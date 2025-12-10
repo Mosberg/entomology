@@ -15,7 +15,8 @@
   "environment": "*",
   "entrypoints": {
     "main": ["dk.mosberg.entomology.EntomologyMod"],
-    "client": ["dk.mosberg.entomology.client.EntomologyClient"]
+    "client": ["dk.mosberg.entomology.client.EntomologyClient"],
+    "modmenu": ["dk.mosberg.entomology.client.modmenu.ModMenuIntegration"]
   },
   "mixins": [],
   "depends": {

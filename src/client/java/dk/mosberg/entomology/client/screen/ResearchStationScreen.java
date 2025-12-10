@@ -26,7 +26,6 @@ public class ResearchStationScreen extends HandledScreen<ResearchStationScreenHa
 
   @Override
   protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-    renderBackground(context, mouseX, mouseY, delta);
     int x = (this.width - this.backgroundWidth) / 2;
     int y = (this.height - this.backgroundHeight) / 2;
 
@@ -38,6 +37,12 @@ public class ResearchStationScreen extends HandledScreen<ResearchStationScreenHa
     context.fill(x, y + this.backgroundHeight - 1, x + this.backgroundWidth, y + this.backgroundHeight, 0xFF8B8B8B); // Bottom
     context.fill(x, y, x + 1, y + this.backgroundHeight, 0xFF8B8B8B); // Left
     context.fill(x + this.backgroundWidth - 1, y, x + this.backgroundWidth, y + this.backgroundHeight, 0xFF8B8B8B); // Right
+  }
+
+  @Override
+  public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+    // Render the standard world background
+    super.renderBackground(context, mouseX, mouseY, delta);
   }
 
   @Override

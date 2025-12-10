@@ -4,10 +4,15 @@
   "itemGroup.entomology.general": "Entomology",
   "itemGroup.entomology.entomology": "Entomology",
 
+  "category.entomology": "Entomology",
   "key.categories.entomology": "Entomology",
+  "key.category.entomologyjson.entomology": "Entomology",
   "key.entomology.field_guide": "Open Field Guide",
+  "key.entomologyjson.field_guide": "Open Field Guide",
   "key.entomology.info_toggle": "Toggle Specimen Info",
+  "key.entomologyjson.info_toggle": "Toggle Specimen Info",
   "key.entomology.research_station": "Quick Research",
+  "key.entomologyjson.research_station": "Quick Research",
 
   "item.entomology.bug_net": "Bug Net",
   "item.entomology.basic_bug_net": "Basic Bug Net",
@@ -34,6 +39,8 @@
   "item.entomology.endermite_spawn_egg": "Endermite Spawn Egg",
   "item.entomology.phantom_spawn_egg": "Phantom Spawn Egg",
 
+  "item.entomology.research_station": "Research Station",
+  "item.entomology.display_case": "Display Case",
   "block.entomology.specimen_jar": "Specimen Jar",
   "block.entomology.research_station": "Research Station",
   "block.entomology.display_case": "Display Case",
@@ -271,8 +278,7 @@
   "advancement.entomology.master_entomologist.title": "Master Entomologist",
   "advancement.entomology.master_entomologist.description": "Complete your insect encyclopedia by discovering all species",
 
-  "category.entomology": "Entomology",
-  "key.entomology.field_guide": "Open Field Guide",
-  "key.entomology.info_toggle": "Toggle Specimen Info",
-  "key.entomology.research_station": "Research Station"
+  "config.entomology.enable_particles": "Enable Particles",
+  "config.entomology.enable_sounds": "Enable Sounds",
+  "config.entomology.enable_hud": "Enable HUD"
 }

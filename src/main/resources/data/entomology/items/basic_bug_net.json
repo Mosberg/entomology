@@ -4,8 +4,18 @@
   "capture_targets": [
     "minecraft:bee",
     "minecraft:silverfish",
+    "minecraft:spider",
+    "minecraft:cave_spider",
+    "minecraft:endermite",
+    "minecraft:phantom",
+    "entomology:butterfly",
+    "entomology:firefly",
+    "entomology:beetle",
     "entomology:fly",
-    "entomology:butterfly"
+    "entomology:mosquito",
+    "entomology:damselfly",
+    "entomology:cicada",
+    "entomology:monarch_butterfly"
   ],
   "durability": 128,
   "max_stack_size": 1,

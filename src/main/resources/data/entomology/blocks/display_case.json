@@ -2,6 +2,22 @@
   "id": "display_case",
   "capacity": 1,
   "display_entity": true,
-  "inputs": [],
+  "inputs": [
+    "entomology:specimen_jar",
+    "minecraft:bee",
+    "minecraft:silverfish",
+    "minecraft:spider",
+    "minecraft:cave_spider",
+    "minecraft:endermite",
+    "minecraft:phantom",
+    "entomology:butterfly",
+    "entomology:firefly",
+    "entomology:beetle",
+    "entomology:fly",
+    "entomology:mosquito",
+    "entomology:damselfly",
+    "entomology:cicada",
+    "entomology:monarch_butterfly"
+  ],
   "outputs": []
 }

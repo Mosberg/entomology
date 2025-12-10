@@ -1,41 +1,63 @@
-# Entomology Mod - Project Setup Progress
+# Entomology Mod - Rendering Implementation Progress
 
-## ✅ Step 1: Create copilot-instructions.md
+## ✅ Step 1: Entity Models
 
 **Status:** Complete
 
-## ⏳ Step 2: Get Project Setup Info
+- Created InsectEntityModel.java for ground insects (beetle, cicada)
+- Created FlyingInsectEntityModel.java for flying insects (butterfly, firefly, etc.)
+- Models use Minecraft 1.21 EntityRenderState system
+- Simple walking/flying animations implemented
 
-**Status:** In Progress
+## ✅ Step 2: Entity Renderers
 
-## ⏳ Step 3: Scaffold Project Structure
+**Status:** Complete
 
-**Status:** Pending
+- Created InsectEntityRenderer.java for ground insects
+- Created FlyingInsectEntityRenderer.java for flying insects
+- Renderers compatible with Minecraft 1.21 API
+- Registered EntomologyModelLayers for model layer registration
 
-## ⏳ Step 4: Create Core Mod Classes
+## ✅ Step 3: Client Registration
 
-**Status:** Pending
+**Status:** Complete
 
-## ⏳ Step 5: Create Gameplay Items and Blocks
+- Updated EntomologyClient.java with model layer registration
+- Registered custom renderers for all 8 entity types
+- Replaced EmptyEntityRenderer placeholders with proper renderers
 
-**Status:** Pending
+## ✅ Step 4: Mod Menu Integration
 
-## ⏳ Step 6: Create Client-Side Code
+**Status:** Complete
 
-**Status:** Pending
+- Added Mod Menu dependency to build.gradle
+- Added TerraformersMC maven repository
+- Implemented ModMenuIntegration with ConfigScreenFactory
+- Added modmenu entrypoint to fabric.mod.json
+- Config screen accessible through Mod Menu
 
-## ⏳ Step 7: Create JSON Data Files
+## ⏳ Step 5: Entity Textures
 
-**Status:** Pending
+**Status:** Needs Assets
 
-## ⏳ Step 8: Create Assets and Localization
+- Created textures/entity directory structure
+- Added README with texture specifications
+- Need 32x32 PNG textures for: beetle, cicada, butterfly, monarch_butterfly, damselfly, firefly, fly, mosquito
+- Models will use placeholder textures until assets are created
 
-**Status:** Pending
+## ⏳ Step 6: Block Entity Renderers
 
-## ⏳ Step 9: Build and Verify
+**Status:** Deferred (API Issues)
 
-**Status:** Pending
+- BlockEntityRenderer requires 2 type parameters in 1.21
+- ItemRenderer.renderItem() signature changed
+- Needs further API research for proper implementation
 
-## ⏳ Step 10: Create Documentation
+## ✅ Step 7: Build and Verify
 
-**Status:** Pending
+**Status:** Complete
+
+- Project builds successfully (0 errors)
+- All 24 tests passing
+- Mod Menu integration working
+- Ready for in-game testing once textures are added

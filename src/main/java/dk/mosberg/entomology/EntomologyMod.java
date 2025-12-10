@@ -11,8 +11,19 @@ import dk.mosberg.entomology.item.SpecimenJarItem;
 import dk.mosberg.entomology.block.ResearchStationBlock;
 import dk.mosberg.entomology.block.SpecimenJarBlock;
 import dk.mosberg.entomology.data.DataDrivenRegistry;
+import dk.mosberg.entomology.entity.BeetleEntity;
+import dk.mosberg.entomology.entity.ButterflyEntity;
+import dk.mosberg.entomology.entity.CicadaEntity;
+import dk.mosberg.entomology.entity.DamselflyEntity;
+import dk.mosberg.entomology.entity.FireflyEntity;
+import dk.mosberg.entomology.entity.FlyEntity;
+import dk.mosberg.entomology.entity.MonarchButterflyEntity;
+import dk.mosberg.entomology.entity.MosquitoEntity;
 import dk.mosberg.entomology.registry.ModRegistry;
 import dk.mosberg.entomology.screen.ResearchStationScreenHandler;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -64,6 +75,16 @@ public class EntomologyMod implements ModInitializer {
   public static Item specimenJarItem;
   public static Item fieldGuide;
 
+  // Spawn Eggs
+  public static Item beetleSpawnEgg;
+  public static Item butterflySpawnEgg;
+  public static Item cicadaSpawnEgg;
+  public static Item damselflySpawnEgg;
+  public static Item fireflySpawnEgg;
+  public static Item flySpawnEgg;
+  public static Item monarchButterflySpawnEgg;
+  public static Item mosquitoSpawnEgg;
+
   // Blocks
   public static Block specimenJarBlock;
   public static Block researchStationBlock;
@@ -82,10 +103,23 @@ public class EntomologyMod implements ModInitializer {
       id("entomology"));
   public static ItemGroup entomologyItemGroup;
 
+  // Entity types
+  public static EntityType<BeetleEntity> beetle;
+  public static EntityType<ButterflyEntity> butterfly;
+  public static EntityType<CicadaEntity> cicada;
+  public static EntityType<DamselflyEntity> damselfly;
+  public static EntityType<FireflyEntity> firefly;
+  public static EntityType<FlyEntity> fly;
+  public static EntityType<MonarchButterflyEntity> monarchButterfly;
+  public static EntityType<MosquitoEntity> mosquito;
+
   @Override
   public void onInitialize() {
     LOGGER.info("Initializing Entomology v2.0.0");
     LOGGER.info("Architecture: Modular | Data-Driven | API-Extensible");
+
+    // Load configuration
+    dk.mosberg.entomology.config.EntomologyConfig.load();
 
     // Initialize advanced systems first
     try {
@@ -107,6 +141,7 @@ public class EntomologyMod implements ModInitializer {
 
     // Register content
     registerContent();
+    registerEntities();
 
     // Register custom creative tab
     registerCreativeTab();
@@ -212,6 +247,67 @@ public class EntomologyMod implements ModInitializer {
     // Store reference in screen handler class
     ResearchStationScreenHandler.screenHandlerType = researchStationScreenHandler;
     registerDataReloaders();
+  }
+
+  private void registerEntities() {
+    // Register entity types
+    beetle = Registry.register(Registries.ENTITY_TYPE, id("beetle"),
+        EntityType.Builder.create(BeetleEntity::new, SpawnGroup.CREATURE)
+            .dimensions(0.4f, 0.3f)
+            .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("beetle"))));
+
+    butterfly = Registry.register(Registries.ENTITY_TYPE, id("butterfly"),
+        EntityType.Builder.create(ButterflyEntity::new, SpawnGroup.AMBIENT)
+            .dimensions(0.3f, 0.3f)
+            .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("butterfly"))));
+
+    cicada = Registry.register(Registries.ENTITY_TYPE, id("cicada"),
+        EntityType.Builder.create(CicadaEntity::new, SpawnGroup.CREATURE)
+            .dimensions(0.4f, 0.3f)
+            .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("cicada"))));
+
+    damselfly = Registry.register(Registries.ENTITY_TYPE, id("damselfly"),
+        EntityType.Builder.create(DamselflyEntity::new, SpawnGroup.AMBIENT)
+            .dimensions(0.3f, 0.3f)
+            .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("damselfly"))));
+
+    firefly = Registry.register(Registries.ENTITY_TYPE, id("firefly"),
+        EntityType.Builder.create(FireflyEntity::new, SpawnGroup.AMBIENT)
+            .dimensions(0.2f, 0.2f)
+            .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("firefly"))));
+
+    fly = Registry.register(Registries.ENTITY_TYPE, id("fly"),
+        EntityType.Builder.create(FlyEntity::new, SpawnGroup.AMBIENT)
+            .dimensions(0.2f, 0.2f)
+            .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("fly"))));
+
+    monarchButterfly = Registry.register(Registries.ENTITY_TYPE, id("monarch_butterfly"),
+        EntityType.Builder.create(MonarchButterflyEntity::new, SpawnGroup.AMBIENT)
+            .dimensions(0.3f, 0.3f)
+            .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("monarch_butterfly"))));
+
+    mosquito = Registry.register(Registries.ENTITY_TYPE, id("mosquito"),
+        EntityType.Builder.create(MosquitoEntity::new, SpawnGroup.AMBIENT)
+            .dimensions(0.2f, 0.2f)
+            .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("mosquito"))));
+
+    // Register attributes
+    FabricDefaultAttributeRegistry.register(beetle, BeetleEntity.createBeetleAttributes());
+    FabricDefaultAttributeRegistry.register(butterfly, ButterflyEntity.createButterflyAttributes());
+    FabricDefaultAttributeRegistry.register(cicada, CicadaEntity.createCicadaAttributes());
+    FabricDefaultAttributeRegistry.register(damselfly, DamselflyEntity.createDamselflyAttributes());
+    FabricDefaultAttributeRegistry.register(firefly, FireflyEntity.createFireflyAttributes());
+    FabricDefaultAttributeRegistry.register(fly, FlyEntity.createFlyAttributes());
+    FabricDefaultAttributeRegistry.register(monarchButterfly,
+        MonarchButterflyEntity.createMonarchButterflyAttributes());
+    FabricDefaultAttributeRegistry.register(mosquito, MosquitoEntity.createMosquitoAttributes());
+
+    registerSpawnEggs();
+  }
+
+  private static void registerSpawnEggs() {
+
+    LOGGER.info("Spawn egg registration skipped - will be implemented after testing");
   }
 
   @SuppressWarnings("deprecation") // registerReloadListener still functional in current API

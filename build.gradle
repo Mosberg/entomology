@@ -14,6 +14,7 @@ base {
 repositories {
     mavenCentral()
     maven { url = "https://maven.fabricmc.net/" }
+    maven { url = "https://maven.terraformersmc.com/" }
 }
 
 dependencies {
@@ -21,6 +22,9 @@ dependencies {
     mappings "net.fabricmc:yarn:${yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+
+    // Mod Menu for config screen integration
+    modImplementation "com.terraformersmc:modmenu:11.0.3"
 
     // JSON Schema validation
     implementation "com.github.erosb:everit-json-schema:1.14.4"

@@ -6,13 +6,16 @@
     "minecraft:silverfish",
     "minecraft:spider",
     "minecraft:cave_spider",
-    "entomology:fly",
+    "minecraft:endermite",
+    "minecraft:phantom",
     "entomology:butterfly",
+    "entomology:firefly",
     "entomology:beetle",
+    "entomology:fly",
     "entomology:mosquito",
     "entomology:damselfly",
     "entomology:cicada",
-    "entomology:firefly"
+    "entomology:monarch_butterfly"
   ],
   "durability": 96,
   "max_stack_size": 1,
