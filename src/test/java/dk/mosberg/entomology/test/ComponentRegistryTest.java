@@ -3,9 +3,13 @@ package dk.mosberg.entomology.test;
 import dk.mosberg.entomology.EntomologyMod;
 import dk.mosberg.entomology.registry.advanced.ComponentRegistry;
 import net.minecraft.util.Identifier;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for ComponentRegistry.

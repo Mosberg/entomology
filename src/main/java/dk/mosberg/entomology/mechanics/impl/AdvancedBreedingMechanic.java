@@ -9,7 +9,15 @@ import dk.mosberg.entomology.api.mechanics.IMechanicResult;
 import dk.mosberg.entomology.mechanics.base.AbstractMechanic;
 import net.minecraft.util.Identifier;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * Advanced breeding mechanic with genetics, mutations, and trait inheritance.

@@ -1,207 +1,272 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/Mosberg/entomology/schemas/mechanics.schema.json",
-  "title": "Entomology Mechanics Configuration",
-  "description": "Schema for mechanics configuration including breeding, spawning, and environmental systems",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/global_game_mechanics.schema.json",
+  "title": "Mechanics Configuration",
+  "description": "Schema for global game mechanics configuration in the Entomology Minecraft mod.",
   "type": "object",
-  "required": ["version", "breeding"],
   "properties": {
-    "version": {
-      "type": "string",
-      "description": "Configuration version for migration",
-      "pattern": "^\\d+\\.\\d+\\.\\d+$",
-      "examples": ["2.0.0"]
-    },
     "breeding": {
       "type": "object",
-      "description": "Breeding mechanic configuration",
-      "required": ["enabled"],
+      "description": "Breeding mechanics configuration.",
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Enable or disable breeding mechanic",
+          "description": "Master toggle for breeding mechanics.",
           "default": true
         },
-        "globalMutationRate": {
+        "baseChance": {
           "type": "number",
-          "description": "Global mutation probability multiplier",
           "minimum": 0.0,
           "maximum": 1.0,
-          "default": 0.05
-        },
-        "breedingCooldown": {
-          "type": "integer",
-          "description": "Cooldown between breeding attempts in ticks",
-          "minimum": 0,
-          "default": 6000
-        },
-        "breedingPairs": {
-          "type": "array",
-          "description": "List of valid breeding combinations",
-          "items": {
-            "$ref": "#/definitions/breedingPair"
-          }
-        },
-        "traits": {
-          "type": "array",
-          "description": "Trait definitions for inheritance",
-          "items": {
-            "$ref": "#/definitions/trait"
-          }
-        }
-      }
-    },
-    "spawning": {
-      "type": "object",
-      "description": "Spawn mechanic configuration",
-      "properties": {
-        "enableDynamicRates": {
-          "type": "boolean",
-          "description": "Enable adaptive spawn rate adjustment",
-          "default": true
-        },
-        "baseSpawnWeight": {
-          "type": "integer",
-          "description": "Base spawn weight for all specimens",
-          "minimum": 1,
-          "default": 10
-        },
-        "rarityMultipliers": {
-          "type": "object",
-          "description": "Spawn weight multipliers by rarity",
-          "properties": {
-            "common": { "type": "number", "default": 1.0 },
-            "uncommon": { "type": "number", "default": 0.5 },
-            "rare": { "type": "number", "default": 0.1 },
-            "epic": { "type": "number", "default": 0.05 },
-            "legendary": { "type": "number", "default": 0.01 }
-          }
-        }
-      }
-    },
-    "environmental": {
-      "type": "object",
-      "description": "Environmental mechanic configuration",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Enable environmental requirements",
-          "default": true
-        },
-        "checkInterval": {
-          "type": "integer",
-          "description": "Ticks between environment checks",
-          "minimum": 20,
-          "default": 100
-        },
-        "strictMode": {
-          "type": "boolean",
-          "description": "Strict enforcement of requirements",
-          "default": false
-        }
-      }
-    },
-    "balance": {
-      "type": "object",
-      "description": "Balance tuning configuration",
-      "properties": {
-        "adaptiveDifficulty": {
-          "type": "boolean",
-          "description": "Enable adaptive difficulty scaling",
-          "default": true
-        },
-        "telemetryEnabled": {
-          "type": "boolean",
-          "description": "Enable telemetry collection",
-          "default": true
-        },
-        "tuningRate": {
-          "type": "number",
-          "description": "Rate of balance adjustments",
-          "minimum": 0.0,
-          "maximum": 1.0,
-          "default": 0.1
-        }
-      }
-    }
-  },
-  "definitions": {
-    "breedingPair": {
-      "type": "object",
-      "description": "A valid breeding combination",
-      "required": ["parent1", "parent2"],
-      "properties": {
-        "parent1": {
-          "type": "string",
-          "description": "First parent specimen ID",
-          "pattern": "^[a-z0-9_]+:[a-z0-9_]+$"
-        },
-        "parent2": {
-          "type": "string",
-          "description": "Second parent specimen ID",
-          "pattern": "^[a-z0-9_]+:[a-z0-9_]+$"
-        },
-        "offspring": {
-          "type": "array",
-          "description": "Possible offspring specimen IDs",
-          "items": {
-            "type": "string",
-            "pattern": "^[a-z0-9_]+:[a-z0-9_]+$"
-          },
-          "minItems": 1
-        },
-        "mutations": {
-          "type": "array",
-          "description": "Possible mutation specimen IDs",
-          "items": {
-            "type": "string",
-            "pattern": "^[a-z0-9_]+:[a-z0-9_]+$"
-          }
-        },
-        "successChance": {
-          "type": "number",
-          "description": "Probability of successful breeding",
-          "minimum": 0.0,
-          "maximum": 1.0,
-          "default": 0.5
+          "description": "Base breeding success chance.",
+          "default": 0.25
         },
         "mutationChance": {
           "type": "number",
-          "description": "Probability of mutation (multiplied by global rate)",
           "minimum": 0.0,
           "maximum": 1.0,
+          "description": "Base mutation chance.",
           "default": 0.05
-        }
-      }
-    },
-    "trait": {
-      "type": "object",
-      "description": "A genetic trait definition",
-      "required": ["id"],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique trait identifier",
-          "pattern": "^[a-z0-9_]+$"
         },
-        "inheritable": {
+        "cooldownTicks": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Default cooldown between breeding attempts in ticks.",
+          "default": 6000
+        },
+        "requiresPlayer": {
           "type": "boolean",
-          "description": "Whether trait can be inherited",
+          "description": "Whether breeding requires player proximity.",
           "default": true
         },
-        "inheritanceChance": {
-          "type": "number",
-          "description": "Probability of inheritance from parent",
-          "minimum": 0.0,
-          "maximum": 1.0,
-          "default": 0.5
-        },
-        "dominant": {
+        "playerRange": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Range in blocks for player proximity check.",
+          "default": 32
+        }
+      },
+      "additionalProperties": false
+    },
+    "environment": {
+      "type": "object",
+      "description": "Environmental mechanics configuration.",
+      "properties": {
+        "enabled": {
           "type": "boolean",
-          "description": "Whether trait is dominant over recessive",
+          "description": "Master toggle for environmental mechanics.",
+          "default": true
+        },
+        "updateInterval": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Ticks between environmental checks.",
+          "default": 100
+        },
+        "temperatureAffectsSpawning": {
+          "type": "boolean",
+          "description": "Whether biome temperature affects insect spawning.",
+          "default": true
+        },
+        "weatherAffectsBehavior": {
+          "type": "boolean",
+          "description": "Whether weather affects insect behavior.",
+          "default": true
+        },
+        "seasonalBehavior": {
+          "type": "boolean",
+          "description": "Whether insects have seasonal behavior patterns.",
           "default": false
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "research": {
+      "type": "object",
+      "description": "Research mechanics configuration.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Master toggle for research mechanics.",
+          "default": true
+        },
+        "autoTrackDiscoveries": {
+          "type": "boolean",
+          "description": "Automatically track new specimen discoveries.",
+          "default": true
+        },
+        "experienceMultiplier": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Multiplier for experience rewards.",
+          "default": 1.0
+        },
+        "requiresResearchStation": {
+          "type": "boolean",
+          "description": "Whether research requires a research station.",
+          "default": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "capture": {
+      "type": "object",
+      "description": "Capture mechanics configuration.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Master toggle for capture mechanics.",
+          "default": true
+        },
+        "baseSuccessRate": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Base capture success rate modifier.",
+          "default": 1.0
+        },
+        "damageReducesCaptureChance": {
+          "type": "boolean",
+          "description": "Whether entity damage reduces capture chance.",
+          "default": true
+        },
+        "preserveEntityData": {
+          "type": "boolean",
+          "description": "Whether captured entities preserve NBT data.",
+          "default": true
+        },
+        "captureExperienceReward": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Experience points awarded per capture.",
+          "default": 5
+        }
+      },
+      "additionalProperties": false
+    },
+    "spawning": {
+      "type": "object",
+      "description": "Spawning mechanics configuration.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Master toggle for custom spawning.",
+          "default": true
+        },
+        "spawnRateMultiplier": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Global spawn rate multiplier.",
+          "default": 1.0
+        },
+        "respectMobCap": {
+          "type": "boolean",
+          "description": "Whether spawns respect the mob cap.",
+          "default": true
+        },
+        "biomeDiversity": {
+          "type": "boolean",
+          "description": "Whether biome affects insect diversity.",
+          "default": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "display": {
+      "type": "object",
+      "description": "Display mechanics configuration.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Master toggle for display mechanics.",
+          "default": true
+        },
+        "animateDisplays": {
+          "type": "boolean",
+          "description": "Whether display cases show animated entities.",
+          "default": true
+        },
+        "displayParticles": {
+          "type": "boolean",
+          "description": "Whether displays show particle effects.",
+          "default": true
+        },
+        "nameTagsVisible": {
+          "type": "boolean",
+          "description": "Whether entity names are visible in displays.",
+          "default": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "difficulty": {
+      "type": "object",
+      "description": "Difficulty scaling configuration.",
+      "properties": {
+        "scaleWithDifficulty": {
+          "type": "boolean",
+          "description": "Whether mechanics scale with game difficulty.",
+          "default": true
+        },
+        "peacefulDisablesHostile": {
+          "type": "boolean",
+          "description": "Whether peaceful mode disables hostile insects.",
+          "default": true
+        },
+        "hardModeBonuses": {
+          "type": "object",
+          "description": "Bonuses applied in hard mode.",
+          "properties": {
+            "healthMultiplier": {
+              "type": "number",
+              "minimum": 1.0,
+              "description": "Health multiplier for insects.",
+              "default": 1.5
+            },
+            "damageMultiplier": {
+              "type": "number",
+              "minimum": 1.0,
+              "description": "Damage multiplier for insects.",
+              "default": 1.25
+            },
+            "captureChancePenalty": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "Reduction to capture success rates.",
+              "default": 0.2
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "performance": {
+      "type": "object",
+      "description": "Performance optimization settings.",
+      "properties": {
+        "maxEntitiesPerChunk": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum mod entities per chunk.",
+          "default": 20
+        },
+        "entityTickRate": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Ticks between entity AI updates.",
+          "default": 1
+        },
+        "particleLimit": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum particles per entity.",
+          "default": 10
+        }
+      },
+      "additionalProperties": false
     }
-  }
+  },
+  "additionalProperties": false
 }

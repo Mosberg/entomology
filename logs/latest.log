@@ -1,12 +1,12 @@
-[21:05:40] [Test worker/INFO]: Initializing Entomology systems...
-[21:05:40] [Test worker/INFO]: API initialized (version 1.0.0)
-[21:05:40] [Test worker/INFO]: Registered 2 legacy mechanics, 0 advanced mechanics
-[21:05:40] [Test worker/INFO]: Component registration complete
-[21:05:40] [Test worker/INFO]: Registered specimen schema validator
-[21:05:40] [Test worker/INFO]: Schema validator registration complete
-[21:05:40] [Test worker/INFO]: Entomology initialization complete
-[21:05:40] [Test worker/INFO]: Initializing advanced systems...
-[21:05:40] [Test worker/ERROR]: Failed to load config: mechanics
+[21:28:15] [Test worker/INFO]: Initializing Entomology systems...
+[21:28:15] [Test worker/INFO]: API initialized (version 1.0.0)
+[21:28:15] [Test worker/INFO]: Registered 2 legacy mechanics, 0 advanced mechanics
+[21:28:15] [Test worker/INFO]: Component registration complete
+[21:28:15] [Test worker/INFO]: Registered specimen schema validator
+[21:28:15] [Test worker/INFO]: Schema validator registration complete
+[21:28:15] [Test worker/INFO]: Entomology initialization complete
+[21:28:15] [Test worker/INFO]: Initializing advanced systems...
+[21:28:15] [Test worker/ERROR]: Failed to load config: mechanics
 java.nio.file.NoSuchFileException: config\entomology\schema\mechanics.schema.json
 	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85) ~[?:?]
 	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103) ~[?:?]
@@ -16,11 +16,11 @@ java.nio.file.NoSuchFileException: config\entomology\schema\mechanics.schema.jso
 	at java.base/java.nio.file.Files.newByteChannel(Files.java:432) ~[?:?]
 	at java.base/java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:420) ~[?:?]
 	at java.base/java.nio.file.Files.newInputStream(Files.java:160) ~[?:?]
-	at dk.mosberg.entomology.config.advanced.SchemaConfigManager.loadSchema(SchemaConfigManager.java:233) ~[main/:?]
-	at dk.mosberg.entomology.config.advanced.SchemaConfigManager.loadConfig(SchemaConfigManager.java:47) ~[main/:?]
+	at dk.mosberg.entomology.config.advanced.SchemaConfigManager.loadSchema(SchemaConfigManager.java:239) ~[main/:?]
+	at dk.mosberg.entomology.config.advanced.SchemaConfigManager.loadConfig(SchemaConfigManager.java:53) ~[main/:?]
 	at dk.mosberg.entomology.integration.SystemIntegration.loadConfigurations(SystemIntegration.java:106) ~[main/:?]
 	at dk.mosberg.entomology.integration.SystemIntegration.initialize(SystemIntegration.java:58) ~[main/:?]
-	at dk.mosberg.entomology.integration.IntegrationTest.testMechanicsRegistration(IntegrationTest.java:55) ~[test/:?]
+	at dk.mosberg.entomology.integration.IntegrationTest.testMechanicsRegistration(IntegrationTest.java:59) ~[test/:?]
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728) ~[junit-platform-commons-1.10.1.jar:1.10.1]
@@ -103,21 +103,21 @@ java.nio.file.NoSuchFileException: config\entomology\schema\mechanics.schema.jso
 	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72) [gradle-worker-main-9.2.1.jar:9.2.1]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) [gradle-worker.jar:?]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) [gradle-worker.jar:?]
-[21:05:41] [Test worker/INFO]: Initializing all components...
-[21:05:41] [Test worker/INFO]: Initialized 3 components
-[21:05:41] [Test worker/INFO]: Telemetry system enabled
-[21:05:41] [Test worker/INFO]: Advanced systems initialized successfully
-[21:05:41] [Test worker/WARN]: Advanced systems already initialized
-[21:05:41] [Test worker/INFO]: Reloading advanced systems...
-[21:05:41] [Test worker/INFO]: Reloading all configurations...
-[21:05:41] [Test worker/INFO]: Reload complete
-[21:05:41] [Test worker/WARN]: Advanced systems already initialized
-[21:05:41] [Test worker/WARN]: Advanced systems already initialized
-[21:05:41] [Test worker/INFO]: Shutting down advanced systems...
-[21:05:41] [Test worker/INFO]: Shutting down all components...
-[21:05:41] [Test worker/INFO]: Shutdown complete
-[21:05:41] [Test worker/INFO]: Initializing advanced systems...
-[21:05:41] [Test worker/ERROR]: Failed to load config: mechanics
+[21:28:15] [Test worker/INFO]: Initializing all components...
+[21:28:15] [Test worker/INFO]: Initialized 3 components
+[21:28:15] [Test worker/INFO]: Telemetry system enabled
+[21:28:15] [Test worker/INFO]: Advanced systems initialized successfully
+[21:28:15] [Test worker/WARN]: Advanced systems already initialized
+[21:28:15] [Test worker/INFO]: Reloading advanced systems...
+[21:28:15] [Test worker/INFO]: Reloading all configurations...
+[21:28:15] [Test worker/INFO]: Reload complete
+[21:28:15] [Test worker/WARN]: Advanced systems already initialized
+[21:28:15] [Test worker/WARN]: Advanced systems already initialized
+[21:28:15] [Test worker/INFO]: Shutting down advanced systems...
+[21:28:15] [Test worker/INFO]: Shutting down all components...
+[21:28:15] [Test worker/INFO]: Shutdown complete
+[21:28:15] [Test worker/INFO]: Initializing advanced systems...
+[21:28:15] [Test worker/ERROR]: Failed to load config: mechanics
 java.nio.file.NoSuchFileException: config\entomology\schema\mechanics.schema.json
 	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85) ~[?:?]
 	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103) ~[?:?]
@@ -127,11 +127,11 @@ java.nio.file.NoSuchFileException: config\entomology\schema\mechanics.schema.jso
 	at java.base/java.nio.file.Files.newByteChannel(Files.java:432) ~[?:?]
 	at java.base/java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:420) ~[?:?]
 	at java.base/java.nio.file.Files.newInputStream(Files.java:160) ~[?:?]
-	at dk.mosberg.entomology.config.advanced.SchemaConfigManager.loadSchema(SchemaConfigManager.java:233) ~[main/:?]
-	at dk.mosberg.entomology.config.advanced.SchemaConfigManager.loadConfig(SchemaConfigManager.java:47) ~[main/:?]
+	at dk.mosberg.entomology.config.advanced.SchemaConfigManager.loadSchema(SchemaConfigManager.java:239) ~[main/:?]
+	at dk.mosberg.entomology.config.advanced.SchemaConfigManager.loadConfig(SchemaConfigManager.java:53) ~[main/:?]
 	at dk.mosberg.entomology.integration.SystemIntegration.loadConfigurations(SystemIntegration.java:106) ~[main/:?]
 	at dk.mosberg.entomology.integration.SystemIntegration.initialize(SystemIntegration.java:58) ~[main/:?]
-	at dk.mosberg.entomology.integration.IntegrationTest.testConfigurationValidation(IntegrationTest.java:38) ~[test/:?]
+	at dk.mosberg.entomology.integration.IntegrationTest.testConfigurationValidation(IntegrationTest.java:42) ~[test/:?]
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728) ~[junit-platform-commons-1.10.1.jar:1.10.1]
@@ -214,18 +214,18 @@ java.nio.file.NoSuchFileException: config\entomology\schema\mechanics.schema.jso
 	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72) [gradle-worker-main-9.2.1.jar:9.2.1]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) [gradle-worker.jar:?]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) [gradle-worker.jar:?]
-[21:05:41] [Test worker/INFO]: Initializing all components...
-[21:05:41] [Test worker/INFO]: Initialized 3 components
-[21:05:41] [Test worker/INFO]: Telemetry system enabled
-[21:05:41] [Test worker/INFO]: Advanced systems initialized successfully
-[21:05:41] [Test worker/INFO]: Validated 2 mechanics
-[21:05:41] [Test worker/INFO]: Configured advanced breeding: 0 pairs, 0 traits
-[21:05:41] [Test worker/INFO]: Shutting down all components...
-[21:05:41] [Test worker/INFO]: Shutting down all components...
-[21:05:41] [Test worker/INFO]: Shutting down all components...
-[21:05:41] [Test worker/INFO]: Shutting down all components...
-[21:05:41] [Test worker/INFO]: Initializing all components...
-[21:05:41] [Test worker/INFO]: Initialized 2 components
-[21:05:41] [Test worker/INFO]: Shutting down all components...
-[21:05:41] [Test worker/INFO]: Shutting down all components...
-[21:05:41] [Test worker/INFO]: Shutting down all components...
+[21:28:15] [Test worker/INFO]: Initializing all components...
+[21:28:15] [Test worker/INFO]: Initialized 3 components
+[21:28:15] [Test worker/INFO]: Telemetry system enabled
+[21:28:15] [Test worker/INFO]: Advanced systems initialized successfully
+[21:28:15] [Test worker/INFO]: Validated 2 mechanics
+[21:28:15] [Test worker/INFO]: Configured advanced breeding: 0 pairs, 0 traits
+[21:28:15] [Test worker/INFO]: Shutting down all components...
+[21:28:15] [Test worker/INFO]: Shutting down all components...
+[21:28:15] [Test worker/INFO]: Shutting down all components...
+[21:28:15] [Test worker/INFO]: Shutting down all components...
+[21:28:15] [Test worker/INFO]: Initializing all components...
+[21:28:15] [Test worker/INFO]: Initialized 2 components
+[21:28:15] [Test worker/INFO]: Shutting down all components...
+[21:28:15] [Test worker/INFO]: Shutting down all components...
+[21:28:15] [Test worker/INFO]: Shutting down all components...

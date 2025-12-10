@@ -1,6 +1,9 @@
 package dk.mosberg.entomology.config.advanced;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import dk.mosberg.entomology.EntomologyMod;
 import org.everit.json.schema.Schema;
 import org.everit.json.schema.ValidationException;
@@ -14,7 +17,10 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
