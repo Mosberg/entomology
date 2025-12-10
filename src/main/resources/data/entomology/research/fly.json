@@ -1,0 +1,56 @@
+{
+  "id": "fly_research",
+  "specimen_id": "entomology:fly",
+  "page_key": "research.entomology.fly.page",
+  "research_tier": 1,
+  "prerequisites": [],
+  "required_specimens": 10,
+  "required_observations": 8,
+  "unlock_requirements": {
+    "observe_feeding": true,
+    "study_larval_stage": true,
+    "track_flight_patterns": 5
+  },
+  "research_time_ticks": 4000,
+  "experience_reward": 80,
+  "unlocks": {
+    "breeding_recipes": ["fly_trap"],
+    "equipment": ["pest_repellent"],
+    "mechanics": ["fly_farming", "decomposition_acceleration"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.fly.stage1",
+      "requirements": {
+        "specimens_captured": 3
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.fly.stage2",
+      "requirements": {
+        "specimens_captured": 7,
+        "feeding_observed": true,
+        "flight_tracked": 3
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.fly.stage3",
+      "requirements": {
+        "specimens_captured": 10,
+        "larval_stage_studied": true,
+        "flight_tracked": 5
+      }
+    }
+  ],
+  "discoveries": [
+    "Flies have only two wings (Diptera)",
+    "Exceptional flight agility and speed",
+    "Rapid reproduction in organic matter",
+    "Important decomposers in ecosystems"
+  ],
+  "related_research": ["mosquito_research", "beetle_research"],
+  "danger_level": "NONE"
+}

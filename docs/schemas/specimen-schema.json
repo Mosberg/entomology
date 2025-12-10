@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Specimen Definition",
+  "description": "Defines a capturable insect specimen with environmental preferences and mechanics",
+  "type": "object",
+  "required": ["id", "name", "rarity", "capture_targets"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this specimen",
+      "pattern": "^[a-z0-9_]+$",
+      "examples": ["bee", "butterfly", "firefly"]
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name shown in-game",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description shown in field guide",
+      "maxLength": 256
+    },
+    "rarity": {
+      "type": "number",
+      "description": "Spawn rarity: 0.0 (common) to 1.0 (legendary)",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "capture_targets": {
+      "type": "array",
+      "description": "Entity types that this specimen can be captured from",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "examples": [
+        ["minecraft:bee"],
+        ["minecraft:silverfish", "minecraft:endermite"]
+      ]
+    },
+    "environmental": {
+      "type": "object",
+      "description": "Environmental preferences and spawn modifiers",
+      "properties": {
+        "preferred_biomes": {
+          "type": "array",
+          "description": "Biomes where this specimen spawns more frequently",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$"
+          },
+          "examples": [
+            ["minecraft:plains", "minecraft:sunflower_plains"],
+            ["minecraft:forest", "minecraft:birch_forest"]
+          ]
+        },
+        "temperature_range": {
+          "type": "object",
+          "description": "Acceptable temperature range (Minecraft biome values)",
+          "properties": {
+            "min": {
+              "type": "number",
+              "minimum": -0.5,
+              "maximum": 2.0
+            },
+            "max": {
+              "type": "number",
+              "minimum": -0.5,
+              "maximum": 2.0
+            }
+          },
+          "required": ["min", "max"]
+        },
+        "humidity_range": {
+          "type": "object",
+          "description": "Acceptable humidity range (downfall values)",
+          "properties": {
+            "min": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "max": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            }
+          },
+          "required": ["min", "max"]
+        },
+        "time_preference": {
+          "type": "string",
+          "description": "Active time period",
+          "enum": ["day", "night", "any"]
+        },
+        "spawn_weight_multiplier": {
+          "type": "number",
+          "description": "Multiplier for spawn weight in preferred conditions",
+          "minimum": 0.1,
+          "maximum": 10.0,
+          "default": 1.0
+        }
+      }
+    },
+    "breeding": {
+      "type": "object",
+      "description": "Breeding configuration for this specimen",
+      "properties": {
+        "can_breed": {
+          "type": "boolean",
+          "default": true
+        },
+        "breeding_pairs": {
+          "type": "array",
+          "description": "Valid breeding partner IDs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "offspring": {
+          "type": "array",
+          "description": "Possible offspring specimen IDs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mutation_chance": {
+          "type": "number",
+          "description": "Chance of mutation during breeding",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.05
+        }
+      }
+    },
+    "components": {
+      "type": "object",
+      "description": "Custom component configurations",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Component-specific configuration"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Arbitrary tags for filtering and categorization",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "examples": [
+        ["flying", "pollinator"],
+        ["nocturnal", "cave_dweller"]
+      ]
+    }
+  }
+}

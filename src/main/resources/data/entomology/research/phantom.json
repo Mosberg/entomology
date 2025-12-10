@@ -1,0 +1,64 @@
+{
+  "id": "phantom_research",
+  "specimen_id": "phantom",
+  "page_key": "research.entomology.phantom.page",
+  "research_tier": 4,
+  "prerequisites": ["bee_research"],
+  "required_specimens": 4,
+  "required_observations": 25,
+  "unlock_requirements": {
+    "collect_phantom_membrane": 8,
+    "study_insomnia_mechanic": true,
+    "observe_dive_attack": 10,
+    "nighttime_tracking": 15
+  },
+  "research_time_ticks": 15000,
+  "experience_reward": 300,
+  "unlocks": {
+    "breeding_recipes": [],
+    "equipment": [
+      "membrane_processor",
+      "insomnia_monitor",
+      "phantom_repellent"
+    ],
+    "mechanics": ["phantom_spawning_control", "membrane_synthesis"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.phantom.stage1",
+      "requirements": {
+        "specimens_captured": 1,
+        "insomnia_days": 3
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.phantom.stage2",
+      "requirements": {
+        "specimens_captured": 2,
+        "dive_attacks_observed": 5,
+        "membranes_collected": 4
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.phantom.stage3",
+      "requirements": {
+        "specimens_captured": 4,
+        "membranes_collected": 8,
+        "nighttime_tracked": 15,
+        "insomnia_mechanic_understood": true
+      }
+    }
+  ],
+  "discoveries": [
+    "Phantoms spawn after 3+ days without sleep",
+    "Undead flying insects vulnerable to sunlight",
+    "Membranes can repair elytra",
+    "Spawn in groups above clouds at night"
+  ],
+  "related_research": ["firefly_research", "monarch_butterfly_research"],
+  "danger_level": "HIGH",
+  "undead_classification": true
+}

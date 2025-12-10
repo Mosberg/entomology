@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/advancement.schema.json",
+  "title": "Advancement Definition",
+  "description": "Schema for defining advancements in the Entomology Minecraft mod (compatible with vanilla format).",
+  "type": "object",
+  "properties": {
+    "display": {
+      "type": "object",
+      "description": "Display properties for the advancement.",
+      "properties": {
+        "icon": {
+          "type": "object",
+          "description": "Icon item for the advancement.",
+          "properties": {
+            "item": {
+              "type": "string",
+              "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$",
+              "description": "Item identifier for the icon."
+            },
+            "nbt": {
+              "type": "string",
+              "description": "NBT data for the icon item."
+            }
+          },
+          "required": ["item"],
+          "additionalProperties": false
+        },
+        "title": {
+          "type": "string",
+          "description": "Translation key for the advancement title."
+        },
+        "description": {
+          "type": "string",
+          "description": "Translation key for the advancement description."
+        },
+        "frame": {
+          "type": "string",
+          "enum": ["task", "challenge", "goal"],
+          "description": "Frame type (border style) for the advancement.",
+          "default": "task"
+        },
+        "background": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+\\.png$",
+          "description": "Background texture for root advancement tabs."
+        },
+        "show_toast": {
+          "type": "boolean",
+          "description": "Whether to show a toast notification when earned.",
+          "default": true
+        },
+        "announce_to_chat": {
+          "type": "boolean",
+          "description": "Whether to announce in chat when earned.",
+          "default": true
+        },
+        "hidden": {
+          "type": "boolean",
+          "description": "Whether the advancement is hidden until earned.",
+          "default": false
+        }
+      },
+      "required": ["icon", "title", "description"],
+      "additionalProperties": false
+    },
+    "parent": {
+      "type": "string",
+      "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$",
+      "description": "Parent advancement identifier."
+    },
+    "criteria": {
+      "type": "object",
+      "description": "Criteria that must be met to earn the advancement.",
+      "patternProperties": {
+        "^[a-z0-9_]+$": {
+          "type": "object",
+          "properties": {
+            "trigger": {
+              "type": "string",
+              "description": "Trigger type identifier."
+            },
+            "conditions": {
+              "type": "object",
+              "description": "Conditions for the trigger.",
+              "additionalProperties": true
+            }
+          },
+          "required": ["trigger"],
+          "additionalProperties": false
+        }
+      },
+      "minProperties": 1
+    },
+    "requirements": {
+      "type": "array",
+      "description": "Requirement groups (OR of ANDs).",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "description": "Criterion name."
+        },
+        "minItems": 1
+      },
+      "minItems": 1
+    },
+    "rewards": {
+      "type": "object",
+      "description": "Rewards granted when advancement is earned.",
+      "properties": {
+        "recipes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$"
+          },
+          "description": "Recipe identifiers to unlock."
+        },
+        "loot": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$"
+          },
+          "description": "Loot table identifiers to roll."
+        },
+        "experience": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Experience points to award."
+        },
+        "function": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$",
+          "description": "Function to execute."
+        }
+      },
+      "additionalProperties": false
+    },
+    "sends_telemetry_event": {
+      "type": "boolean",
+      "description": "Whether earning this advancement sends a telemetry event.",
+      "default": false
+    }
+  },
+  "required": ["criteria"],
+  "additionalProperties": false
+}

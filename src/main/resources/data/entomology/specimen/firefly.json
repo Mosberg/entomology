@@ -1,0 +1,79 @@
+{
+  "id": "firefly",
+  "entity_type": "entomology:firefly",
+  "display_name_key": "specimen.entomology.firefly",
+  "description_key": "specimen.entomology.firefly.desc",
+  "rarity": "UNCOMMON",
+  "size": "TINY",
+  "experience_value": 30,
+  "can_breed": true,
+  "taxonomic_order": "Coleoptera",
+  "behavior_traits": ["bioluminescent", "flying", "nocturnal", "peaceful"],
+  "environmental_preferences": {
+    "preferred_biomes": [
+      "minecraft:swamp",
+      "minecraft:mangrove_swamp",
+      "minecraft:river",
+      "minecraft:forest",
+      "minecraft:dark_forest"
+    ],
+    "temperature_range": { "min": 0.6, "max": 1.2 },
+    "humidity_range": { "min": 0.5, "max": 1.0 },
+    "time_preference": "night",
+    "light_level_max": 7,
+    "water_proximity": true,
+    "proximity_radius": 32
+  },
+  "capture_difficulty": 0.4,
+  "aggression_triggers": [],
+  "special_mechanics": {
+    "bioluminescence": {
+      "enabled": true,
+      "light_level": 8,
+      "pulse_interval_ticks": 20,
+      "pulse_duration_ticks": 10,
+      "color": "#FFE77D",
+      "pattern_variants": ["steady", "pulse", "flash"]
+    },
+    "flight_behavior": {
+      "enabled": true,
+      "flight_speed": 0.15,
+      "height_preference": "low",
+      "hover_ability": true
+    },
+    "mating_display": {
+      "enabled": true,
+      "signal_pattern": "synchronized",
+      "attraction_radius": 16
+    },
+    "light_extraction": {
+      "enabled": true,
+      "extractable_item": "entomology:bioluminescent_compound"
+    }
+  },
+  "breeding": {
+    "can_breed": true,
+    "breeding_item": "entomology:nectar",
+    "breeding_pairs": ["firefly"],
+    "offspring": ["firefly"],
+    "mutation_chance": 0.03,
+    "cooldown_ticks": 6000,
+    "color_inheritance": true
+  },
+  "drops": {
+    "common": ["entomology:firefly_abdomen"],
+    "uncommon": ["entomology:bioluminescent_compound"],
+    "rare": ["entomology:luciferin_crystal"]
+  },
+  "health": 4.0,
+  "damage": 0.0,
+  "speed": 0.15,
+  "tags": [
+    "flying",
+    "nocturnal",
+    "bioluminescent",
+    "aquatic_nearby",
+    "peaceful",
+    "coleoptera"
+  ]
+}

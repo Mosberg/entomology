@@ -1,0 +1,57 @@
+{
+  "id": "beetle_research",
+  "specimen_id": "beetle",
+  "page_key": "research.entomology.beetle.page",
+  "research_tier": 1,
+  "prerequisites": [],
+  "required_specimens": 6,
+  "required_observations": 12,
+  "unlock_requirements": {
+    "collect_shell_samples": 5,
+    "study_burrowing": true,
+    "observe_log_attraction": true
+  },
+  "research_time_ticks": 6500,
+  "experience_reward": 140,
+  "unlocks": {
+    "breeding_recipes": ["beetle_variants"],
+    "equipment": ["shell_armor_crafting", "burrow_detector"],
+    "mechanics": ["composting_enhancement", "log_farming"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.beetle.stage1",
+      "requirements": {
+        "specimens_captured": 2,
+        "forest_explored": true
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.beetle.stage2",
+      "requirements": {
+        "specimens_captured": 5,
+        "shell_samples": 3,
+        "burrowing_observed": true
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.beetle.stage3",
+      "requirements": {
+        "specimens_captured": 6,
+        "shell_samples": 5,
+        "log_attraction_studied": true
+      }
+    }
+  ],
+  "discoveries": [
+    "Beetles comprise largest insect order",
+    "Elytra protect flight wings beneath",
+    "Important decomposers in ecosystem",
+    "Shell durability varies by species"
+  ],
+  "related_research": ["spider_research", "firefly_research"],
+  "danger_level": "NONE"
+}

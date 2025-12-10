@@ -1,0 +1,60 @@
+{
+  "id": "damselfly_research",
+  "specimen_id": "entomology:damselfly",
+  "page_key": "research.entomology.damselfly.page",
+  "research_tier": 2,
+  "prerequisites": [],
+  "required_specimens": 7,
+  "required_observations": 15,
+  "unlock_requirements": {
+    "study_aquatic_nymphs": true,
+    "observe_hunting": true,
+    "collect_wing_samples": 5,
+    "track_flight_patterns": 8
+  },
+  "research_time_ticks": 8500,
+  "experience_reward": 195,
+  "unlocks": {
+    "breeding_recipes": ["damselfly_color_variants"],
+    "equipment": ["nymph_observation_kit", "flight_tracker"],
+    "mechanics": ["aquatic_breeding", "predator_control"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.damselfly.stage1",
+      "requirements": {
+        "specimens_captured": 2,
+        "water_biome_explored": true
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.damselfly.stage2",
+      "requirements": {
+        "specimens_captured": 5,
+        "nymphs_studied": true,
+        "wing_samples": 3
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.damselfly.stage3",
+      "requirements": {
+        "specimens_captured": 7,
+        "wing_samples": 5,
+        "hunting_observed": true,
+        "flight_tracked": 8
+      }
+    }
+  ],
+  "discoveries": [
+    "Aquatic nymphs hunt underwater prey",
+    "Exceptional flight control and hovering",
+    "Can fly backward and sideways",
+    "Iridescent coloration varies by species"
+  ],
+  "related_research": ["mosquito_research", "firefly_research"],
+  "danger_level": "NONE",
+  "aquatic_lifecycle": true
+}

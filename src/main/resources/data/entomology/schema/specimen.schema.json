@@ -1,0 +1,380 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/specimen.schema.json",
+  "title": "Entomology Specimen Definition",
+  "description": "Schema for defining insect specimens in the Entomology Minecraft mod.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(minecraft:|entomology:|entomology:)?[a-z0-9_]+$",
+      "description": "Unique identifier for the specimen."
+    },
+    "entity_type": {
+      "type": "string",
+      "pattern": "^(minecraft:|entomology:|entomology:)[a-z0-9_]+$",
+      "description": "Entity type reference for the specimen."
+    },
+    "display_name_key": {
+      "type": "string",
+      "pattern": "^specimen\\.entomology\\.[a-z0-9_]+$",
+      "description": "Translation key for the display name."
+    },
+    "description_key": {
+      "type": "string",
+      "pattern": "^specimen\\.entomology\\.[a-z0-9_]+\\.desc$",
+      "description": "Translation key for the description."
+    },
+    "rarity": {
+      "type": "string",
+      "enum": ["COMMON", "UNCOMMON", "RARE", "EPIC", "LEGENDARY"],
+      "description": "Rarity tier of the specimen."
+    },
+    "size": {
+      "type": "string",
+      "enum": ["TINY", "SMALL", "MEDIUM", "LARGE", "HUGE"],
+      "description": "Physical size classification."
+    },
+    "experience_value": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Experience points awarded for capturing this specimen."
+    },
+    "can_breed": {
+      "type": "boolean",
+      "description": "Whether this specimen can breed."
+    },
+    "taxonomic_order": {
+      "type": "string",
+      "description": "Scientific taxonomic order (e.g., Lepidoptera, Coleoptera, Diptera)."
+    },
+    "dimensional_origin": {
+      "type": "string",
+      "enum": ["overworld", "the_nether", "the_end"],
+      "description": "Dimension where the specimen naturally occurs."
+    },
+    "undead_classification": {
+      "type": "boolean",
+      "description": "Whether the specimen is classified as undead.",
+      "default": false
+    },
+    "behavior_traits": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of behavioral characteristics.",
+      "minItems": 1
+    },
+    "environmental_preferences": {
+      "type": "object",
+      "description": "Environmental conditions preferred by the specimen.",
+      "properties": {
+        "preferred_biomes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of preferred biome identifiers.",
+          "minItems": 1
+        },
+        "temperature_range": {
+          "type": "object",
+          "properties": {
+            "min": { "type": "number" },
+            "max": { "type": "number" }
+          },
+          "required": ["min", "max"]
+        },
+        "humidity_range": {
+          "type": "object",
+          "properties": {
+            "min": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+            "max": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+          },
+          "required": ["min", "max"]
+        },
+        "time_preference": {
+          "type": "string",
+          "enum": ["day", "night", "dusk", "dawn", "any"],
+          "description": "Preferred time of day for activity."
+        },
+        "light_level_min": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15,
+          "description": "Minimum light level for spawning/activity."
+        },
+        "light_level_max": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15,
+          "description": "Maximum light level for spawning/activity."
+        },
+        "altitude_min": {
+          "type": "integer",
+          "description": "Minimum Y-level for spawning."
+        },
+        "altitude_max": {
+          "type": "integer",
+          "description": "Maximum Y-level for spawning."
+        },
+        "water_proximity": {
+          "type": "boolean",
+          "description": "Whether the specimen prefers proximity to water.",
+          "default": false
+        },
+        "flower_proximity": {
+          "type": "boolean",
+          "description": "Whether the specimen prefers proximity to flowers.",
+          "default": false
+        },
+        "tree_proximity": {
+          "type": "boolean",
+          "description": "Whether the specimen prefers proximity to trees.",
+          "default": false
+        },
+        "food_proximity": {
+          "type": "boolean",
+          "description": "Whether the specimen is attracted to food sources.",
+          "default": false
+        },
+        "proximity_radius": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Radius in blocks for proximity checks."
+        },
+        "dimensional": {
+          "type": "boolean",
+          "description": "Whether the specimen can exist across dimensions.",
+          "default": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "capture_difficulty": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Difficulty of capturing (0.0=easiest, 1.0=hardest)."
+    },
+    "aggression_triggers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of triggers that cause aggression."
+    },
+    "special_mechanics": {
+      "type": "object",
+      "description": "Special gameplay mechanics for this specimen.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "enabled": { "type": "boolean" }
+        },
+        "required": ["enabled"]
+      }
+    },
+    "breeding": {
+      "type": "object",
+      "description": "Breeding mechanics and requirements.",
+      "properties": {
+        "can_breed": {
+          "type": "boolean",
+          "description": "Whether breeding is possible."
+        },
+        "breeding_item": {
+          "type": "string",
+          "description": "Item required to initiate breeding."
+        },
+        "breeding_pairs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Valid breeding partner specimen IDs."
+        },
+        "offspring": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Possible offspring specimen IDs."
+        },
+        "mutation_chance": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Probability of mutation occurring."
+        },
+        "cooldown_ticks": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Cooldown period between breeding attempts."
+        },
+        "egg_laying": {
+          "type": "boolean",
+          "description": "Whether the specimen lays eggs.",
+          "default": false
+        },
+        "eggs_per_breeding": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of eggs laid per breeding."
+        },
+        "water_required": {
+          "type": "boolean",
+          "description": "Whether water is required for breeding.",
+          "default": false
+        },
+        "color_inheritance": {
+          "type": "boolean",
+          "description": "Whether color traits are inherited.",
+          "default": false
+        }
+      },
+      "required": ["can_breed"],
+      "additionalProperties": false
+    },
+    "drops": {
+      "type": "object",
+      "description": "Item drops from the specimen.",
+      "properties": {
+        "common": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Common drop items."
+        },
+        "uncommon": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Uncommon drop items."
+        },
+        "rare": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Rare drop items."
+        }
+      },
+      "additionalProperties": false
+    },
+    "health": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Maximum health points."
+    },
+    "damage": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Attack damage value."
+    },
+    "speed": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Movement speed."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Descriptive tags for categorization and filtering.",
+      "minItems": 1
+    },
+    "order": {
+      "type": "string",
+      "description": "Taxonomic order (alternative to taxonomic_order for backward compatibility)."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name (alternative to display_name_key for backward compatibility)."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description text (alternative to description_key for backward compatibility)."
+    },
+    "capture_targets": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Entity types this specimen can be captured from (backward compatibility)."
+    },
+    "components": {
+      "type": "object",
+      "description": "Custom components for extended functionality (backward compatibility).",
+      "additionalProperties": { "type": "object" }
+    },
+    "habitats": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Habitat types (backward compatibility).",
+      "minItems": 1
+    },
+    "time": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["day", "night", "dusk", "dawn"]
+      },
+      "description": "Activity times (backward compatibility).",
+      "minItems": 1
+    },
+    "weather": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["clear", "rain", "humid", "storm"]
+      },
+      "description": "Weather preferences (backward compatibility)."
+    },
+    "behaviors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Behavior list (backward compatibility)."
+    },
+    "sounds": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Sound events (backward compatibility)."
+    },
+    "loot": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Loot items (backward compatibility)."
+    },
+    "spawn": {
+      "type": "object",
+      "description": "Spawn configuration (backward compatibility).",
+      "properties": {
+        "weight": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Spawn weight."
+        },
+        "group_size": {
+          "type": "object",
+          "properties": {
+            "min": { "type": "integer", "minimum": 1 },
+            "max": { "type": "integer", "minimum": 1 }
+          },
+          "required": ["min", "max"]
+        },
+        "conditions": {
+          "type": "object",
+          "description": "Spawn conditions."
+        }
+      }
+    },
+    "guide": {
+      "type": "object",
+      "description": "Field guide information (backward compatibility).",
+      "properties": {
+        "description": { "type": "string" },
+        "facts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      },
+      "required": ["description", "facts"]
+    }
+  },
+  "required": ["id"],
+  "oneOf": [
+    {
+      "required": ["entity_type", "display_name_key", "description_key"]
+    },
+    {
+      "required": ["name", "description"]
+    }
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/item.schema.json",
+  "title": "Item Definition",
+  "description": "Schema for defining items in the Entomology Minecraft mod.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "Unique identifier for the item."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "tool",
+        "consumable",
+        "material",
+        "research",
+        "spawn_egg",
+        "misc"
+      ],
+      "description": "Functional type of the item."
+    },
+    "max_stack_size": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 64,
+      "description": "Maximum stack size for this item.",
+      "default": 64
+    },
+    "durability": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Maximum durability for tool items."
+    },
+    "fireproof": {
+      "type": "boolean",
+      "description": "Whether the item is immune to fire and lava damage.",
+      "default": false
+    },
+    "rarity": {
+      "type": "string",
+      "enum": ["COMMON", "UNCOMMON", "RARE", "EPIC"],
+      "description": "Rarity tier affecting item name color.",
+      "default": "COMMON"
+    },
+    "consumable": {
+      "type": "object",
+      "description": "Properties for consumable items.",
+      "properties": {
+        "food_value": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Hunger points restored."
+        },
+        "saturation": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Saturation value."
+        },
+        "effects": {
+          "type": "array",
+          "description": "Potion effects applied when consumed.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "effect": {
+                "type": "string",
+                "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$",
+                "description": "Effect identifier."
+              },
+              "duration": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Effect duration in ticks."
+              },
+              "amplifier": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Effect amplifier (level - 1)."
+              },
+              "chance": {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "description": "Probability of effect applying.",
+                "default": 1.0
+              }
+            },
+            "required": ["effect", "duration", "amplifier"],
+            "additionalProperties": false
+          }
+        },
+        "always_edible": {
+          "type": "boolean",
+          "description": "Can be consumed even when not hungry.",
+          "default": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "spawn_egg": {
+      "type": "object",
+      "description": "Properties for spawn egg items.",
+      "properties": {
+        "entity_type": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$",
+          "description": "Entity type spawned by this egg."
+        },
+        "primary_color": {
+          "type": "integer",
+          "description": "Primary color as RGB integer."
+        },
+        "secondary_color": {
+          "type": "integer",
+          "description": "Secondary color as RGB integer."
+        }
+      },
+      "required": ["entity_type"],
+      "additionalProperties": false
+    },
+    "research": {
+      "type": "object",
+      "description": "Properties for research items.",
+      "properties": {
+        "grants_research": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+_research$"
+          },
+          "description": "Research IDs granted when item is used."
+        },
+        "experience_value": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Experience points granted."
+        }
+      },
+      "additionalProperties": false
+    },
+    "fuel": {
+      "type": "object",
+      "description": "Properties for fuel items.",
+      "properties": {
+        "burn_time": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Burn time in ticks (200 ticks = 1 item smelted)."
+        }
+      },
+      "required": ["burn_time"],
+      "additionalProperties": false
+    },
+    "tool": {
+      "type": "object",
+      "description": "Properties for tool items.",
+      "properties": {
+        "mining_speed": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Mining speed multiplier."
+        },
+        "attack_damage": {
+          "type": "number",
+          "description": "Additional attack damage."
+        },
+        "attack_speed": {
+          "type": "number",
+          "description": "Attack speed modifier."
+        },
+        "enchantability": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Enchantability value (higher = better enchants)."
+        },
+        "repair_material": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$",
+          "description": "Item used to repair this tool in an anvil."
+        }
+      },
+      "additionalProperties": false
+    },
+    "glowing": {
+      "type": "boolean",
+      "description": "Whether the item has an enchantment glint.",
+      "default": false
+    },
+    "tooltips": {
+      "type": "array",
+      "description": "Custom tooltip lines.",
+      "items": {
+        "type": "string",
+        "description": "Translation key for tooltip line."
+      }
+    },
+    "components": {
+      "type": "object",
+      "description": "Custom data components.",
+      "additionalProperties": true
+    }
+  },
+  "required": ["id", "type"],
+  "additionalProperties": false
+}

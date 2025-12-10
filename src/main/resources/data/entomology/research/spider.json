@@ -1,0 +1,58 @@
+{
+  "id": "spider_research",
+  "specimen_id": "spider",
+  "page_key": "research.entomology.spider.page",
+  "research_tier": 1,
+  "prerequisites": [],
+  "required_specimens": 5,
+  "required_observations": 10,
+  "unlock_requirements": {
+    "collect_spider_eyes": 6,
+    "collect_string": 12,
+    "observe_wall_climbing": true,
+    "study_neutral_behavior": true
+  },
+  "research_time_ticks": 5000,
+  "experience_reward": 120,
+  "unlocks": {
+    "breeding_recipes": ["spider_variant"],
+    "equipment": ["web_analyzer", "climbing_gear"],
+    "mechanics": ["spider_jockey_prevention", "web_farming"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.spider.stage1",
+      "requirements": {
+        "specimens_captured": 2,
+        "string_collected": 4
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.spider.stage2",
+      "requirements": {
+        "specimens_captured": 5,
+        "spider_eyes_collected": 3,
+        "wall_climbing_observed": true
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.spider.stage3",
+      "requirements": {
+        "spider_eyes_collected": 6,
+        "string_collected": 12,
+        "neutral_behavior_studied": true
+      }
+    }
+  ],
+  "discoveries": [
+    "Spiders are neutral during daylight",
+    "Can climb any solid surface",
+    "Eyes contain useful brewing ingredients",
+    "Occasionally spawn with skeleton riders"
+  ],
+  "related_research": ["cave_spider_research", "beetle_research"],
+  "danger_level": "LOW"
+}

@@ -1,0 +1,59 @@
+{
+  "display": {
+    "icon": {
+      "item": "entomology:specimen_jar"
+    },
+    "title": "advancement.entomology.first_find.title",
+    "description": "advancement.entomology.first_find.description",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "entomology:bug_beginnings",
+  "criteria": {
+    "catch_insect": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [
+          {
+            "type": "minecraft:bee"
+          },
+          {
+            "type": "minecraft:silverfish"
+          },
+          {
+            "type": "minecraft:spider"
+          },
+          {
+            "type": "minecraft:cave_spider"
+          },
+          {
+            "type": "entomology:fly"
+          },
+          {
+            "type": "entomology:butterfly"
+          },
+          {
+            "type": "entomology:mosquito"
+          },
+          {
+            "type": "entomology:firefly"
+          },
+          {
+            "type": "entomology:beetle"
+          },
+          {
+            "type": "entomology:cicada"
+          },
+          {
+            "type": "entomology:damselfly"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 20
+  }
+}

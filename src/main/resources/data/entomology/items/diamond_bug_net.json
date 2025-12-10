@@ -1,0 +1,23 @@
+{
+  "id": "diamond_bug_net",
+  "type": "tool",
+  "capture_targets": [
+    "minecraft:bee",
+    "minecraft:silverfish",
+    "minecraft:spider",
+    "minecraft:cave_spider",
+    "minecraft:endermite",
+    "entomology:fly",
+    "entomology:butterfly",
+    "entomology:beetle",
+    "entomology:mosquito",
+    "entomology:damselfly",
+    "entomology:cicada",
+    "entomology:firefly",
+    "entomology:monarch_butterfly"
+  ],
+  "durability": 256,
+  "max_stack_size": 1,
+  "capture_chance": 0.9,
+  "durability_per_capture": 1
+}

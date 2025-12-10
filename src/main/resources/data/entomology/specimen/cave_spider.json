@@ -1,0 +1,63 @@
+{
+  "id": "cave_spider",
+  "entity_type": "minecraft:cave_spider",
+  "display_name_key": "specimen.entomology.cave_spider",
+  "description_key": "specimen.entomology.cave_spider.desc",
+  "rarity": "UNCOMMON",
+  "size": "SMALL",
+  "experience_value": 20,
+  "can_breed": true,
+  "taxonomic_order": "Araneae",
+  "behavior_traits": [
+    "venomous",
+    "wall_climbing",
+    "hostile",
+    "spawner_dwelling"
+  ],
+  "environmental_preferences": {
+    "preferred_biomes": [
+      "minecraft:mineshaft",
+      "minecraft:caves",
+      "minecraft:underground"
+    ],
+    "temperature_range": { "min": 0.0, "max": 0.6 },
+    "humidity_range": { "min": 0.5, "max": 1.0 },
+    "time_preference": "any",
+    "light_level_max": 11
+  },
+  "capture_difficulty": 0.55,
+  "aggression_triggers": ["always_hostile"],
+  "special_mechanics": {
+    "wall_climbing": {
+      "enabled": true,
+      "speed_multiplier": 0.8
+    },
+    "venom": {
+      "enabled": true,
+      "effect": "minecraft:poison",
+      "duration_ticks": 140,
+      "amplifier": 0
+    },
+    "spawner_association": {
+      "enabled": true,
+      "spawner_type": "minecraft:cave_spider"
+    }
+  },
+  "breeding": {
+    "can_breed": true,
+    "breeding_item": "minecraft:fermented_spider_eye",
+    "breeding_pairs": ["cave_spider"],
+    "offspring": ["cave_spider"],
+    "mutation_chance": 0.08,
+    "cooldown_ticks": 6000
+  },
+  "drops": {
+    "common": ["minecraft:string"],
+    "uncommon": ["minecraft:spider_eye"],
+    "rare": ["entomology:venom_sac"]
+  },
+  "health": 12.0,
+  "damage": 2.0,
+  "speed": 0.3,
+  "tags": ["venomous", "hostile", "arachnid", "cave_dwelling", "araneae"]
+}

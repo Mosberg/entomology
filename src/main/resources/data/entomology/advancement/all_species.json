@@ -1,0 +1,119 @@
+{
+  "display": {
+    "icon": {
+      "item": "entomology:field_guide"
+    },
+    "title": "advancement.entomology.all_species.title",
+    "description": "advancement.entomology.all_species.description",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "entomology:collector",
+  "criteria": {
+    "bee": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "minecraft:bee" }]
+      }
+    },
+    "silverfish": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "minecraft:silverfish" }]
+      }
+    },
+    "spider": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "minecraft:spider" }]
+      }
+    },
+    "cave_spider": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "minecraft:cave_spider" }]
+      }
+    },
+    "endermite": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "minecraft:endermite" }]
+      }
+    },
+    "phantom": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "minecraft:phantom" }]
+      }
+    },
+    "fly": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "entomology:fly" }]
+      }
+    },
+    "butterfly": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "entomology:butterfly" }]
+      }
+    },
+    "mosquito": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "entomology:mosquito" }]
+      }
+    },
+    "firefly": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "entomology:firefly" }]
+      }
+    },
+    "beetle": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "entomology:beetle" }]
+      }
+    },
+    "cicada": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "entomology:cicada" }]
+      }
+    },
+    "damselfly": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "entomology:damselfly" }]
+      }
+    },
+    "monarch_butterfly": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [{ "type": "entomology:monarch_butterfly" }]
+      }
+    }
+  },
+  "requirements": [
+    ["bee"],
+    ["silverfish"],
+    ["spider"],
+    ["cave_spider"],
+    ["endermite"],
+    ["phantom"],
+    ["fly"],
+    ["butterfly"],
+    ["mosquito"],
+    ["firefly"],
+    ["beetle"],
+    ["cicada"],
+    ["damselfly"],
+    ["monarch_butterfly"]
+  ],
+  "rewards": {
+    "experience": 250
+  }
+}

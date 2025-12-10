@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "entomology",
+  "version": "${version}",
+  "name": "Entomology",
+  "description": "JSON-driven insect collection and research mod for Minecraft.",
+  "authors": ["Mosberg"],
+  "contact": {
+    "homepage": "https://github.com/mosberg/entomology-json",
+    "sources": "https://github.com/mosberg/entomology-json",
+    "issues": "https://github.com/mosberg/entomology-json/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/entomology/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["dk.mosberg.entomology.EntomologyMod"],
+    "client": ["dk.mosberg.entomology.client.EntomologyClient"]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.18.1",
+    "minecraft": "1.21.10",
+    "java": ">=21",
+    "fabric-api": ">=0.138.3+1.21.10"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

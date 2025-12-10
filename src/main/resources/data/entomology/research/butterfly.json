@@ -1,0 +1,60 @@
+{
+  "id": "butterfly_research",
+  "specimen_id": "butterfly",
+  "page_key": "research.entomology.butterfly.page",
+  "research_tier": 1,
+  "prerequisites": [],
+  "required_specimens": 6,
+  "required_observations": 12,
+  "unlock_requirements": {
+    "observe_metamorphosis": true,
+    "collect_wing_scales": 4,
+    "study_pollination": true,
+    "find_caterpillar": true
+  },
+  "research_time_ticks": 7500,
+  "experience_reward": 160,
+  "unlocks": {
+    "breeding_recipes": ["butterfly_variants", "color_hybrids"],
+    "equipment": ["butterfly_garden", "metamorphosis_chamber"],
+    "mechanics": ["pollination_boost", "lifecycle_control"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.butterfly.stage1",
+      "requirements": {
+        "specimens_captured": 2,
+        "flowers_visited": 5
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.butterfly.stage2",
+      "requirements": {
+        "specimens_captured": 4,
+        "wing_scales": 2,
+        "caterpillar_found": true
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.butterfly.stage3",
+      "requirements": {
+        "specimens_captured": 6,
+        "wing_scales": 4,
+        "metamorphosis_observed": true,
+        "pollination_studied": true
+      }
+    }
+  ],
+  "discoveries": [
+    "Complete metamorphosis from caterpillar",
+    "Wing scales create colorful patterns",
+    "Important pollinators for flowers",
+    "Color variations for species identification"
+  ],
+  "related_research": ["bee_research", "monarch_butterfly_research"],
+  "danger_level": "NONE",
+  "pollinator": true
+}

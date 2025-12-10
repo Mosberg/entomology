@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "entomology:bug_net"
+    },
+    "title": "advancement.entomology.bug_beginnings.title",
+    "description": "advancement.entomology.bug_beginnings.description",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "entomology:root",
+  "criteria": {
+    "get_bug_net": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "entomology:bug_net",
+              "entomology:basic_bug_net",
+              "entomology:iron_bug_net",
+              "entomology:golden_bug_net",
+              "entomology:diamond_bug_net",
+              "entomology:netherite_bug_net"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 10
+  }
+}

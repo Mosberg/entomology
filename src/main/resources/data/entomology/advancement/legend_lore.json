@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "entomology:phantom_spawn_egg"
+    },
+    "title": "advancement.entomology.legend_lore.title",
+    "description": "advancement.entomology.legend_lore.description",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "entomology:rare_find",
+  "criteria": {
+    "catch_phantom": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [
+          {
+            "type": "minecraft:phantom"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 150
+  }
+}

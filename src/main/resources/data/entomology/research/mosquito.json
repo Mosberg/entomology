@@ -1,0 +1,60 @@
+{
+  "id": "mosquito_research",
+  "specimen_id": "entomology:mosquito",
+  "page_key": "research.entomology.mosquito.page",
+  "research_tier": 2,
+  "prerequisites": ["fly_research"],
+  "required_specimens": 8,
+  "required_observations": 16,
+  "unlock_requirements": {
+    "study_blood_feeding": true,
+    "observe_breeding_water": true,
+    "collect_larval_samples": 6,
+    "track_nocturnal_activity": 10
+  },
+  "research_time_ticks": 9000,
+  "experience_reward": 180,
+  "unlocks": {
+    "breeding_recipes": [],
+    "equipment": ["mosquito_repellent", "larval_trap", "blood_analyzer"],
+    "mechanics": ["disease_prevention", "population_control"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.mosquito.stage1",
+      "requirements": {
+        "specimens_captured": 3,
+        "swamp_explored": true
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.mosquito.stage2",
+      "requirements": {
+        "specimens_captured": 6,
+        "blood_feeding_studied": true,
+        "larval_samples": 3
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.mosquito.stage3",
+      "requirements": {
+        "specimens_captured": 8,
+        "larval_samples": 6,
+        "breeding_water_observed": true,
+        "nocturnal_tracked": 10
+      }
+    }
+  ],
+  "discoveries": [
+    "Only females feed on blood",
+    "Larvae develop in standing water",
+    "Can transmit various diseases",
+    "Most active at dawn and dusk"
+  ],
+  "related_research": ["fly_research", "damselfly_research"],
+  "danger_level": "LOW",
+  "disease_vector": true
+}

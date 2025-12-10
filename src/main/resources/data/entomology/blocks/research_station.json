@@ -1,0 +1,9 @@
+{
+  "id": "research_station",
+  "inputs": ["specimen_jar", "field_guide"],
+  "outputs": ["research_entry"],
+  "research_time_ticks": 200,
+  "experience_per_research": 5,
+  "requires_player": false,
+  "max_concurrent_research": 1
+}

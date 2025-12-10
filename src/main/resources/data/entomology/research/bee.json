@@ -1,0 +1,52 @@
+{
+  "id": "bee_research",
+  "specimen_id": "bee",
+  "page_key": "research.entomology.bee.page",
+  "research_tier": 1,
+  "prerequisites": [],
+  "required_specimens": 5,
+  "required_observations": 10,
+  "unlock_requirements": {
+    "collect_pollen_samples": 3,
+    "observe_pollination": true,
+    "find_nest": true
+  },
+  "research_time_ticks": 6000,
+  "experience_reward": 100,
+  "unlocks": {
+    "breeding_recipes": ["bee_hybrid"],
+    "equipment": ["pollen_analyzer"],
+    "mechanics": ["advanced_beekeeping"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.bee.stage1",
+      "requirements": {
+        "specimens_captured": 2
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.bee.stage2",
+      "requirements": {
+        "specimens_captured": 5,
+        "pollen_collected": 3
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.bee.stage3",
+      "requirements": {
+        "nest_located": true,
+        "pollination_observed": 10
+      }
+    }
+  ],
+  "discoveries": [
+    "Bees communicate through waggle dances",
+    "Colony organization and roles",
+    "Pollination efficiency mechanics"
+  ],
+  "related_research": ["firefly_research", "monarch_butterfly_research"]
+}

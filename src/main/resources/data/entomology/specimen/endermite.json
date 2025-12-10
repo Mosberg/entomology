@@ -1,0 +1,59 @@
+{
+  "id": "endermite",
+  "entity_type": "minecraft:endermite",
+  "display_name_key": "specimen.entomology.endermite",
+  "description_key": "specimen.entomology.endermite.desc",
+  "rarity": "RARE",
+  "size": "TINY",
+  "experience_value": 50,
+  "can_breed": false,
+  "taxonomic_order": "Unknown",
+  "dimensional_origin": "the_end",
+  "behavior_traits": [
+    "parasitic",
+    "dimensional",
+    "short_lived",
+    "enderman_target"
+  ],
+  "environmental_preferences": {
+    "preferred_biomes": ["any"],
+    "temperature_range": { "min": -1.0, "max": 2.0 },
+    "humidity_range": { "min": 0.0, "max": 1.0 },
+    "time_preference": "any",
+    "dimensional": true
+  },
+  "capture_difficulty": 0.75,
+  "aggression_triggers": ["always_hostile"],
+  "special_mechanics": {
+    "teleportation_spawn": {
+      "enabled": true,
+      "spawn_chance": 0.05,
+      "source": "ender_pearl_use"
+    },
+    "enderman_aggression": {
+      "enabled": true,
+      "provokes_endermen": true,
+      "radius": 64
+    },
+    "despawn_timer": {
+      "enabled": true,
+      "lifespan_ticks": 2400
+    },
+    "dimensional_essence": {
+      "enabled": true,
+      "essence_type": "end"
+    }
+  },
+  "breeding": {
+    "can_breed": false
+  },
+  "drops": {
+    "common": [],
+    "uncommon": ["entomology:ender_chitin"],
+    "rare": ["entomology:dimensional_essence"]
+  },
+  "health": 8.0,
+  "damage": 2.0,
+  "speed": 0.25,
+  "tags": ["dimensional", "parasitic", "rare", "short_lived", "end_creature"]
+}

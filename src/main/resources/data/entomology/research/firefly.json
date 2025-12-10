@@ -1,0 +1,60 @@
+{
+  "id": "firefly_research",
+  "specimen_id": "firefly",
+  "page_key": "research.entomology.firefly.page",
+  "research_tier": 2,
+  "prerequisites": ["bee_research"],
+  "required_specimens": 8,
+  "required_observations": 18,
+  "unlock_requirements": {
+    "study_bioluminescence": true,
+    "collect_light_samples": 6,
+    "observe_mating_signals": true,
+    "nighttime_observation": 12
+  },
+  "research_time_ticks": 9000,
+  "experience_reward": 200,
+  "unlocks": {
+    "breeding_recipes": ["firefly_color_variants"],
+    "equipment": ["bioluminescence_extractor", "light_amplifier"],
+    "mechanics": ["natural_lighting", "firefly_jar_crafting"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.firefly.stage1",
+      "requirements": {
+        "specimens_captured": 3,
+        "swamp_biome_explored": true
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.firefly.stage2",
+      "requirements": {
+        "specimens_captured": 6,
+        "light_samples": 3,
+        "nighttime_observed": 6
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.firefly.stage3",
+      "requirements": {
+        "specimens_captured": 8,
+        "light_samples": 6,
+        "bioluminescence_studied": true,
+        "mating_signals_observed": true
+      }
+    }
+  ],
+  "discoveries": [
+    "Fireflies produce light through luciferin reactions",
+    "Flash patterns used for mate attraction",
+    "Most active near water in warm climates",
+    "Light emission controlled by oxygen supply"
+  ],
+  "related_research": ["bee_research", "monarch_butterfly_research"],
+  "danger_level": "NONE",
+  "bioluminescent": true
+}

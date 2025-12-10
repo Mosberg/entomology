@@ -1,0 +1,59 @@
+{
+  "id": "silverfish",
+  "entity_type": "minecraft:silverfish",
+  "display_name_key": "specimen.entomology.silverfish",
+  "description_key": "specimen.entomology.silverfish.desc",
+  "rarity": "UNCOMMON",
+  "size": "TINY",
+  "experience_value": 25,
+  "can_breed": false,
+  "taxonomic_order": "Zygentoma",
+  "behavior_traits": ["pest", "infesting", "calling", "nocturnal"],
+  "environmental_preferences": {
+    "preferred_biomes": [
+      "minecraft:mountains",
+      "minecraft:stronghold",
+      "minecraft:underground"
+    ],
+    "temperature_range": { "min": 0.0, "max": 0.8 },
+    "humidity_range": { "min": 0.6, "max": 1.0 },
+    "time_preference": "night",
+    "light_level_max": 7
+  },
+  "capture_difficulty": 0.6,
+  "aggression_triggers": ["always_hostile"],
+  "special_mechanics": {
+    "block_infestation": {
+      "enabled": true,
+      "infestable_blocks": [
+        "minecraft:stone",
+        "minecraft:cobblestone",
+        "minecraft:stone_bricks"
+      ],
+      "infestation_chance": 0.1
+    },
+    "reinforcement_calling": {
+      "enabled": true,
+      "radius": 21,
+      "max_reinforcements": 3,
+      "chance": 0.5
+    },
+    "molting": {
+      "enabled": true,
+      "cycle_ticks": 72000,
+      "molt_drop": "entomology:silverfish_molt"
+    }
+  },
+  "breeding": {
+    "can_breed": false
+  },
+  "drops": {
+    "common": ["entomology:silverfish_scale"],
+    "uncommon": ["entomology:silverfish_molt"],
+    "rare": []
+  },
+  "health": 8.0,
+  "damage": 1.0,
+  "speed": 0.25,
+  "tags": ["pest", "infesting", "nocturnal", "underground", "zygentoma"]
+}

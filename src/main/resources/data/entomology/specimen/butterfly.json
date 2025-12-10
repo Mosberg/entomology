@@ -1,0 +1,87 @@
+{
+  "id": "butterfly",
+  "entity_type": "entomology:butterfly",
+  "display_name_key": "specimen.entomology.butterfly",
+  "description_key": "specimen.entomology.butterfly.desc",
+  "rarity": "UNCOMMON",
+  "size": "TINY",
+  "experience_value": 25,
+  "can_breed": true,
+  "taxonomic_order": "Lepidoptera",
+  "behavior_traits": [
+    "flying",
+    "pollinator",
+    "diurnal",
+    "flower_attracted",
+    "peaceful"
+  ],
+  "environmental_preferences": {
+    "preferred_biomes": [
+      "minecraft:plains",
+      "minecraft:flower_forest",
+      "minecraft:meadow",
+      "minecraft:forest",
+      "minecraft:jungle"
+    ],
+    "temperature_range": { "min": 0.5, "max": 1.2 },
+    "humidity_range": { "min": 0.3, "max": 0.9 },
+    "time_preference": "day",
+    "light_level_min": 10,
+    "flower_proximity": true,
+    "proximity_radius": 24
+  },
+  "capture_difficulty": 0.4,
+  "aggression_triggers": [],
+  "special_mechanics": {
+    "flight_behavior": {
+      "enabled": true,
+      "flight_speed": 0.25,
+      "height_preference": "medium",
+      "gliding_ability": true,
+      "graceful_movement": true
+    },
+    "pollination": {
+      "enabled": true,
+      "pollination_radius": 10,
+      "efficiency": 0.7,
+      "flower_preference": [
+        "minecraft:poppy",
+        "minecraft:dandelion",
+        "minecraft:allium"
+      ]
+    },
+    "lifecycle": {
+      "enabled": true,
+      "stages": ["egg", "caterpillar", "chrysalis", "butterfly"],
+      "egg_duration_ticks": 1200,
+      "caterpillar_duration_ticks": 4800,
+      "chrysalis_duration_ticks": 3600,
+      "adult_lifespan_ticks": 18000
+    },
+    "color_variants": {
+      "enabled": true,
+      "variants": ["blue", "orange", "yellow", "white", "purple"],
+      "variant_weights": [1.0, 1.5, 1.0, 1.2, 0.8]
+    }
+  },
+  "breeding": {
+    "can_breed": true,
+    "breeding_item": "minecraft:flower",
+    "breeding_pairs": ["entomology:butterfly"],
+    "offspring": ["entomology:butterfly"],
+    "mutation_chance": 0.05,
+    "cooldown_ticks": 6000,
+    "egg_laying": true,
+    "eggs_per_breeding": 10,
+    "color_inheritance": true
+  },
+  "drops": {
+    "common": ["entomology:butterfly_wing"],
+    "uncommon": ["entomology:wing_scales"],
+    "rare": ["entomology:chrysalis"]
+  },
+  "health": 4.0,
+  "damage": 0.0,
+  "speed": 0.25,
+  "tags": ["flying", "pollinator", "diurnal", "peaceful", "lepidoptera"]
+}

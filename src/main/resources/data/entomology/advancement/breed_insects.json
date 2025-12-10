@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:egg"
+    },
+    "title": "advancement.entomology.breed_insects.title",
+    "description": "advancement.entomology.breed_insects.description",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "entomology:collector",
+  "criteria": {
+    "breed": {
+      "trigger": "minecraft:bred_animals",
+      "conditions": {
+        "child": {
+          "type_specific": {
+            "type": "entomology"
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "experience": 75
+  }
+}

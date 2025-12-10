@@ -1,0 +1,99 @@
+{
+  "id": "monarch_butterfly",
+  "entity_type": "entomology:monarch_butterfly",
+  "display_name_key": "specimen.entomology.monarch_butterfly",
+  "description_key": "specimen.entomology.monarch_butterfly.desc",
+  "rarity": "UNCOMMON",
+  "size": "TINY",
+  "experience_value": 40,
+  "can_breed": true,
+  "taxonomic_order": "Lepidoptera",
+  "behavior_traits": [
+    "flying",
+    "pollinator",
+    "migratory",
+    "diurnal",
+    "peaceful"
+  ],
+  "environmental_preferences": {
+    "preferred_biomes": [
+      "minecraft:plains",
+      "minecraft:sunflower_plains",
+      "minecraft:flower_forest",
+      "minecraft:meadow",
+      "minecraft:forest"
+    ],
+    "temperature_range": { "min": 0.5, "max": 1.0 },
+    "humidity_range": { "min": 0.3, "max": 0.8 },
+    "time_preference": "day",
+    "light_level_min": 9,
+    "flower_proximity": true,
+    "proximity_radius": 24
+  },
+  "capture_difficulty": 0.45,
+  "aggression_triggers": [],
+  "special_mechanics": {
+    "flight_behavior": {
+      "enabled": true,
+      "flight_speed": 0.3,
+      "height_preference": "high",
+      "gliding_ability": true,
+      "erratic_movement": true
+    },
+    "pollination": {
+      "enabled": true,
+      "pollination_radius": 12,
+      "efficiency": 0.8,
+      "flower_preference": [
+        "minecraft:dandelion",
+        "minecraft:poppy",
+        "entomology:milkweed"
+      ]
+    },
+    "lifecycle": {
+      "enabled": true,
+      "stages": ["egg", "larva", "pupa", "adult"],
+      "egg_duration_ticks": 2400,
+      "larval_duration_ticks": 7200,
+      "pupal_duration_ticks": 6000,
+      "adult_lifespan_ticks": 24000
+    },
+    "migration": {
+      "enabled": true,
+      "seasonal": true,
+      "migration_distance": 2000,
+      "direction_tracking": true
+    },
+    "toxicity": {
+      "enabled": true,
+      "source": "milkweed",
+      "predator_deterrent": true
+    }
+  },
+  "breeding": {
+    "can_breed": true,
+    "breeding_item": "entomology:milkweed",
+    "breeding_pairs": ["monarch_butterfly"],
+    "offspring": ["monarch_butterfly"],
+    "mutation_chance": 0.02,
+    "cooldown_ticks": 6000,
+    "egg_laying": true,
+    "eggs_per_breeding": 5
+  },
+  "drops": {
+    "common": ["entomology:butterfly_wing"],
+    "uncommon": ["entomology:wing_scales"],
+    "rare": ["entomology:monarch_chrysalis"]
+  },
+  "health": 6.0,
+  "damage": 0.0,
+  "speed": 0.3,
+  "tags": [
+    "flying",
+    "pollinator",
+    "diurnal",
+    "migratory",
+    "peaceful",
+    "lepidoptera"
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "breeding_pairs": [
+    {
+      "parent1": "bee",
+      "parent2": "bee",
+      "offspring": ["bee"],
+      "chance": 0.3,
+      "mutations": [
+        {
+          "result": "queen_bee",
+          "chance": 0.05,
+          "conditions": {
+            "required_blocks_nearby": [
+              "minecraft:bee_nest",
+              "minecraft:beehive"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "parent1": "spider",
+      "parent2": "spider",
+      "offspring": ["spider"],
+      "chance": 0.35,
+      "mutations": []
+    },
+    {
+      "parent1": "cave_spider",
+      "parent2": "cave_spider",
+      "offspring": ["cave_spider"],
+      "chance": 0.3,
+      "mutations": [],
+      "requirements": {
+        "max_light_level": 7,
+        "underground": true
+      }
+    },
+    {
+      "parent1": "butterfly",
+      "parent2": "butterfly",
+      "offspring": ["butterfly"],
+      "chance": 0.4,
+      "mutations": [
+        {
+          "result": "monarch_butterfly",
+          "chance": 0.02
+        }
+      ],
+      "requirements": {
+        "min_light_level": 10,
+        "flowers_nearby": true
+      }
+    },
+    {
+      "parent1": "monarch_butterfly",
+      "parent2": "monarch_butterfly",
+      "offspring": ["monarch_butterfly"],
+      "chance": 0.25,
+      "mutations": [
+        {
+          "result": "painted_lady",
+          "chance": 0.03,
+          "conditions": {
+            "required_blocks_nearby": ["entomology:milkweed"]
+          }
+        }
+      ]
+    },
+    {
+      "parent1": "firefly",
+      "parent2": "firefly",
+      "offspring": ["firefly"],
+      "chance": 0.35,
+      "mutations": [
+        {
+          "result": "blue_firefly",
+          "chance": 0.02,
+          "conditions": {
+            "biome": "minecraft:mangrove_swamp",
+            "moon_phase": 0
+          }
+        }
+      ],
+      "requirements": {
+        "min_light_level": 0,
+        "max_light_level": 7,
+        "water_nearby": true
+      }
+    },
+    {
+      "parent1": "beetle",
+      "parent2": "beetle",
+      "offspring": ["beetle"],
+      "chance": 0.4,
+      "mutations": [],
+      "requirements": {
+        "log_nearby": true
+      }
+    },
+    {
+      "parent1": "fly",
+      "parent2": "fly",
+      "offspring": ["fly"],
+      "chance": 0.8,
+      "mutations": []
+    },
+    {
+      "parent1": "mosquito",
+      "parent2": "mosquito",
+      "offspring": ["mosquito"],
+      "chance": 0.5,
+      "mutations": [],
+      "requirements": {
+        "water_nearby": true,
+        "max_light_level": 8
+      }
+    },
+    {
+      "parent1": "damselfly",
+      "parent2": "damselfly",
+      "offspring": ["damselfly"],
+      "chance": 0.45,
+      "mutations": [],
+      "requirements": {
+        "water_nearby": true,
+        "min_light_level": 8
+      }
+    },
+    {
+      "parent1": "cicada",
+      "parent2": "cicada",
+      "offspring": ["cicada"],
+      "chance": 0.3,
+      "mutations": [],
+      "requirements": {
+        "tree_nearby": true,
+        "season": "summer"
+      }
+    }
+  ]
+}

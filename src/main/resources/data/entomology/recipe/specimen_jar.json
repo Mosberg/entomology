@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [" C ", "G G", " G "],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "id": "entomology:specimen_jar",
+    "count": 4
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/loot_table.schema.json",
+  "title": "Loot Table Definition",
+  "description": "Schema for loot tables in the Entomology Minecraft mod (compatible with vanilla format).",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "minecraft:empty",
+        "minecraft:entity",
+        "minecraft:block",
+        "minecraft:chest",
+        "minecraft:fishing",
+        "minecraft:gift",
+        "minecraft:advancement_reward",
+        "minecraft:generic"
+      ],
+      "description": "Type of loot table."
+    },
+    "pools": {
+      "type": "array",
+      "description": "Loot pools in this table.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional name for the pool."
+          },
+          "conditions": {
+            "type": "array",
+            "description": "Conditions that must be met for this pool to be used.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "condition": {
+                  "type": "string",
+                  "description": "Condition type identifier."
+                }
+              },
+              "required": ["condition"],
+              "additionalProperties": true
+            }
+          },
+          "functions": {
+            "type": "array",
+            "description": "Functions applied to all items in this pool.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "function": {
+                  "type": "string",
+                  "description": "Function type identifier."
+                }
+              },
+              "required": ["function"],
+              "additionalProperties": true
+            }
+          },
+          "rolls": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Fixed number of rolls."
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "number",
+                    "description": "Minimum rolls."
+                  },
+                  "max": {
+                    "type": "number",
+                    "description": "Maximum rolls."
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": ["minecraft:uniform", "minecraft:binomial"],
+                    "description": "Distribution type."
+                  }
+                },
+                "required": ["min", "max"],
+                "additionalProperties": true
+              }
+            ],
+            "description": "Number of times to select from this pool."
+          },
+          "bonus_rolls": {
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "number"
+                  },
+                  "max": {
+                    "type": "number"
+                  }
+                },
+                "required": ["min", "max"]
+              }
+            ],
+            "description": "Additional rolls based on luck."
+          },
+          "entries": {
+            "type": "array",
+            "description": "Items that can be selected from this pool.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "minecraft:item",
+                    "minecraft:tag",
+                    "minecraft:loot_table",
+                    "minecraft:group",
+                    "minecraft:alternatives",
+                    "minecraft:sequence",
+                    "minecraft:dynamic",
+                    "minecraft:empty"
+                  ],
+                  "description": "Entry type."
+                },
+                "name": {
+                  "type": "string",
+                  "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$",
+                  "description": "Item, tag, or loot table identifier."
+                },
+                "weight": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Selection weight.",
+                  "default": 1
+                },
+                "quality": {
+                  "type": "integer",
+                  "description": "Quality modifier (affects luck-based selection)."
+                },
+                "conditions": {
+                  "type": "array",
+                  "description": "Conditions for this entry.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "condition": {
+                        "type": "string",
+                        "description": "Condition type identifier."
+                      }
+                    },
+                    "required": ["condition"],
+                    "additionalProperties": true
+                  }
+                },
+                "functions": {
+                  "type": "array",
+                  "description": "Functions applied to this entry.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "function": {
+                        "type": "string",
+                        "description": "Function type identifier."
+                      }
+                    },
+                    "required": ["function"],
+                    "additionalProperties": true
+                  }
+                },
+                "children": {
+                  "type": "array",
+                  "description": "Child entries for group/alternatives/sequence types."
+                }
+              },
+              "required": ["type"],
+              "additionalProperties": true
+            },
+            "minItems": 1
+          }
+        },
+        "required": ["rolls", "entries"],
+        "additionalProperties": false
+      }
+    },
+    "functions": {
+      "type": "array",
+      "description": "Functions applied to all items from all pools.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "function": {
+            "type": "string",
+            "description": "Function type identifier."
+          }
+        },
+        "required": ["function"],
+        "additionalProperties": true
+      }
+    },
+    "random_sequence": {
+      "type": "string",
+      "description": "Identifier for deterministic random sequence."
+    }
+  },
+  "additionalProperties": false
+}

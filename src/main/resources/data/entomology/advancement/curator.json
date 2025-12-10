@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "entomology:display_case"
+    },
+    "title": "advancement.entomology.curator.title",
+    "description": "advancement.entomology.curator.description",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "entomology:collector",
+  "criteria": {
+    "place_display_case": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "entomology:display_case"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 50
+  }
+}

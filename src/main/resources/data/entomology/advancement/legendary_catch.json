@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "entomology:endermite_spawn_egg"
+    },
+    "title": "advancement.entomology.legendary_catch.title",
+    "description": "advancement.entomology.legendary_catch.description",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "entomology:legend_lore",
+  "criteria": {
+    "catch_endermite": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [
+          {
+            "type": "minecraft:endermite"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 200
+  }
+}

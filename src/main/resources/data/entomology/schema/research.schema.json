@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/research.schema.json",
+  "title": "Entomology Research Definition",
+  "description": "Schema for defining insect research progression in the Entomology Minecraft mod.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+_research$",
+      "description": "Unique identifier for the research entry."
+    },
+    "specimen_id": {
+      "type": "string",
+      "description": "Reference to the specimen ID this research is about."
+    },
+    "page_key": {
+      "type": "string",
+      "pattern": "^research\\.entomology\\.[a-z0-9_]+\\.page$",
+      "description": "Translation key for the research page content."
+    },
+    "research_tier": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Research difficulty tier (1=easiest, 5=hardest)."
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9_]+_research$"
+      },
+      "description": "List of research IDs that must be completed before this one.",
+      "default": []
+    },
+    "required_specimens": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of specimens needed to complete the research."
+    },
+    "required_observations": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of observations required."
+    },
+    "unlock_requirements": {
+      "type": "object",
+      "description": "Additional requirements to unlock or complete the research.",
+      "additionalProperties": {
+        "oneOf": [
+          { "type": "boolean" },
+          { "type": "integer" },
+          { "type": "string" }
+        ]
+      }
+    },
+    "research_time_ticks": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Time in ticks required to complete the research (20 ticks = 1 second)."
+    },
+    "experience_reward": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Experience points awarded upon completion."
+    },
+    "unlocks": {
+      "type": "object",
+      "description": "Content unlocked by completing this research.",
+      "properties": {
+        "breeding_recipes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Breeding recipes unlocked."
+        },
+        "equipment": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Equipment or items unlocked."
+        },
+        "mechanics": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Game mechanics or features unlocked."
+        }
+      },
+      "additionalProperties": false
+    },
+    "research_stages": {
+      "type": "array",
+      "description": "Progressive stages of the research.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stage": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Stage number."
+          },
+          "description_key": {
+            "type": "string",
+            "description": "Translation key for stage description."
+          },
+          "requirements": {
+            "type": "object",
+            "description": "Requirements to complete this stage.",
+            "additionalProperties": {
+              "oneOf": [
+                { "type": "boolean" },
+                { "type": "integer" },
+                { "type": "string" }
+              ]
+            }
+          }
+        },
+        "required": ["stage", "description_key", "requirements"],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "discoveries": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of discoveries or facts learned from this research.",
+      "minItems": 1
+    },
+    "related_research": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9_]+_research$"
+      },
+      "description": "Related research entries that might interest the player."
+    },
+    "danger_level": {
+      "type": "string",
+      "enum": ["NONE", "LOW", "MODERATE", "HIGH", "EXTREME"],
+      "description": "Danger level of researching this specimen.",
+      "default": "NONE"
+    },
+    "dimensional_origin": {
+      "type": "string",
+      "enum": ["overworld", "the_nether", "the_end"],
+      "description": "Dimension where the specimen originates."
+    },
+    "undead_classification": {
+      "type": "boolean",
+      "description": "Whether the specimen is classified as undead.",
+      "default": false
+    },
+    "bioluminescent": {
+      "type": "boolean",
+      "description": "Whether the specimen produces bioluminescence.",
+      "default": false
+    },
+    "pollinator": {
+      "type": "boolean",
+      "description": "Whether the specimen is a pollinator.",
+      "default": false
+    },
+    "disease_vector": {
+      "type": "boolean",
+      "description": "Whether the specimen can transmit diseases.",
+      "default": false
+    },
+    "aquatic_lifecycle": {
+      "type": "boolean",
+      "description": "Whether the specimen has an aquatic lifecycle stage.",
+      "default": false
+    },
+    "sound_production": {
+      "type": "boolean",
+      "description": "Whether the specimen produces notable sounds.",
+      "default": false
+    }
+  },
+  "required": [
+    "id",
+    "specimen_id",
+    "page_key",
+    "research_tier",
+    "required_specimens",
+    "required_observations",
+    "research_time_ticks",
+    "experience_reward",
+    "research_stages",
+    "discoveries"
+  ],
+  "additionalProperties": false
+}

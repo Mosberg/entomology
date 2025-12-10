@@ -1,0 +1,21 @@
+{
+  "id": "golden_bug_net",
+  "type": "tool",
+  "capture_targets": [
+    "minecraft:bee",
+    "minecraft:silverfish",
+    "minecraft:spider",
+    "minecraft:cave_spider",
+    "entomology:fly",
+    "entomology:butterfly",
+    "entomology:beetle",
+    "entomology:mosquito",
+    "entomology:damselfly",
+    "entomology:cicada",
+    "entomology:firefly"
+  ],
+  "durability": 96,
+  "max_stack_size": 1,
+  "capture_chance": 0.85,
+  "durability_per_capture": 1
+}

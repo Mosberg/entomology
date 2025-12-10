@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "entomology:specimen_jar"
+    },
+    "title": {
+      "translate": "advancement.entomology.collector.title"
+    },
+    "description": {
+      "translate": "advancement.entomology.collector.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "entomology:first_capture",
+  "criteria": {
+    "collected_10": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["entomology:specimen_jar"],
+            "count": {
+              "min": 10
+            }
+          }
+        ]
+      }
+    }
+  }
+}

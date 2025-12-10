@@ -1,0 +1,78 @@
+{
+  "id": "cicada",
+  "entity_type": "entomology:cicada",
+  "display_name_key": "specimen.entomology.cicada",
+  "description_key": "specimen.entomology.cicada.desc",
+  "rarity": "UNCOMMON",
+  "size": "MEDIUM",
+  "experience_value": 35,
+  "can_breed": true,
+  "taxonomic_order": "Hemiptera",
+  "behavior_traits": ["vocal", "arboreal", "periodic", "plant_feeder"],
+  "environmental_preferences": {
+    "preferred_biomes": [
+      "minecraft:forest",
+      "minecraft:dark_forest",
+      "minecraft:jungle",
+      "minecraft:birch_forest",
+      "minecraft:old_growth_birch_forest"
+    ],
+    "temperature_range": { "min": 0.6, "max": 1.2 },
+    "humidity_range": { "min": 0.4, "max": 0.9 },
+    "time_preference": "day",
+    "light_level_min": 7,
+    "tree_proximity": true,
+    "proximity_radius": 16
+  },
+  "capture_difficulty": 0.5,
+  "aggression_triggers": [],
+  "special_mechanics": {
+    "sound_production": {
+      "enabled": true,
+      "sound_event": "entity.cicada.call",
+      "volume": 1.5,
+      "pitch_variance": 0.2,
+      "call_interval_ticks": 100,
+      "chorus_synchronization": true
+    },
+    "underground_lifecycle": {
+      "enabled": true,
+      "nymph_duration_ticks": 144000,
+      "emergence_season": "summer",
+      "molting_enabled": true
+    },
+    "tree_attachment": {
+      "enabled": true,
+      "preferred_blocks": [
+        "minecraft:oak_log",
+        "minecraft:birch_log",
+        "minecraft:jungle_log"
+      ],
+      "sap_feeding": true
+    },
+    "seasonal_emergence": {
+      "enabled": true,
+      "emergence_years": [1, 13, 17],
+      "mass_emergence_multiplier": 10.0
+    }
+  },
+  "breeding": {
+    "can_breed": true,
+    "breeding_item": "minecraft:oak_leaves",
+    "breeding_pairs": ["cicada"],
+    "offspring": ["cicada"],
+    "mutation_chance": 0.04,
+    "cooldown_ticks": 12000,
+    "egg_laying": true,
+    "eggs_per_breeding": 200
+  },
+  "drops": {
+    "common": ["entomology:cicada_shell"],
+    "uncommon": ["entomology:cicada_wing"],
+    "rare": ["entomology:tymbals"]
+  },
+  "health": 10.0,
+  "damage": 0.0,
+  "speed": 0.2,
+  "tags": ["vocal", "arboreal", "peaceful", "seasonal", "hemiptera"]
+}

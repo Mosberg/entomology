@@ -1,0 +1,68 @@
+{
+  "id": "phantom",
+  "entity_type": "minecraft:phantom",
+  "display_name_key": "specimen.entomology.phantom",
+  "description_key": "specimen.entomology.phantom.desc",
+  "rarity": "EPIC",
+  "size": "LARGE",
+  "experience_value": 75,
+  "can_breed": false,
+  "taxonomic_order": "Unknown",
+  "undead_classification": true,
+  "behavior_traits": [
+    "undead",
+    "flying",
+    "insomnia_triggered",
+    "dive_attacking",
+    "photophobic"
+  ],
+  "environmental_preferences": {
+    "preferred_biomes": ["any_overworld"],
+    "temperature_range": { "min": -1.0, "max": 2.0 },
+    "humidity_range": { "min": 0.0, "max": 1.0 },
+    "time_preference": "night",
+    "light_level_max": 0,
+    "altitude_min": 65
+  },
+  "capture_difficulty": 0.85,
+  "aggression_triggers": ["insomnia_detection"],
+  "special_mechanics": {
+    "insomnia_spawning": {
+      "enabled": true,
+      "min_insomnia_days": 3,
+      "spawn_height_min": 65,
+      "group_size_min": 1,
+      "group_size_max": 4
+    },
+    "dive_attack": {
+      "enabled": true,
+      "dive_speed": 0.6,
+      "attack_cooldown_ticks": 60,
+      "swoop_damage": 6.0
+    },
+    "sunlight_vulnerability": {
+      "enabled": true,
+      "burns_in_daylight": true
+    },
+    "membrane_production": {
+      "enabled": true,
+      "drop_rate": 1.0
+    },
+    "size_variants": {
+      "enabled": true,
+      "size_range": { "min": 0, "max": 64 }
+    }
+  },
+  "breeding": {
+    "can_breed": false
+  },
+  "drops": {
+    "common": ["minecraft:phantom_membrane"],
+    "uncommon": ["entomology:phantom_wing"],
+    "rare": ["entomology:nightmare_essence"]
+  },
+  "health": 20.0,
+  "damage": 6.0,
+  "speed": 0.4,
+  "tags": ["undead", "flying", "hostile", "nocturnal", "photophobic", "large"]
+}

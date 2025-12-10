@@ -1,0 +1,8 @@
+{
+  "id": "field_guide",
+  "type": "book",
+  "max_stack_size": 1,
+  "research_capacity": 100,
+  "auto_populate": true,
+  "shows_progress": true
+}

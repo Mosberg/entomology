@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/block.schema.json",
+  "title": "Block Definition",
+  "description": "Schema for defining functional blocks in the Entomology Minecraft mod.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "Unique identifier for the block."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["container", "display", "workstation", "decorative"],
+      "description": "Functional type of the block."
+    },
+    "capacity": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of items/entities the block can hold."
+    },
+    "display_entity": {
+      "type": "boolean",
+      "description": "Whether the block displays stored entities visually.",
+      "default": false
+    },
+    "entity_scale": {
+      "type": "number",
+      "minimum": 0.1,
+      "maximum": 10.0,
+      "description": "Scale multiplier for displayed entities.",
+      "default": 1.0
+    },
+    "entity_rotation": {
+      "type": "boolean",
+      "description": "Whether displayed entities rotate.",
+      "default": false
+    },
+    "rotation_speed": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Rotation speed in degrees per tick.",
+      "default": 0.5
+    },
+    "preserves_data": {
+      "type": "boolean",
+      "description": "Whether the block preserves entity data when stored.",
+      "default": true
+    },
+    "light_emission": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 15,
+      "description": "Light level emitted by the block (0-15).",
+      "default": 0
+    },
+    "hardness": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Mining hardness of the block."
+    },
+    "resistance": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Explosion resistance of the block."
+    },
+    "requires_tool": {
+      "type": "boolean",
+      "description": "Whether a proper tool is required to harvest the block.",
+      "default": false
+    },
+    "mining_tool": {
+      "type": "string",
+      "enum": ["pickaxe", "axe", "shovel", "hoe", "none"],
+      "description": "Type of tool required for efficient mining."
+    },
+    "mining_level": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4,
+      "description": "Mining level required (0=wooden, 1=stone, 2=iron, 3=diamond, 4=netherite)."
+    },
+    "interactable": {
+      "type": "boolean",
+      "description": "Whether the block can be right-clicked for interaction.",
+      "default": true
+    },
+    "gui_type": {
+      "type": "string",
+      "enum": ["container", "research", "breeding", "display", "none"],
+      "description": "Type of GUI displayed when interacting with the block."
+    },
+    "inventory_size": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of inventory slots in the block's GUI."
+    },
+    "automation_support": {
+      "type": "object",
+      "description": "Support for automated item/entity transfer.",
+      "properties": {
+        "hopper_input": {
+          "type": "boolean",
+          "description": "Can receive items from hoppers.",
+          "default": false
+        },
+        "hopper_output": {
+          "type": "boolean",
+          "description": "Can output items to hoppers.",
+          "default": false
+        },
+        "redstone_control": {
+          "type": "boolean",
+          "description": "Can be controlled by redstone signals.",
+          "default": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "particle_effects": {
+      "type": "array",
+      "description": "Particle effects displayed by the block.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "particle_type": {
+            "type": "string",
+            "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$",
+            "description": "Particle type identifier."
+          },
+          "spawn_rate": {
+            "type": "number",
+            "minimum": 0.0,
+            "description": "Particles spawned per tick."
+          },
+          "condition": {
+            "type": "string",
+            "enum": ["always", "active", "powered", "occupied"],
+            "description": "Condition for spawning particles."
+          }
+        },
+        "required": ["particle_type", "spawn_rate"],
+        "additionalProperties": false
+      }
+    },
+    "sound_effects": {
+      "type": "object",
+      "description": "Sound events for the block.",
+      "properties": {
+        "place": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_.]+$",
+          "description": "Sound when block is placed."
+        },
+        "break": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_.]+$",
+          "description": "Sound when block is broken."
+        },
+        "interact": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_.]+$",
+          "description": "Sound when block is interacted with."
+        },
+        "ambient": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_.]+$",
+          "description": "Ambient sound played periodically."
+        }
+      },
+      "additionalProperties": false
+    },
+    "multiblock": {
+      "type": "object",
+      "description": "Multiblock structure configuration.",
+      "properties": {
+        "is_multiblock": {
+          "type": "boolean",
+          "description": "Whether this block is part of a multiblock structure.",
+          "default": false
+        },
+        "structure_blocks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+          },
+          "description": "Block types required for the structure."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["id", "type"],
+  "additionalProperties": false
+}

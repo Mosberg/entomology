@@ -1,0 +1,17 @@
+{
+  "id": "iron_bug_net",
+  "type": "tool",
+  "capture_targets": [
+    "minecraft:bee",
+    "minecraft:silverfish",
+    "minecraft:spider",
+    "entomology:fly",
+    "entomology:butterfly",
+    "entomology:beetle",
+    "entomology:mosquito"
+  ],
+  "durability": 128,
+  "max_stack_size": 1,
+  "capture_chance": 0.7,
+  "durability_per_capture": 1
+}

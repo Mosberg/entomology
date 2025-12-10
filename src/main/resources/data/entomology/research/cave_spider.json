@@ -1,0 +1,55 @@
+{
+  "id": "cave_spider_research",
+  "specimen_id": "cave_spider",
+  "page_key": "research.entomology.cave_spider.page",
+  "research_tier": 2,
+  "prerequisites": ["spider_research"],
+  "required_specimens": 6,
+  "required_observations": 12,
+  "unlock_requirements": {
+    "collect_venom_samples": 4,
+    "study_poison_effect": true,
+    "observe_spawner_behavior": true
+  },
+  "research_time_ticks": 7200,
+  "experience_reward": 175,
+  "unlocks": {
+    "breeding_recipes": ["venomous_spider_variant"],
+    "equipment": ["venom_extractor", "antivenom_kit"],
+    "mechanics": ["venom_resistance", "spawner_manipulation"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.cave_spider.stage1",
+      "requirements": {
+        "specimens_captured": 2,
+        "mineshaft_explored": true
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.cave_spider.stage2",
+      "requirements": {
+        "specimens_captured": 6,
+        "venom_samples": 2
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.cave_spider.stage3",
+      "requirements": {
+        "venom_samples": 4,
+        "poison_effect_analyzed": true,
+        "spawner_studied": true
+      }
+    }
+  ],
+  "discoveries": [
+    "Cave spider venom causes poisoning",
+    "Smaller size allows access to tight spaces",
+    "Often found near abandoned mineshaft spawners"
+  ],
+  "related_research": ["spider_research", "silverfish_research"],
+  "danger_level": "MODERATE"
+}

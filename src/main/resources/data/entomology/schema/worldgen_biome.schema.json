@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/worldgen_biome.schema.json",
+  "title": "Biome Definition",
+  "description": "Schema for custom biome definitions in the Entomology Minecraft mod (Minecraft 1.19+ format).",
+  "type": "object",
+  "properties": {
+    "has_precipitation": {
+      "type": "boolean",
+      "description": "Whether this biome has precipitation (rain/snow).",
+      "default": true
+    },
+    "temperature": {
+      "type": "number",
+      "description": "Biome temperature (-2.0 to 2.0)."
+    },
+    "temperature_modifier": {
+      "type": "string",
+      "enum": ["none", "frozen"],
+      "description": "Temperature modification rules.",
+      "default": "none"
+    },
+    "downfall": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Humidity/rainfall level (0.0-1.0)."
+    },
+    "effects": {
+      "type": "object",
+      "description": "Visual and audio effects for the biome.",
+      "properties": {
+        "fog_color": {
+          "type": "integer",
+          "description": "Fog color as RGB integer."
+        },
+        "water_color": {
+          "type": "integer",
+          "description": "Water color as RGB integer."
+        },
+        "water_fog_color": {
+          "type": "integer",
+          "description": "Underwater fog color as RGB integer."
+        },
+        "sky_color": {
+          "type": "integer",
+          "description": "Sky color as RGB integer."
+        },
+        "foliage_color": {
+          "type": "integer",
+          "description": "Foliage color as RGB integer (optional)."
+        },
+        "grass_color": {
+          "type": "integer",
+          "description": "Grass color as RGB integer (optional)."
+        },
+        "grass_color_modifier": {
+          "type": "string",
+          "enum": ["none", "dark_forest", "swamp"],
+          "description": "Special grass color modification.",
+          "default": "none"
+        },
+        "music": {
+          "type": "object",
+          "description": "Background music configuration.",
+          "properties": {
+            "sound": {
+              "type": "string",
+              "pattern": "^(minecraft:|entomology:)[a-z0-9_.]+$"
+            },
+            "min_delay": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_delay": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "replace_current_music": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          "required": [
+            "sound",
+            "min_delay",
+            "max_delay",
+            "replace_current_music"
+          ]
+        },
+        "ambient_sound": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_.]+$",
+          "description": "Continuous ambient sound."
+        },
+        "additions_sound": {
+          "type": "object",
+          "description": "Random additional sounds.",
+          "properties": {
+            "sound": {
+              "type": "string",
+              "pattern": "^(minecraft:|entomology:)[a-z0-9_.]+$"
+            },
+            "tick_chance": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            }
+          },
+          "required": ["sound", "tick_chance"]
+        },
+        "mood_sound": {
+          "type": "object",
+          "description": "Mood sound configuration.",
+          "properties": {
+            "sound": {
+              "type": "string",
+              "pattern": "^(minecraft:|entomology:)[a-z0-9_.]+$"
+            },
+            "tick_delay": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "block_search_extent": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "offset": {
+              "type": "number"
+            }
+          },
+          "required": ["sound", "tick_delay", "block_search_extent", "offset"]
+        },
+        "particle": {
+          "type": "object",
+          "description": "Ambient particle effects.",
+          "properties": {
+            "options": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+                }
+              },
+              "required": ["type"]
+            },
+            "probability": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            }
+          },
+          "required": ["options", "probability"]
+        }
+      },
+      "required": ["fog_color", "water_color", "water_fog_color", "sky_color"],
+      "additionalProperties": false
+    },
+    "spawners": {
+      "type": "object",
+      "description": "Mob spawning configuration.",
+      "properties": {
+        "monster": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/spawner_entry"
+          }
+        },
+        "creature": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/spawner_entry"
+          }
+        },
+        "ambient": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/spawner_entry"
+          }
+        },
+        "water_creature": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/spawner_entry"
+          }
+        },
+        "water_ambient": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/spawner_entry"
+          }
+        },
+        "underground_water_creature": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/spawner_entry"
+          }
+        },
+        "axolotls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/spawner_entry"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "spawn_costs": {
+      "type": "object",
+      "description": "Spawn cost configuration for mob density limits.",
+      "patternProperties": {
+        "^(minecraft:|entomology:)[a-z0-9_]+$": {
+          "type": "object",
+          "properties": {
+            "energy_budget": {
+              "type": "number",
+              "minimum": 0.0
+            },
+            "charge": {
+              "type": "number",
+              "minimum": 0.0
+            }
+          },
+          "required": ["energy_budget", "charge"]
+        }
+      }
+    },
+    "carvers": {
+      "type": "object",
+      "description": "Cave and ravine carver configuration.",
+      "properties": {
+        "air": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$"
+          }
+        }
+      }
+    },
+    "features": {
+      "type": "array",
+      "description": "Generation features in decoration stages.",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$"
+        }
+      }
+    }
+  },
+  "required": ["has_precipitation", "temperature", "downfall", "effects"],
+  "additionalProperties": false,
+  "$defs": {
+    "spawner_entry": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$",
+          "description": "Entity type identifier."
+        },
+        "weight": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Spawn weight."
+        },
+        "minCount": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Minimum group size."
+        },
+        "maxCount": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum group size."
+        }
+      },
+      "required": ["type", "weight", "minCount", "maxCount"],
+      "additionalProperties": false
+    }
+  }
+}

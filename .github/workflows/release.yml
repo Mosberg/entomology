@@ -1,0 +1,102 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: "temurin"
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build release
+        run: ./gradlew build --no-daemon
+
+      - name: Extract version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ steps.get_version.outputs.VERSION }}
+          draft: false
+          prerelease: false
+          files: |
+            build/libs/*.jar
+          body: |
+            ## Entomology ${{ steps.get_version.outputs.VERSION }}
+
+            ### Features
+            - Data-driven insect collection system
+            - Advanced breeding mechanics
+            - Environmental spawn modifiers
+            - Extensible API for third-party mods
+
+            ### Installation
+            1. Download the mod jar file
+            2. Place in your `mods` folder
+            3. Requires Fabric Loader 0.18.1+ and Fabric API 0.138.3+
+
+            ### Documentation
+            See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for full documentation
+
+            ### Changelog
+            See commit history for detailed changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to Modrinth
+        if: success()
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: ${{ secrets.MODRINTH_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          files: build/libs/*.jar
+
+          name: Entomology ${{ steps.get_version.outputs.VERSION }}
+          version: ${{ steps.get_version.outputs.VERSION }}
+          version-type: release
+
+          loaders: fabric
+          game-versions: 1.21.10
+
+          java: 21
+        continue-on-error: true
+
+      - name: Publish to CurseForge
+        if: success()
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          curseforge-id: ${{ secrets.CURSEFORGE_ID }}
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          files: build/libs/*.jar
+
+          name: Entomology ${{ steps.get_version.outputs.VERSION }}
+          version: ${{ steps.get_version.outputs.VERSION }}
+          version-type: release
+
+          loaders: fabric
+          game-versions: 1.21.10
+
+          java: 21
+        continue-on-error: true

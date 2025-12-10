@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/bug_net.schema.json",
+  "title": "Bug Net Definition",
+  "description": "Schema for defining bug net tools in the Entomology Minecraft mod.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "Unique identifier for the bug net."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["tool"],
+      "description": "Item type classification."
+    },
+    "capture_targets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+      },
+      "minItems": 1,
+      "description": "List of entity types this bug net can capture."
+    },
+    "durability": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Maximum durability of the bug net."
+    },
+    "max_stack_size": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 64,
+      "description": "Maximum stack size for this item.",
+      "default": 1
+    },
+    "capture_chance": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Base probability of successfully capturing an entity (0.0-1.0)."
+    },
+    "durability_per_capture": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Durability consumed per capture attempt.",
+      "default": 1
+    },
+    "fireproof": {
+      "type": "boolean",
+      "description": "Whether the bug net is immune to fire and lava damage.",
+      "default": false
+    },
+    "enchantable": {
+      "type": "boolean",
+      "description": "Whether the bug net can be enchanted.",
+      "default": true
+    },
+    "repair_material": {
+      "type": "string",
+      "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$",
+      "description": "Item used to repair this bug net in an anvil."
+    },
+    "special_abilities": {
+      "type": "object",
+      "description": "Special capture abilities or modifiers.",
+      "properties": {
+        "auto_capture": {
+          "type": "boolean",
+          "description": "Automatically captures entities on contact.",
+          "default": false
+        },
+        "capture_radius": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Capture radius in blocks."
+        },
+        "multi_capture": {
+          "type": "boolean",
+          "description": "Can capture multiple entities at once.",
+          "default": false
+        },
+        "max_captures": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum simultaneous captures when multi_capture is enabled."
+        },
+        "capture_boss": {
+          "type": "boolean",
+          "description": "Can capture boss entities.",
+          "default": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "tier": {
+      "type": "string",
+      "enum": ["basic", "iron", "gold", "diamond", "netherite"],
+      "description": "Material tier of the bug net."
+    }
+  },
+  "required": ["id", "type", "capture_targets", "durability", "capture_chance"],
+  "additionalProperties": false
+}

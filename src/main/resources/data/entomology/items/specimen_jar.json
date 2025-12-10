@@ -1,0 +1,9 @@
+{
+  "id": "specimen_jar",
+  "type": "container",
+  "capacity": 1,
+  "max_stack_size": 16,
+  "preserves_specimen": true,
+  "deterioration_rate": 0.001,
+  "display_entity": true
+}

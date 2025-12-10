@@ -1,0 +1,69 @@
+{
+  "display": {
+    "icon": {
+      "item": "entomology:netherite_bug_net"
+    },
+    "title": "advancement.entomology.all_nets.title",
+    "description": "advancement.entomology.all_nets.description",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "entomology:bug_beginnings",
+  "criteria": {
+    "basic_net": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["entomology:basic_bug_net"]
+          }
+        ]
+      }
+    },
+    "iron_net": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["entomology:iron_bug_net"]
+          }
+        ]
+      }
+    },
+    "golden_net": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["entomology:golden_bug_net"]
+          }
+        ]
+      }
+    },
+    "diamond_net": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["entomology:diamond_bug_net"]
+          }
+        ]
+      }
+    },
+    "netherite_net": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["entomology:netherite_bug_net"]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 100
+  }
+}

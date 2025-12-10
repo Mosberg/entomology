@@ -1,0 +1,93 @@
+{
+  "id": "mosquito",
+  "entity_type": "entomology:mosquito",
+  "display_name_key": "specimen.entomology.mosquito",
+  "description_key": "specimen.entomology.mosquito.desc",
+  "rarity": "UNCOMMON",
+  "size": "TINY",
+  "experience_value": 15,
+  "can_breed": true,
+  "taxonomic_order": "Diptera",
+  "behavior_traits": [
+    "flying",
+    "blood_feeder",
+    "nocturnal",
+    "aquatic_breeding",
+    "hostile"
+  ],
+  "environmental_preferences": {
+    "preferred_biomes": [
+      "minecraft:swamp",
+      "minecraft:mangrove_swamp",
+      "minecraft:river",
+      "minecraft:jungle"
+    ],
+    "temperature_range": { "min": 0.5, "max": 1.5 },
+    "humidity_range": { "min": 0.6, "max": 1.0 },
+    "time_preference": "night",
+    "light_level_max": 7,
+    "water_proximity": true,
+    "proximity_radius": 16
+  },
+  "capture_difficulty": 0.45,
+  "aggression_triggers": ["player_nearby"],
+  "special_mechanics": {
+    "flight_behavior": {
+      "enabled": true,
+      "flight_speed": 0.35,
+      "erratic_movement": true,
+      "hover_ability": true,
+      "noise_generation": true
+    },
+    "blood_feeding": {
+      "enabled": true,
+      "attack_damage": 1.0,
+      "attack_interval_ticks": 60,
+      "healing_per_bite": 1.0,
+      "blood_requirement": true
+    },
+    "disease_transmission": {
+      "enabled": true,
+      "effects": [
+        {
+          "effect": "minecraft:weakness",
+          "duration": 600,
+          "amplifier": 0,
+          "chance": 0.1
+        },
+        {
+          "effect": "minecraft:slowness",
+          "duration": 400,
+          "amplifier": 0,
+          "chance": 0.15
+        }
+      ]
+    },
+    "aquatic_breeding": {
+      "enabled": true,
+      "requires_standing_water": true,
+      "larval_stage_duration": 3600,
+      "water_block_required": "minecraft:water"
+    }
+  },
+  "breeding": {
+    "can_breed": true,
+    "breeding_item": "entomology:blood_sample",
+    "breeding_pairs": ["mosquito"],
+    "offspring": ["mosquito"],
+    "mutation_chance": 0.03,
+    "cooldown_ticks": 4800,
+    "egg_laying": true,
+    "eggs_per_breeding": 100,
+    "water_required": true
+  },
+  "drops": {
+    "common": ["entomology:mosquito_proboscis"],
+    "uncommon": ["entomology:blood_sac"],
+    "rare": []
+  },
+  "health": 3.0,
+  "damage": 1.0,
+  "speed": 0.35,
+  "tags": ["flying", "hostile", "nocturnal", "blood_feeder", "diptera"]
+}

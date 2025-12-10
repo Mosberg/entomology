@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/recipe.schema.json",
+  "title": "Recipe Definition",
+  "description": "Schema for crafting recipes in the Entomology Minecraft mod (compatible with vanilla format).",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "minecraft:crafting_shaped",
+        "minecraft:crafting_shapeless",
+        "minecraft:smelting",
+        "minecraft:blasting",
+        "minecraft:smoking",
+        "minecraft:campfire_cooking",
+        "minecraft:stonecutting",
+        "minecraft:smithing_transform",
+        "minecraft:smithing_trim"
+      ],
+      "description": "Type of crafting recipe."
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "building",
+        "redstone",
+        "equipment",
+        "misc",
+        "food",
+        "decorations"
+      ],
+      "description": "Recipe book category."
+    },
+    "group": {
+      "type": "string",
+      "description": "Recipe group for recipe book organization."
+    },
+    "pattern": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 3
+      },
+      "minItems": 1,
+      "maxItems": 3,
+      "description": "Crafting pattern for shaped recipes (3x3 grid)."
+    },
+    "key": {
+      "type": "object",
+      "description": "Ingredient mapping for pattern symbols.",
+      "patternProperties": {
+        "^[A-Z0-9 ]$": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "item": {
+                  "type": "string",
+                  "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+                }
+              },
+              "required": ["item"],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "tag": {
+                  "type": "string",
+                  "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$"
+                }
+              },
+              "required": ["tag"],
+              "additionalProperties": false
+            }
+          ]
+        }
+      }
+    },
+    "ingredients": {
+      "type": "array",
+      "description": "Ingredients for shapeless recipes.",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "item": {
+                "type": "string",
+                "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "default": 1
+              }
+            },
+            "required": ["item"],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tag": {
+                "type": "string",
+                "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "default": 1
+              }
+            },
+            "required": ["tag"],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "ingredient": {
+      "description": "Single ingredient for smelting/stonecutting recipes.",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "item": {
+              "type": "string",
+              "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+            }
+          },
+          "required": ["item"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tag": {
+              "type": "string",
+              "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$"
+            }
+          },
+          "required": ["tag"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "result": {
+      "description": "Result item of the recipe.",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          "required": ["id"],
+          "additionalProperties": false
+        },
+        {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+        }
+      ]
+    },
+    "experience": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Experience awarded for smelting recipes."
+    },
+    "cookingtime": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Cooking time in ticks for smelting recipes."
+    },
+    "template": {
+      "type": "object",
+      "description": "Template item for smithing recipes.",
+      "properties": {
+        "item": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+        }
+      },
+      "required": ["item"],
+      "additionalProperties": false
+    },
+    "base": {
+      "type": "object",
+      "description": "Base item for smithing recipes.",
+      "properties": {
+        "item": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+        }
+      },
+      "required": ["item"],
+      "additionalProperties": false
+    },
+    "addition": {
+      "type": "object",
+      "description": "Addition item for smithing recipes.",
+      "properties": {
+        "item": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+        }
+      },
+      "required": ["item"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["type"],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "minecraft:crafting_shaped"
+          }
+        }
+      },
+      "then": {
+        "required": ["pattern", "key", "result"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "minecraft:crafting_shapeless"
+          }
+        }
+      },
+      "then": {
+        "required": ["ingredients", "result"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "minecraft:smelting",
+              "minecraft:blasting",
+              "minecraft:smoking",
+              "minecraft:campfire_cooking"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": ["ingredient", "result", "cookingtime"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "minecraft:smithing_transform"
+          }
+        }
+      },
+      "then": {
+        "required": ["template", "base", "addition", "result"]
+      }
+    }
+  ],
+  "additionalProperties": false
+}

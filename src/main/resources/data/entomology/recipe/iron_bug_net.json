@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [" SS", " IS", "I  "],
+  "key": {
+    "S": {
+      "item": "minecraft:string"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "entomology:iron_bug_net",
+    "count": 1
+  }
+}

@@ -1,0 +1,303 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/entity.schema.json",
+  "title": "Entity Definition",
+  "description": "Schema for entity type definitions in the Entomology Minecraft mod.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "Unique identifier for the entity type."
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "monster",
+        "creature",
+        "ambient",
+        "water_creature",
+        "water_ambient",
+        "misc"
+      ],
+      "description": "Spawn category for this entity."
+    },
+    "dimensions": {
+      "type": "object",
+      "description": "Entity hitbox dimensions.",
+      "properties": {
+        "width": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Hitbox width in blocks."
+        },
+        "height": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Hitbox height in blocks."
+        },
+        "eye_height": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Eye height in blocks (for rendering)."
+        }
+      },
+      "required": ["width", "height"],
+      "additionalProperties": false
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Entity attributes (health, speed, etc.).",
+      "properties": {
+        "max_health": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Maximum health points."
+        },
+        "movement_speed": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Base movement speed."
+        },
+        "flying_speed": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Flying movement speed."
+        },
+        "attack_damage": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Attack damage dealt."
+        },
+        "attack_knockback": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Knockback strength."
+        },
+        "armor": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Armor points."
+        },
+        "armor_toughness": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Armor toughness."
+        },
+        "knockback_resistance": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Knockback resistance (0.0-1.0)."
+        },
+        "follow_range": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Entity detection range in blocks."
+        }
+      },
+      "additionalProperties": false
+    },
+    "behavior": {
+      "type": "object",
+      "description": "Behavioral configuration.",
+      "properties": {
+        "can_fly": {
+          "type": "boolean",
+          "description": "Whether the entity can fly.",
+          "default": false
+        },
+        "can_swim": {
+          "type": "boolean",
+          "description": "Whether the entity can swim.",
+          "default": false
+        },
+        "can_breathe_underwater": {
+          "type": "boolean",
+          "description": "Whether the entity can breathe underwater.",
+          "default": false
+        },
+        "can_climb": {
+          "type": "boolean",
+          "description": "Whether the entity can climb walls.",
+          "default": false
+        },
+        "fireproof": {
+          "type": "boolean",
+          "description": "Whether the entity is immune to fire damage.",
+          "default": false
+        },
+        "attack_type": {
+          "type": "string",
+          "enum": ["melee", "ranged", "none"],
+          "description": "Type of attack behavior.",
+          "default": "none"
+        },
+        "aggressive": {
+          "type": "boolean",
+          "description": "Whether the entity is hostile by default.",
+          "default": false
+        },
+        "aggression_triggers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "player_nearby",
+              "attacked",
+              "light_level",
+              "time_of_day",
+              "hurt_by_player"
+            ]
+          },
+          "description": "Conditions that trigger aggression."
+        },
+        "panic_on_damage": {
+          "type": "boolean",
+          "description": "Whether the entity panics when damaged.",
+          "default": false
+        },
+        "tempt_items": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+          },
+          "description": "Items that attract/tempt this entity."
+        },
+        "breeding_item": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$",
+          "description": "Item used to breed this entity."
+        }
+      },
+      "additionalProperties": false
+    },
+    "spawning": {
+      "type": "object",
+      "description": "Natural spawning configuration.",
+      "properties": {
+        "spawn_group": {
+          "type": "string",
+          "description": "Spawn group identifier."
+        },
+        "spawn_cost": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Spawn cost for mob cap calculations."
+        },
+        "min_group_size": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Minimum group size."
+        },
+        "max_group_size": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum group size."
+        },
+        "biomes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$"
+          },
+          "description": "Biomes where this entity can spawn."
+        }
+      },
+      "additionalProperties": false
+    },
+    "sounds": {
+      "type": "object",
+      "description": "Sound events for the entity.",
+      "properties": {
+        "ambient": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_.]+$"
+        },
+        "hurt": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_.]+$"
+        },
+        "death": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_.]+$"
+        },
+        "step": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_.]+$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "loot_table": {
+      "type": "string",
+      "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$",
+      "description": "Loot table for this entity."
+    },
+    "experience_reward": {
+      "type": "object",
+      "description": "Experience dropped when killed.",
+      "properties": {
+        "min": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": ["min", "max"]
+    },
+    "immunities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "fire",
+          "fall_damage",
+          "drowning",
+          "explosion",
+          "magic",
+          "wither",
+          "dragon_breath",
+          "cactus",
+          "lightning",
+          "cramming",
+          "starvation"
+        ]
+      },
+      "description": "Damage types this entity is immune to."
+    },
+    "client": {
+      "type": "object",
+      "description": "Client-side rendering configuration.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+$",
+          "description": "Model identifier."
+        },
+        "texture": {
+          "type": "string",
+          "pattern": "^(minecraft:|entomology:)[a-z0-9_/]+\\.png$",
+          "description": "Texture path."
+        },
+        "shadow_radius": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Shadow size in blocks."
+        },
+        "tracking_range": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Client tracking range in chunks."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["id", "category", "dimensions"],
+  "additionalProperties": false
+}

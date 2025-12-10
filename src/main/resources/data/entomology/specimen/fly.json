@@ -1,0 +1,77 @@
+{
+  "id": "fly",
+  "entity_type": "entomology:fly",
+  "display_name_key": "specimen.entomology.fly",
+  "description_key": "specimen.entomology.fly.desc",
+  "rarity": "COMMON",
+  "size": "TINY",
+  "experience_value": 5,
+  "can_breed": true,
+  "taxonomic_order": "Diptera",
+  "behavior_traits": [
+    "flying",
+    "scavenger",
+    "rapid_reproduction",
+    "food_attracted"
+  ],
+  "environmental_preferences": {
+    "preferred_biomes": ["any"],
+    "temperature_range": { "min": 0.2, "max": 1.5 },
+    "humidity_range": { "min": 0.0, "max": 1.0 },
+    "time_preference": "day",
+    "light_level_min": 5,
+    "food_proximity": true,
+    "proximity_radius": 32
+  },
+  "capture_difficulty": 0.25,
+  "aggression_triggers": [],
+  "special_mechanics": {
+    "flight_behavior": {
+      "enabled": true,
+      "flight_speed": 0.4,
+      "erratic_movement": true,
+      "hover_ability": true,
+      "evasion_multiplier": 1.5
+    },
+    "food_attraction": {
+      "enabled": true,
+      "attraction_radius": 32,
+      "attracted_to": [
+        "minecraft:rotten_flesh",
+        "minecraft:spider_eye",
+        "compost"
+      ],
+      "landing_on_food": true
+    },
+    "rapid_breeding": {
+      "enabled": true,
+      "breeding_speed_multiplier": 3.0,
+      "larval_stage_duration": 2400
+    },
+    "disease_vector": {
+      "enabled": true,
+      "contamination_chance": 0.1,
+      "effect": "minecraft:hunger",
+      "duration_ticks": 600
+    }
+  },
+  "breeding": {
+    "can_breed": true,
+    "breeding_item": "minecraft:rotten_flesh",
+    "breeding_pairs": ["fly"],
+    "offspring": ["fly"],
+    "mutation_chance": 0.01,
+    "cooldown_ticks": 1200,
+    "egg_laying": true,
+    "eggs_per_breeding": 50
+  },
+  "drops": {
+    "common": ["entomology:fly_wing"],
+    "uncommon": ["entomology:compound_eye"],
+    "rare": []
+  },
+  "health": 2.0,
+  "damage": 0.0,
+  "speed": 0.4,
+  "tags": ["flying", "scavenger", "pest", "ubiquitous", "diptera"]
+}

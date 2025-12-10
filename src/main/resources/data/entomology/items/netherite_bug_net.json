@@ -1,0 +1,25 @@
+{
+  "id": "netherite_bug_net",
+  "type": "tool",
+  "capture_targets": [
+    "minecraft:bee",
+    "minecraft:silverfish",
+    "minecraft:spider",
+    "minecraft:cave_spider",
+    "minecraft:endermite",
+    "minecraft:phantom",
+    "entomology:butterfly",
+    "entomology:firefly",
+    "entomology:beetle",
+    "entomology:fly",
+    "entomology:mosquito",
+    "entomology:damselfly",
+    "entomology:cicada",
+    "entomology:monarch_butterfly"
+  ],
+  "durability": 384,
+  "max_stack_size": 1,
+  "capture_chance": 1.0,
+  "durability_per_capture": 1,
+  "fireproof": true
+}

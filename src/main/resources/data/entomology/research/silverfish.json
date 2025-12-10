@@ -1,0 +1,53 @@
+{
+  "id": "silverfish_research",
+  "specimen_id": "silverfish",
+  "page_key": "research.entomology.silverfish.page",
+  "research_tier": 2,
+  "prerequisites": [],
+  "required_specimens": 8,
+  "required_observations": 15,
+  "unlock_requirements": {
+    "study_infested_blocks": 5,
+    "observe_calling_behavior": true,
+    "collect_molt_samples": 3
+  },
+  "research_time_ticks": 8000,
+  "experience_reward": 150,
+  "unlocks": {
+    "breeding_recipes": [],
+    "equipment": ["infestation_detector", "molt_analyzer"],
+    "mechanics": ["silverfish_containment", "infestation_prevention"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.silverfish.stage1",
+      "requirements": {
+        "specimens_captured": 3,
+        "infested_blocks_found": 2
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.silverfish.stage2",
+      "requirements": {
+        "specimens_captured": 8,
+        "calling_observed": true
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.silverfish.stage3",
+      "requirements": {
+        "molt_samples": 3,
+        "containment_test": true
+      }
+    }
+  ],
+  "discoveries": [
+    "Silverfish can call reinforcements from nearby blocks",
+    "They prefer dark, damp environments",
+    "Molting cycles occur every 72 hours"
+  ],
+  "related_research": ["cave_spider_research", "endermite_research"]
+}

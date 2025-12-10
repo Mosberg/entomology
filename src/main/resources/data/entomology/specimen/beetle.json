@@ -1,0 +1,97 @@
+{
+  "id": "beetle",
+  "entity_type": "entomology:beetle",
+  "display_name_key": "specimen.entomology.beetle",
+  "description_key": "specimen.entomology.beetle.desc",
+  "rarity": "UNCOMMON",
+  "size": "SMALL",
+  "experience_value": 18,
+  "can_breed": true,
+  "taxonomic_order": "Coleoptera",
+  "behavior_traits": [
+    "crawl",
+    "hunker",
+    "burrow",
+    "log_attracted",
+    "decomposer"
+  ],
+  "environmental_preferences": {
+    "preferred_biomes": [
+      "minecraft:forest",
+      "minecraft:dark_forest",
+      "minecraft:jungle",
+      "minecraft:plains"
+    ],
+    "temperature_range": { "min": 0.3, "max": 1.2 },
+    "humidity_range": { "min": 0.4, "max": 1.0 },
+    "time_preference": "any",
+    "log_proximity": true
+  },
+  "spawn": {
+    "weight": 6,
+    "group_size": {
+      "min": 1,
+      "max": 3
+    },
+    "conditions": {
+      "biome_tags": ["forest", "jungle", "plains"],
+      "time": ["day", "night"],
+      "weather": ["clear", "rain"],
+      "near_logs": true,
+      "light_level_max": 15
+    }
+  },
+  "special_mechanics": {
+    "shell_defense": {
+      "enabled": true,
+      "damage_reduction": 0.3,
+      "hunker_duration_ticks": 100
+    },
+    "burrowing": {
+      "enabled": true,
+      "burrow_speed": 0.1,
+      "burrowable_blocks": [
+        "minecraft:dirt",
+        "minecraft:grass_block",
+        "minecraft:podzol"
+      ]
+    },
+    "log_decomposition": {
+      "enabled": true,
+      "decomposition_rate": 0.05,
+      "produces_compost": true
+    },
+    "elytra_flight": {
+      "enabled": true,
+      "flight_duration_ticks": 200,
+      "flight_speed": 0.2
+    }
+  },
+  "breeding": {
+    "can_breed": true,
+    "breeding_item": "entomology:rotting_wood",
+    "breeding_pairs": ["entomology:beetle"],
+    "offspring": ["entomology:beetle"],
+    "mutation_chance": 0.06,
+    "cooldown_ticks": 6000
+  },
+  "drops": {
+    "common": ["entomology:beetle_shell", "entomology:beetle_leg"],
+    "uncommon": ["entomology:beetle_elytra"],
+    "rare": ["entomology:hardened_chitin"]
+  },
+  "health": 12.0,
+  "damage": 1.0,
+  "speed": 0.2,
+  "guide": {
+    "description": "Beetles are hardy insects with tough exoskeletons, often found crawling on logs or burrowing underground. They play a vital role in decomposition.",
+    "facts": [
+      "Beetles are one of the largest insect orders in real life with over 400,000 species.",
+      "They can hunker down to protect themselves from threats.",
+      "Some beetles are attracted to decaying wood and aid decomposition.",
+      "Their hardened forewings (elytra) protect delicate flight wings.",
+      "Many species can fly despite their bulky appearance."
+    ]
+  },
+  "tags": ["crawling", "armored", "decomposer", "flying_capable", "coleoptera"]
+}

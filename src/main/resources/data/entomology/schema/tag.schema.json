@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/tag.schema.json",
+  "title": "Tag Definition",
+  "description": "Schema for item, block, and entity tags in the Entomology Minecraft mod (compatible with vanilla format).",
+  "type": "object",
+  "properties": {
+    "replace": {
+      "type": "boolean",
+      "description": "Whether this tag replaces all previous definitions instead of appending.",
+      "default": false
+    },
+    "values": {
+      "type": "array",
+      "description": "List of elements in this tag.",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "pattern": "^(#)?(minecraft:|entomology:)[a-z0-9_/]+$",
+            "description": "Item/block/entity identifier or tag reference (prefix with # for tag)."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^(#)?(minecraft:|entomology:)[a-z0-9_/]+$",
+                "description": "Item/block/entity identifier or tag reference."
+              },
+              "required": {
+                "type": "boolean",
+                "description": "Whether this entry is required (fails if missing).",
+                "default": true
+              }
+            },
+            "required": ["id"],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "minItems": 0
+    }
+  },
+  "required": ["values"],
+  "additionalProperties": false
+}

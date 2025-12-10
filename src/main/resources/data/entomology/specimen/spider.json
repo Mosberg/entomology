@@ -1,0 +1,70 @@
+{
+  "id": "spider",
+  "entity_type": "minecraft:spider",
+  "display_name_key": "specimen.entomology.spider",
+  "description_key": "specimen.entomology.spider.desc",
+  "rarity": "COMMON",
+  "size": "MEDIUM",
+  "experience_value": 15,
+  "can_breed": true,
+  "taxonomic_order": "Araneae",
+  "behavior_traits": [
+    "wall_climbing",
+    "light_sensitive",
+    "web_producing",
+    "jockey_host"
+  ],
+  "environmental_preferences": {
+    "preferred_biomes": ["any_overworld"],
+    "temperature_range": { "min": 0.0, "max": 1.5 },
+    "humidity_range": { "min": 0.0, "max": 1.0 },
+    "time_preference": "night",
+    "light_level_max": 11
+  },
+  "capture_difficulty": 0.4,
+  "aggression_triggers": ["attacked", "low_light"],
+  "special_mechanics": {
+    "wall_climbing": {
+      "enabled": true,
+      "speed_multiplier": 0.8
+    },
+    "day_night_behavior": {
+      "enabled": true,
+      "neutral_in_light": true,
+      "light_threshold": 12
+    },
+    "spider_jockey": {
+      "enabled": true,
+      "jockey_chance": 0.01,
+      "possible_riders": ["minecraft:skeleton", "minecraft:wither_skeleton"]
+    },
+    "web_production": {
+      "enabled": true,
+      "web_chance": 0.1,
+      "web_item": "minecraft:cobweb"
+    }
+  },
+  "breeding": {
+    "can_breed": true,
+    "breeding_item": "minecraft:fermented_spider_eye",
+    "breeding_pairs": ["spider"],
+    "offspring": ["spider"],
+    "mutation_chance": 0.05,
+    "cooldown_ticks": 6000
+  },
+  "drops": {
+    "common": ["minecraft:string"],
+    "uncommon": ["minecraft:spider_eye"],
+    "rare": ["entomology:spider_fang"]
+  },
+  "health": 16.0,
+  "damage": 2.0,
+  "speed": 0.3,
+  "tags": [
+    "arachnid",
+    "wall_climbing",
+    "neutral_day",
+    "hostile_night",
+    "araneae"
+  ]
+}

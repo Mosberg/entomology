@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": [
+      { "model": "entomology:block/specimen_jar" },
+      { "model": "entomology:block/specimen_jar", "y": 90 },
+      { "model": "entomology:block/specimen_jar", "y": 180 },
+      { "model": "entomology:block/specimen_jar", "y": 270 }
+    ]
+  }
+}

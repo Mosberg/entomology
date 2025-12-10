@@ -1,0 +1,14 @@
+{
+  "id": "basic_bug_net",
+  "type": "tool",
+  "capture_targets": [
+    "minecraft:bee",
+    "minecraft:silverfish",
+    "entomology:fly",
+    "entomology:butterfly"
+  ],
+  "durability": 128,
+  "max_stack_size": 1,
+  "capture_chance": 0.6,
+  "durability_per_capture": 1
+}

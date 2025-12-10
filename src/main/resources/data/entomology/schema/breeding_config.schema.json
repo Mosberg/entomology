@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/breeding_config.schema.json",
+  "title": "Breeding Configuration",
+  "description": "Schema for defining breeding mechanics and pairs in the Entomology Minecraft mod.",
+  "type": "object",
+  "properties": {
+    "breeding_pairs": {
+      "type": "array",
+      "description": "List of valid breeding pairs and their mechanics.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "parent1": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$",
+            "description": "Specimen ID of the first parent."
+          },
+          "parent2": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$",
+            "description": "Specimen ID of the second parent."
+          },
+          "offspring": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9_]+$"
+            },
+            "minItems": 1,
+            "description": "Possible offspring specimen IDs."
+          },
+          "chance": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "description": "Base probability of successful breeding."
+          },
+          "mutations": {
+            "type": "array",
+            "description": "Possible mutations during breeding.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9_]+$",
+                  "description": "Mutated offspring specimen ID."
+                },
+                "chance": {
+                  "type": "number",
+                  "minimum": 0.0,
+                  "maximum": 1.0,
+                  "description": "Probability of this mutation occurring."
+                },
+                "conditions": {
+                  "type": "object",
+                  "description": "Conditions required for this mutation.",
+                  "properties": {
+                    "required_blocks_nearby": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+                      },
+                      "description": "Blocks that must be nearby."
+                    },
+                    "biome": {
+                      "type": "string",
+                      "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$",
+                      "description": "Required biome for mutation."
+                    },
+                    "moon_phase": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 7,
+                      "description": "Required moon phase (0=full, 4=new)."
+                    },
+                    "weather": {
+                      "type": "string",
+                      "enum": ["clear", "rain", "thunder"],
+                      "description": "Required weather condition."
+                    },
+                    "time_of_day": {
+                      "type": "string",
+                      "enum": ["day", "night", "dawn", "dusk"],
+                      "description": "Required time of day."
+                    },
+                    "min_light_level": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 15,
+                      "description": "Minimum light level required."
+                    },
+                    "max_light_level": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 15,
+                      "description": "Maximum light level required."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "required": ["result", "chance"],
+              "additionalProperties": false
+            },
+            "default": []
+          },
+          "requirements": {
+            "type": "object",
+            "description": "Environmental requirements for breeding to occur.",
+            "properties": {
+              "min_light_level": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 15,
+                "description": "Minimum light level required."
+              },
+              "max_light_level": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 15,
+                "description": "Maximum light level required."
+              },
+              "underground": {
+                "type": "boolean",
+                "description": "Must be underground (below sea level)."
+              },
+              "flowers_nearby": {
+                "type": "boolean",
+                "description": "Requires flowers within range."
+              },
+              "water_nearby": {
+                "type": "boolean",
+                "description": "Requires water within range."
+              },
+              "log_nearby": {
+                "type": "boolean",
+                "description": "Requires logs within range."
+              },
+              "temperature_min": {
+                "type": "number",
+                "description": "Minimum biome temperature."
+              },
+              "temperature_max": {
+                "type": "number",
+                "description": "Maximum biome temperature."
+              },
+              "biomes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(minecraft:|entomology:)[a-z0-9_]+$"
+                },
+                "description": "Specific biomes where breeding is allowed."
+              }
+            },
+            "additionalProperties": false
+          },
+          "cooldown_ticks": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Cooldown period in ticks between breeding attempts (20 ticks = 1 second).",
+            "default": 6000
+          },
+          "egg_laying": {
+            "type": "boolean",
+            "description": "Whether breeding results in egg-laying behavior.",
+            "default": false
+          },
+          "eggs_per_breeding": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Number of eggs laid per successful breeding."
+          },
+          "egg_hatch_time_ticks": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Time in ticks for eggs to hatch."
+          }
+        },
+        "required": ["parent1", "parent2", "offspring", "chance"],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "global_settings": {
+      "type": "object",
+      "description": "Global breeding configuration settings.",
+      "properties": {
+        "breeding_enabled": {
+          "type": "boolean",
+          "description": "Master toggle for breeding mechanics.",
+          "default": true
+        },
+        "base_mutation_chance": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Base chance for any mutation to occur.",
+          "default": 0.05
+        },
+        "breeding_cooldown_multiplier": {
+          "type": "number",
+          "minimum": 0.1,
+          "description": "Global multiplier for all breeding cooldowns.",
+          "default": 1.0
+        },
+        "require_player_nearby": {
+          "type": "boolean",
+          "description": "Whether a player must be nearby for breeding.",
+          "default": true
+        },
+        "player_nearby_range": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Range in blocks to check for player presence.",
+          "default": 32
+        },
+        "color_inheritance": {
+          "type": "boolean",
+          "description": "Whether offspring inherit color variants from parents.",
+          "default": true
+        },
+        "trait_inheritance": {
+          "type": "boolean",
+          "description": "Whether offspring inherit traits from parents.",
+          "default": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["breeding_pairs"],
+  "additionalProperties": false
+}

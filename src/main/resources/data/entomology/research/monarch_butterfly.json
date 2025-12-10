@@ -1,0 +1,60 @@
+{
+  "id": "monarch_butterfly_research",
+  "specimen_id": "monarch_butterfly",
+  "page_key": "research.entomology.monarch_butterfly.page",
+  "research_tier": 2,
+  "prerequisites": ["bee_research"],
+  "required_specimens": 7,
+  "required_observations": 16,
+  "unlock_requirements": {
+    "observe_migration": true,
+    "study_metamorphosis": true,
+    "collect_wing_scales": 5,
+    "find_milkweed": 3
+  },
+  "research_time_ticks": 10000,
+  "experience_reward": 220,
+  "unlocks": {
+    "breeding_recipes": ["monarch_variants", "butterfly_hybrids"],
+    "equipment": ["butterfly_net_advanced", "metamorphosis_chamber"],
+    "mechanics": ["lifecycle_acceleration", "migration_tracking"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.monarch_butterfly.stage1",
+      "requirements": {
+        "specimens_captured": 2,
+        "flowers_found": 5
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.monarch_butterfly.stage2",
+      "requirements": {
+        "specimens_captured": 5,
+        "wing_scales": 3,
+        "metamorphosis_observed": true
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.monarch_butterfly.stage3",
+      "requirements": {
+        "specimens_captured": 7,
+        "wing_scales": 5,
+        "migration_tracked": true,
+        "milkweed_located": 3
+      }
+    }
+  ],
+  "discoveries": [
+    "Monarchs undergo complete metamorphosis",
+    "Capable of multi-generational migration",
+    "Milkweed dependency for larval stage",
+    "Wing patterns warn predators of toxicity"
+  ],
+  "related_research": ["bee_research", "firefly_research"],
+  "danger_level": "NONE",
+  "pollinator": true
+}

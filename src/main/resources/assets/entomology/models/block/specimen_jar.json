@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": true,
+  "textures": {
+    "glass": "minecraft:block/glass",
+    "cork": "minecraft:block/stripped_oak_log",
+    "particle": "minecraft:block/glass"
+  },
+  "elements": [
+    {
+      "comment": "Glass jar body",
+      "from": [5, 0, 5],
+      "to": [11, 8, 11],
+      "faces": {
+        "down": { "uv": [5, 5, 11, 11], "texture": "#glass" },
+        "up": { "uv": [5, 5, 11, 11], "texture": "#glass" },
+        "north": { "uv": [5, 8, 11, 16], "texture": "#glass" },
+        "south": { "uv": [5, 8, 11, 16], "texture": "#glass" },
+        "west": { "uv": [5, 8, 11, 16], "texture": "#glass" },
+        "east": { "uv": [5, 8, 11, 16], "texture": "#glass" }
+      }
+    },
+    {
+      "comment": "Cork top",
+      "from": [5.5, 8, 5.5],
+      "to": [10.5, 10, 10.5],
+      "faces": {
+        "down": { "uv": [5, 5, 10, 10], "texture": "#cork" },
+        "up": { "uv": [5, 5, 10, 10], "texture": "#cork" },
+        "north": { "uv": [5, 6, 10, 8], "texture": "#cork" },
+        "south": { "uv": [5, 6, 10, 8], "texture": "#cork" },
+        "west": { "uv": [5, 6, 10, 8], "texture": "#cork" },
+        "east": { "uv": [5, 6, 10, 8], "texture": "#cork" }
+      }
+    }
+  ]
+}

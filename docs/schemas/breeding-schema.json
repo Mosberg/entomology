@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Breeding Configuration",
+  "description": "Defines breeding pairs, offspring, and mutation mechanics",
+  "type": "object",
+  "properties": {
+    "breeding_pairs": {
+      "type": "array",
+      "description": "List of valid breeding combinations",
+      "items": {
+        "type": "object",
+        "required": ["parent1", "parent2", "offspring"],
+        "properties": {
+          "parent1": {
+            "type": "string",
+            "description": "First parent specimen ID"
+          },
+          "parent2": {
+            "type": "string",
+            "description": "Second parent specimen ID"
+          },
+          "offspring": {
+            "type": "array",
+            "description": "Possible offspring specimen IDs (randomly selected)",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "chance": {
+            "type": "number",
+            "description": "Base breeding success chance",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "default": 0.25
+          },
+          "mutations": {
+            "type": "array",
+            "description": "Possible mutations and their probabilities",
+            "items": {
+              "type": "object",
+              "required": ["result", "chance"],
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "Mutated offspring specimen ID"
+                },
+                "chance": {
+                  "type": "number",
+                  "description": "Mutation probability",
+                  "minimum": 0.0,
+                  "maximum": 1.0
+                },
+                "conditions": {
+                  "type": "object",
+                  "description": "Optional conditions for this mutation",
+                  "properties": {
+                    "biome": {
+                      "type": "string",
+                      "description": "Required biome ID"
+                    },
+                    "moon_phase": {
+                      "type": "integer",
+                      "description": "Required moon phase (0-7)",
+                      "minimum": 0,
+                      "maximum": 7
+                    },
+                    "weather": {
+                      "type": "string",
+                      "enum": ["clear", "rain", "thunder"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "requirements": {
+            "type": "object",
+            "description": "Requirements for breeding to occur",
+            "properties": {
+              "min_light_level": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 15
+              },
+              "max_light_level": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 15
+              },
+              "required_blocks_nearby": {
+                "type": "array",
+                "description": "Blocks that must be within 5 blocks",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://entomology.mod/schemas/damage_type.schema.json",
+  "title": "Damage Type Definition",
+  "description": "Schema for damage types in the Entomology Minecraft mod (Minecraft 1.19.4+ format).",
+  "type": "object",
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "description": "Identifier for death message translations."
+    },
+    "scaling": {
+      "type": "string",
+      "enum": ["never", "when_caused_by_living_non_player", "always"],
+      "description": "When damage scales with difficulty.",
+      "default": "when_caused_by_living_non_player"
+    },
+    "exhaustion": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Exhaustion added per damage point.",
+      "default": 0.0
+    },
+    "effects": {
+      "type": "string",
+      "enum": ["hurt", "thorns", "drowning", "burning", "poking", "freezing"],
+      "description": "Sound and particle effects for this damage type.",
+      "default": "hurt"
+    },
+    "death_message_type": {
+      "type": "string",
+      "enum": ["default", "fall_variants", "intentional_game_design"],
+      "description": "Type of death message formatting.",
+      "default": "default"
+    }
+  },
+  "required": ["message_id", "scaling", "exhaustion"],
+  "additionalProperties": false
+}

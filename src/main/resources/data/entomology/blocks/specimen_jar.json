@@ -1,0 +1,10 @@
+{
+  "id": "specimen_jar",
+  "capacity": 1,
+  "display_entity": true,
+  "entity_scale": 0.5,
+  "entity_rotation": true,
+  "rotation_speed": 0.5,
+  "preserves_data": true,
+  "light_emission": 0
+}

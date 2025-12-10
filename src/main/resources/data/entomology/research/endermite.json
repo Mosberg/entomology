@@ -1,0 +1,59 @@
+{
+  "id": "endermite_research",
+  "specimen_id": "endermite",
+  "page_key": "research.entomology.endermite.page",
+  "research_tier": 3,
+  "prerequisites": ["silverfish_research"],
+  "required_specimens": 10,
+  "required_observations": 20,
+  "unlock_requirements": {
+    "witness_enderman_aggression": true,
+    "collect_ender_samples": 5,
+    "study_teleportation_residue": true,
+    "pearl_spawn_observation": 3
+  },
+  "research_time_ticks": 12000,
+  "experience_reward": 250,
+  "unlocks": {
+    "breeding_recipes": [],
+    "equipment": ["ender_analyzer", "teleportation_tracker"],
+    "mechanics": ["endermite_lure", "ender_pearl_farming"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.endermite.stage1",
+      "requirements": {
+        "specimens_captured": 3,
+        "ender_pearl_used": 5
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.endermite.stage2",
+      "requirements": {
+        "specimens_captured": 7,
+        "enderman_aggression_witnessed": true,
+        "ender_samples": 3
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.endermite.stage3",
+      "requirements": {
+        "specimens_captured": 10,
+        "ender_samples": 5,
+        "teleportation_residue_studied": true
+      }
+    }
+  ],
+  "discoveries": [
+    "Endermites spawn from ender pearl teleportation",
+    "Endermen are naturally aggressive toward endermites",
+    "Short lifespan of approximately 2 minutes",
+    "Dimensional parasites from The End"
+  ],
+  "related_research": ["silverfish_research", "phantom_research"],
+  "danger_level": "LOW",
+  "dimensional_origin": "the_end"
+}

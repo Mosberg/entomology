@@ -1,0 +1,60 @@
+{
+  "id": "cicada_research",
+  "specimen_id": "entomology:cicada",
+  "page_key": "research.entomology.cicada.page",
+  "research_tier": 2,
+  "prerequisites": ["beetle_research"],
+  "required_specimens": 6,
+  "required_observations": 14,
+  "unlock_requirements": {
+    "record_mating_call": true,
+    "collect_molt_shells": 5,
+    "observe_emergence": true,
+    "study_nymph_stage": true
+  },
+  "research_time_ticks": 10000,
+  "experience_reward": 190,
+  "unlocks": {
+    "breeding_recipes": ["cicada_variants"],
+    "equipment": ["sound_recorder", "emergence_predictor"],
+    "mechanics": ["call_synthesis", "lifecycle_tracking"]
+  },
+  "research_stages": [
+    {
+      "stage": 1,
+      "description_key": "research.entomology.cicada.stage1",
+      "requirements": {
+        "specimens_captured": 2,
+        "forest_explored": true
+      }
+    },
+    {
+      "stage": 2,
+      "description_key": "research.entomology.cicada.stage2",
+      "requirements": {
+        "specimens_captured": 4,
+        "mating_call_recorded": true,
+        "molt_shells": 3
+      }
+    },
+    {
+      "stage": 3,
+      "description_key": "research.entomology.cicada.stage3",
+      "requirements": {
+        "specimens_captured": 6,
+        "molt_shells": 5,
+        "emergence_observed": true,
+        "nymph_studied": true
+      }
+    }
+  ],
+  "discoveries": [
+    "Cicadas spend years underground as nymphs",
+    "Males produce loud calls using tymbals",
+    "Periodic emergence in 13 or 17-year cycles",
+    "Mass emergence overwhelms predators"
+  ],
+  "related_research": ["beetle_research", "firefly_research"],
+  "danger_level": "NONE",
+  "sound_production": true
+}

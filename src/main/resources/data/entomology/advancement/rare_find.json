@@ -1,0 +1,38 @@
+{
+  "display": {
+    "icon": {
+      "id": "entomology:specimen_jar"
+    },
+    "title": {
+      "translate": "advancement.entomology.rare_find.title"
+    },
+    "description": {
+      "translate": "advancement.entomology.rare_find.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "entomology:collector",
+  "criteria": {
+    "has_rare": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["entomology:specimen_jar"],
+            "components": {
+              "entomology:specimen": {
+                "rarity": "LEGENDARY"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 100
+  }
+}

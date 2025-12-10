@@ -1,0 +1,76 @@
+{
+  "id": "damselfly",
+  "entity_type": "entomology:damselfly",
+  "display_name_key": "specimen.entomology.damselfly",
+  "description_key": "specimen.entomology.damselfly.desc",
+  "rarity": "UNCOMMON",
+  "size": "SMALL",
+  "experience_value": 30,
+  "can_breed": true,
+  "taxonomic_order": "Odonata",
+  "behavior_traits": ["flying", "aquatic", "predatory", "diurnal", "graceful"],
+  "environmental_preferences": {
+    "preferred_biomes": [
+      "minecraft:river",
+      "minecraft:swamp",
+      "minecraft:mangrove_swamp",
+      "minecraft:lush_caves"
+    ],
+    "temperature_range": { "min": 0.4, "max": 1.0 },
+    "humidity_range": { "min": 0.6, "max": 1.0 },
+    "time_preference": "day",
+    "light_level_min": 8,
+    "water_proximity": true,
+    "proximity_radius": 12
+  },
+  "capture_difficulty": 0.55,
+  "aggression_triggers": ["small_insects"],
+  "special_mechanics": {
+    "flight_behavior": {
+      "enabled": true,
+      "flight_speed": 0.45,
+      "height_preference": "low",
+      "hover_ability": true,
+      "backward_flight": true,
+      "precision_control": true
+    },
+    "aquatic_lifecycle": {
+      "enabled": true,
+      "nymph_duration_ticks": 14400,
+      "nymph_aquatic": true,
+      "emergence_from_water": true
+    },
+    "hunting_behavior": {
+      "enabled": true,
+      "prey_targets": ["mosquito", "fly"],
+      "hunting_radius": 16,
+      "aerial_interception": true
+    },
+    "color_iridescence": {
+      "enabled": true,
+      "color_variants": ["blue", "green", "red", "violet"],
+      "shimmer_effect": true
+    }
+  },
+  "breeding": {
+    "can_breed": true,
+    "breeding_item": "minecraft:tropical_fish",
+    "breeding_pairs": ["damselfly"],
+    "offspring": ["damselfly"],
+    "mutation_chance": 0.04,
+    "cooldown_ticks": 8000,
+    "egg_laying": true,
+    "eggs_per_breeding": 20,
+    "water_required": true,
+    "color_inheritance": true
+  },
+  "drops": {
+    "common": ["entomology:damselfly_wing"],
+    "uncommon": ["entomology:compound_eye"],
+    "rare": ["entomology:iridescent_scales"]
+  },
+  "health": 6.0,
+  "damage": 1.0,
+  "speed": 0.45,
+  "tags": ["flying", "aquatic", "predatory", "diurnal", "odonata"]
+}
