@@ -1,8 +1,11 @@
 package dk.mosberg.entomology.client.keybind;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 /**
  * Manages keybindings for Entomology mod.
@@ -26,11 +29,28 @@ public final class EntomologyKeybinds {
    * All keybindings are fully configurable in Minecraft's key binds menu.
    */
   public static void register() {
-    // TODO: Fix KeyBinding constructor for 1.21 - needs proper signature
-    // Keybinds are temporarily disabled until proper API is found
-    fieldGuideKey = null;
-    infoToggleKey = null;
-    researchStationKey = null;
+    // Create custom category for Entomology keybindings
+    KeyBinding.Category entomologyCategory = KeyBinding.Category.create(
+        Identifier.of("entomologyjson", "entomology"));
+
+    // Register keybindings using Fabric API helper
+    fieldGuideKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+        "key.entomologyjson.field_guide",
+        InputUtil.Type.KEYSYM,
+        InputUtil.UNKNOWN_KEY.getCode(),
+        entomologyCategory));
+
+    infoToggleKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+        "key.entomologyjson.info_toggle",
+        InputUtil.Type.KEYSYM,
+        InputUtil.UNKNOWN_KEY.getCode(),
+        entomologyCategory));
+
+    researchStationKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+        "key.entomologyjson.research_station",
+        InputUtil.Type.KEYSYM,
+        InputUtil.UNKNOWN_KEY.getCode(),
+        entomologyCategory));
 
     // Register tick handler for keybind actions
     ClientTickEvents.END_CLIENT_TICK.register(client -> {

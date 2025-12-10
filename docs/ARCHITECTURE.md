@@ -330,7 +330,7 @@ repositories {
 }
 
 dependencies {
-    modImplementation "dk.mosberg:entomology-json:1.0.0"
+    modImplementation "dk.mosberg:entomology:1.0.0"
 }
 ```
 

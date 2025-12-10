@@ -1,6 +1,6 @@
 # Entomology
 
-[![Build Status](https://github.com/mosberg/entomology-json/workflows/Build%20and%20Test/badge.svg)](https://github.com/mosberg/entomology-json/actions)
+[![Build Status](https://github.com/mosberg/entomology/workflows/Build%20and%20Test/badge.svg)](https://github.com/mosberg/entomology/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.10-brightgreen.svg)](https://www.minecraft.net/)
 [![API Version](https://img.shields.io/badge/API-1.0.0-blue.svg)](docs/ARCHITECTURE.md)
@@ -40,7 +40,7 @@ A **data-driven, extensible Minecraft mod** for collecting and studying insects 
 
 ### Steps
 
-1. Download the latest release from [Releases](https://github.com/mosberg/entomology-json/releases)
+1. Download the latest release from [Releases](https://github.com/mosberg/entomology/releases)
 2. Place the `.jar` file in your `mods` folder
 3. Launch Minecraft with Fabric
 
@@ -110,8 +110,8 @@ Config Layer       ← Hot-reloadable settings
 
 ```bash
 # Clone the repository
-git clone https://github.com/mosberg/entomology-json.git
-cd entomology-json
+git clone https://github.com/mosberg/entomology.git
+cd entomology
 
 # Build the mod
 ./gradlew build
@@ -206,8 +206,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-- **Issues**: [GitHub Issues](https://github.com/mosberg/entomology-json/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/mosberg/entomology-json/discussions)
+- **Issues**: [GitHub Issues](https://github.com/mosberg/entomology/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/mosberg/entomology/discussions)
 
 ---
 

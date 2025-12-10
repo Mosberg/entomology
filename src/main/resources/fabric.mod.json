@@ -6,9 +6,9 @@
   "description": "JSON-driven insect collection and research mod for Minecraft.",
   "authors": ["Mosberg"],
   "contact": {
-    "homepage": "https://github.com/mosberg/entomology-json",
-    "sources": "https://github.com/mosberg/entomology-json",
-    "issues": "https://github.com/mosberg/entomology-json/issues"
+    "homepage": "https://github.com/mosberg/entomology",
+    "sources": "https://github.com/mosberg/entomology",
+    "issues": "https://github.com/mosberg/entomology/issues"
   },
   "license": "MIT",
   "icon": "assets/entomology/icon.png",

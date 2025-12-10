@@ -1,8 +1,10 @@
 package dk.mosberg.entomology;
 
 import dk.mosberg.entomology.api.EntomologyAPI;
+import dk.mosberg.entomology.command.AdvancedCommands;
 import dk.mosberg.entomology.command.EntomologyCommands;
 import dk.mosberg.entomology.config.ConfigManager;
+import dk.mosberg.entomology.integration.SystemIntegration;
 import dk.mosberg.entomology.item.BugNetItem;
 import dk.mosberg.entomology.item.FieldGuideItem;
 import dk.mosberg.entomology.item.SpecimenJarItem;
@@ -82,8 +84,21 @@ public class EntomologyMod implements ModInitializer {
 
   @Override
   public void onInitialize() {
-    LOGGER.info("Initializing Entomology v1.0.0");
+    LOGGER.info("Initializing Entomology v2.0.0");
     LOGGER.info("Architecture: Modular | Data-Driven | API-Extensible");
+
+    // Initialize advanced systems first
+    try {
+      SystemIntegration.getInstance().initialize();
+      LOGGER.info("Advanced systems initialized successfully");
+    } catch (Exception e) {
+      LOGGER.error("Failed to initialize advanced systems", e);
+    }
+
+    // Register lifecycle hooks
+    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+      shutdown();
+    }));
 
     // Initialize core systems
     ConfigManager.getInstance(); // Load configurations
@@ -97,7 +112,15 @@ public class EntomologyMod implements ModInitializer {
     registerCreativeTab();
 
     // Register commands
-    CommandRegistrationCallback.EVENT.register(EntomologyCommands::register);
+    CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+      EntomologyCommands.register(dispatcher, registryAccess, environment);
+      AdvancedCommands.register(dispatcher);
+    });
+
+    // Register shutdown hook
+    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+      shutdown();
+    }));
 
     // Register to item groups
     ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
@@ -243,5 +266,19 @@ public class EntomologyMod implements ModInitializer {
         new BlockItem(block, new Item.Settings()
             .registryKey(RegistryKey.of(RegistryKeys.ITEM, id(path)))));
     return block;
+  }
+
+  /**
+   * Called during mod shutdown.
+   * Ensures clean resource cleanup.
+   */
+  public static void shutdown() {
+    LOGGER.info("Shutting down Entomology...");
+    try {
+      SystemIntegration.getInstance().shutdown();
+    } catch (Exception e) {
+      LOGGER.error("Error during shutdown", e);
+    }
+    LOGGER.info("Entomology shutdown complete");
   }
 }

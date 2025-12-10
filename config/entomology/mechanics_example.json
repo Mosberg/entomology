@@ -1,0 +1,85 @@
+{
+  "version": "2.0.0",
+  "breeding": {
+    "enabled": true,
+    "globalMutationRate": 0.05,
+    "breedingCooldown": 6000,
+    "breedingPairs": [
+      {
+        "parent1": "entomology:butterfly",
+        "parent2": "entomology:butterfly",
+        "offspring": ["entomology:butterfly"],
+        "mutations": ["entomology:monarch_butterfly"],
+        "successChance": 0.5,
+        "mutationChance": 0.1
+      },
+      {
+        "parent1": "entomology:bee",
+        "parent2": "entomology:bee",
+        "offspring": ["entomology:bee"],
+        "mutations": ["entomology:honey_bee"],
+        "successChance": 0.8,
+        "mutationChance": 0.05
+      },
+      {
+        "parent1": "entomology:beetle",
+        "parent2": "entomology:beetle",
+        "offspring": ["entomology:beetle"],
+        "successChance": 0.7
+      },
+      {
+        "parent1": "entomology:firefly",
+        "parent2": "entomology:firefly",
+        "offspring": ["entomology:firefly"],
+        "successChance": 0.6
+      }
+    ],
+    "traits": [
+      {
+        "id": "flight_speed",
+        "inheritable": true,
+        "inheritanceChance": 0.7,
+        "dominant": false
+      },
+      {
+        "id": "size",
+        "inheritable": true,
+        "inheritanceChance": 0.8,
+        "dominant": true
+      },
+      {
+        "id": "coloration",
+        "inheritable": true,
+        "inheritanceChance": 0.6,
+        "dominant": false
+      },
+      {
+        "id": "aggression",
+        "inheritable": true,
+        "inheritanceChance": 0.5,
+        "dominant": true
+      }
+    ]
+  },
+  "spawning": {
+    "enableDynamicRates": true,
+    "baseSpawnWeight": 10,
+    "rarityMultipliers": {
+      "common": 1.0,
+      "uncommon": 0.5,
+      "rare": 0.1,
+      "epic": 0.05,
+      "legendary": 0.01
+    }
+  },
+  "environmental": {
+    "enabled": true,
+    "checkInterval": 100,
+    "strictMode": false
+  },
+  "balance": {
+    "adaptiveDifficulty": true,
+    "telemetryEnabled": true,
+    "tuningRate": 0.1
+  }
+}

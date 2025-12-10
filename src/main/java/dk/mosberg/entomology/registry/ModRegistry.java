@@ -2,8 +2,11 @@ package dk.mosberg.entomology.registry;
 
 import dk.mosberg.entomology.EntomologyMod;
 import dk.mosberg.entomology.api.EntomologyAPI;
+import dk.mosberg.entomology.api.mechanics.IAdvancedMechanic;
 import dk.mosberg.entomology.mechanics.BreedingMechanic;
 import dk.mosberg.entomology.mechanics.EnvironmentalMechanic;
+import dk.mosberg.entomology.registry.advanced.ComponentRegistry;
+import dk.mosberg.entomology.schema.SpecimenSchemaValidator;
 
 /**
  * Central registry for initializing all mod systems.
@@ -29,10 +32,11 @@ public final class ModRegistry {
 
     // 1. Initialize API
     EntomologyAPI api = EntomologyAPI.getInstance();
+    ComponentRegistry registry = ComponentRegistry.getInstance();
     EntomologyMod.LOGGER.info("API initialized (version {})", api.getApiVersion());
 
     // 2. Register core mechanics
-    registerMechanics(api);
+    registerMechanics(api, registry);
 
     // 3. Register component types
     registerComponents(api);
@@ -44,20 +48,37 @@ public final class ModRegistry {
     EntomologyMod.LOGGER.info("Entomology initialization complete");
   }
 
-  private static void registerMechanics(EntomologyAPI api) {
+  private static void registerMechanics(EntomologyAPI api, ComponentRegistry registry) {
+    // Register legacy mechanics with API
     api.registerMechanic(new BreedingMechanic());
     api.registerMechanic(new EnvironmentalMechanic());
 
-    EntomologyMod.LOGGER.info("Registered {} mechanics", api.getMechanics().size());
+    // Advanced mechanics are registered via SystemIntegration
+    // Get all advanced mechanics from component registry
+    var advancedMechanics = registry.getAllMechanics();
+    for (IAdvancedMechanic mechanic : advancedMechanics) {
+      EntomologyMod.LOGGER.debug("Advanced mechanic available: {} (v{})",
+          mechanic.getId(), mechanic.getVersion());
+    }
+
+    EntomologyMod.LOGGER.info("Registered {} legacy mechanics, {} advanced mechanics",
+        api.getMechanics().size(), advancedMechanics.size());
   }
 
   private static void registerComponents(EntomologyAPI api) {
-    // Component registration will be added here
+    // Component factories registered here
+    // Example: api.registerSpecimenComponent(id, factory);
     EntomologyMod.LOGGER.info("Component registration complete");
   }
 
   private static void registerValidators(EntomologyAPI api) {
-    // Schema validator registration will be added here
+    // Register specimen schema validator
+    try {
+      api.registerSchemaValidator("specimen", new SpecimenSchemaValidator());
+      EntomologyMod.LOGGER.info("Registered specimen schema validator");
+    } catch (Exception e) {
+      EntomologyMod.LOGGER.error("Failed to register validators", e);
+    }
     EntomologyMod.LOGGER.info("Schema validator registration complete");
   }
 
