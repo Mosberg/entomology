@@ -1,219 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Entomology is an advanced insect collection, research, and breeding mod for Minecraft 1.21.10 using Fabric. Capture insects with bug nets, study them in a research station, breed them, and showcase your collection.">
-  <meta name="keywords"
-    content="Minecraft, Fabric, Mod, Entomology, Insects, Bug Nets, Research Station, Breeding, Collection, Modding">
-  <meta name="author" content="Mosberg">
-  <title>Entomology – Advanced Insect Collection Mod</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta name="description" content="Entomology Mod - Advanced Minecraft insect collection and research system">
+  <meta name="keywords" content="Minecraft,Mod,Entomology,Insects,Fabric,Research,Collection">
+  <meta name="author" content="Mosberg">
+  
+  <title>Entomology | Minecraft Research Mod</title>
+  
+  <link rel="icon" href="https://raw.githubusercontent.com/Mosberg/entomology/main/assets/icon.png" type="image/png">
+  
+  <!-- Import shared utilities from main site -->
   <link rel="stylesheet" href="https://mosberg.github.io/css/core.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/entomology.css">
 </head>
-
-<body>
-  <header class="hero">
-    <div class="hero-inner">
-      <h1>Entomology</h1>
-      <p class="tagline">Advanced insect collection, research, and breeding mod for Minecraft 1.21.10.</p>
-      <div class="hero-actions">
-        <a href="#download" class="btn primary">Download</a>
-        <a href="#features" class="btn ghost">Explore Features</a>
-      </div>
-      <p class="meta">
-        Version 1.0.0 • Fabric Loader 0.18.1 • Fabric API 0.138.3+1.21.10
-      </p>
-    </div>
-    <!-- Theme Selector -->
-    <div class="controls">
-      <label for="themeSelect" class="sr-only">Choose theme</label>
-      <select id="themeSelect" aria-label="Select website color theme">
-        <option value="auto">Auto</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-        <option value="retro">Retro</option>
-        <option value="cosmic">Cosmic</option>
-        <option value="sunset">Sunset</option>
-        <option value="earth">Earth</option>
-        <option value="ocean">Ocean</option>
-        <option value="solarized">Solarized</option>
-      </select>
-    </div>
-  </header>
-
+<body data-theme="dark">
+  
+  <!-- Top Navigation -->
   <nav class="top-nav">
     <div class="nav-inner">
-      <a href="#top" class="brand">Entomology</a>
-      <button class="nav-toggle" aria-label="Toggle navigation" id="navToggle">☰</button>
+      <a href="https://mosberg.github.io/" class="brand">🦋 Entomology</a>
+      
       <ul class="nav-links" id="navLinks">
+        <li><a href="#overview">Overview</a></li>
         <li><a href="#features">Features</a></li>
-        <li><a href="#gameplay">Gameplay</a></li>
-        <li><a href="#tech">Technical</a></li>
+        <li><a href="#installation">Installation</a></li>
         <li><a href="#architecture">Architecture</a></li>
-        <li><a href="#install">Installation</a></li>
         <li><a href="#download">Download</a></li>
       </ul>
+      
+      <div class="nav-controls">
+        <label for="themeSelect" class="sr-only">Theme</label>
+        <select id="themeSelect" aria-label="Select website color theme">
+          <option value="auto">Auto</option>
+          <option value="dark" selected>Dark</option>
+          <option value="light">Light</option>
+          <option value="cosmic">Cosmic</option>
+          <option value="earth">Earth</option>
+          <option value="retro">Retro</option>
+        </select>
+        
+        <button type="button" id="navToggle" class="nav-toggle" aria-label="Toggle navigation">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </nav>
 
-  <main id="top">
-    <section id="features" class="section">
-      <h2>Key Features</h2>
-      <div class="grid-2">
-        <div>
-          <h3>Gameplay</h3>
-          <ul>
-            <li>8 custom insects: Beetle, Butterfly, Cicada, Damselfly, Firefly, Fly, Monarch Butterfly, Mosquito.</li>
-            <li>5 bug net tiers with 60%–100% catch rates.</li>
-            <li>Specimen jars, research station, display cases, and field guide.</li>
-            <li>Breeding mechanics, environmental preferences, and advancements.</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Technical</h3>
-          <ul>
-            <li>Modular, data‑driven architecture with JSON configuration.</li>
-            <li>Schema validation and hot‑reloadable configs.</li>
-            <li>Custom render states, HUD overlay, particles, and keybinds.</li>
-            <li>Public API, component system, and test suite with 24 tests.</li>
-          </ul>
-        </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="badge-icon">🔬</span>
+        <span>Minecraft 1.21.x • Fabric Mod</span>
       </div>
-    </section>
-
-    <section id="gameplay" class="section section-alt">
-      <h2>Gameplay Systems</h2>
-      <div class="cards">
-        <article class="card">
-          <h3>Insects & Capture</h3>
-          <p>Use bug nets in five tiers to capture insects into specimen jars, each storing rarity, size, and condition
-            data.</p>
-        </article>
-        <article class="card">
-          <h3>Research & Field Guide</h3>
-          <p>Study specimens at the research station to unlock detailed entries in the in‑game field guide.</p>
-        </article>
-        <article class="card">
-          <h3>Breeding & Environment</h3>
-          <p>Breed compatible species using advanced, schema‑driven rules that respect biome, time, and climate
-            preferences.</p>
-        </article>
-        <article class="card">
-          <h3>Collection & Display</h3>
-          <p>Showcase your collection in display cases and track progress with a full advancement set.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="tech" class="section">
-      <h2>Technical Overview</h2>
-      <div class="grid-2">
-        <div>
-          <h3>Architecture</h3>
-          <p>The mod separates core, entity, client, item, block, mechanics, config, data, API, schema, and testing
-            layers for clarity and extensibility.</p>
-        </div>
-        <div>
-          <h3>Data‑Driven Design</h3>
-          <p>Specimens, research entries, mechanics, and more are defined via JSON and validated against schemas for
-            robust modpack integration.</p>
-        </div>
-      </div>
-
-      <h3 class="mt">Stats at a Glance</h3>
-      <div class="stats-grid">
-        <div class="stat">
-          <span class="stat-label">Custom entities</span>
-          <span class="stat-value">8</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">JSON data files</span>
-          <span class="stat-value">50+</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Advancements</span>
-          <span class="stat-value">13</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Recipes</span>
-          <span class="stat-value">9</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Languages</span>
-          <span class="stat-value">3</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Unit tests</span>
-          <span class="stat-value">24</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="architecture" class="section section-alt">
-      <h2>Architecture Snapshot</h2>
-      <pre class="code-block">
-Entomology Mod
-├── Core (EntomologyMod)
-├── Entities (8 custom insects)
-├── Client (renderers, HUD, particles)
-├── Items (nets, jars, field guide)
-├── Blocks (research station, display case, jar)
-├── Mechanics (breeding, environment)
-├── Config (simple & schema‑validated)
-├── Data & Schema (JSON, validators)
-├── API & Integration
-└── Tests & Tooling
-    </pre>
-    </section>
-
-    <section id="install" class="section">
-      <h2>Installation</h2>
-      <div class="grid-2">
-        <div>
-          <h3>Players</h3>
-          <ol>
-            <li>Install Fabric Loader 0.18.1+ for Minecraft 1.21.10.</li>
-            <li>Install Fabric API 0.138.3+ for the same version.</li>
-            <li>Drop the Entomology jar into your <code>.minecraft/mods/</code> folder.</li>
-            <li>Launch Minecraft and enjoy collecting insects.</li>
-          </ol>
-        </div>
-        <div>
-          <h3>Developers</h3>
-          <ol>
-            <li>Clone the repository.</li>
-            <li>Run <code>./gradlew build</code> to compile.</li>
-            <li>Use <code>./gradlew runClient</code> and <code>runServer</code> for dev.</li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <section id="download" class="section section-accent">
-      <h2>Download & Links</h2>
-      <p>You can host the jar and source wherever you like; update the buttons below with your actual URLs.</p>
+      
+      <h1>Entomology</h1>
+      <p class="tagline">Advanced Insect Research & Collection System</p>
+      <p class="hero-description">
+        Transform Minecraft into a naturalist's paradise. Capture, study, and breed insects 
+        with a comprehensive research system powered by JSON schemas and data-driven mechanics.
+      </p>
+      
       <div class="hero-actions">
-        <a href="#" class="btn primary" id="downloadBtn">Download Jar</a>
-        <a href="https://github.com/Mosberg/entomology" class="btn ghost" target="_blank" rel="noopener">GitHub</a>
+        <a href="#download" class="btn primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 12L3 7h3V1h4v6h3L8 12z"/>
+            <path d="M1 13h14v2H1z"/>
+          </svg>
+          Download Mod
+        </a>
+        <a href="https://github.com/Mosberg/entomology" target="_blank" rel="noopener" class="btn ghost">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          View Source
+        </a>
       </div>
-      <p class="note" id="downloadNote"></p>
-    </section>
-  </main>
+      
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">8+</span>
+          <span class="stat-label">Insect Species</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">5</span>
+          <span class="stat-label">Net Tiers</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">JSON</span>
+          <span class="stat-label">Data Driven</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Overview Section -->
+  <section class="section" id="overview">
+    <div class="section-content">
+      <h2>🔍 Mod Overview</h2>
+      <div class="overview-grid">
+        <div class="overview-card">
+          <div class="card-icon">🦋</div>
+          <h3>Diverse Insects</h3>
+          <p>
+            Eight custom insect entities with unique behaviors, biome preferences, 
+            and seasonal patterns. Each species rendered with custom models and animations.
+          </p>
+        </div>
+        
+        <div class="overview-card">
+          <div class="card-icon">🥽</div>
+          <h3>Tiered Capture Tools</h3>
+          <p>
+            Five tiers of bug nets (Wood → Netherite) with varying durability and 
+            success rates. Advanced nets can capture rare and elusive species.
+          </p>
+        </div>
+        
+        <div class="overview-card">
+          <div class="card-icon">🧪</div>
+          <h3>Research Station</h3>
+          <p>
+            Study captured specimens to unlock detailed field guide entries. 
+            Research reveals behavior patterns, habitat info, and breeding conditions.
+          </p>
+        </div>
+        
+        <div class="overview-card">
+          <div class="card-icon">📚</div>
+          <h3>Field Guide</h3>
+          <p>
+            In-game encyclopedia tracking all discovered species with rich metadata: 
+            rarity, size, condition, location found, and research progress.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section section-alt" id="features">
+    <div class="section-content">
+      <h2>✨ Core Features</h2>
+      
+      <div class="feature-grid">
+        <div class="feature-block">
+          <h3>🪲 Specimen Collection</h3>
+          <ul>
+            <li><strong>Specimen Jars</strong> - Store individual insects with metadata</li>
+            <li><strong>Rarity System</strong> - Common, Uncommon, Rare, Epic, Legendary</li>
+            <li><strong>Size Variants</strong> - Each capture has unique size (0.5x - 2.0x)</li>
+            <li><strong>Condition Tracking</strong> - Perfect, Good, Fair, Poor states</li>
+            <li><strong>Display Cases</strong> - Showcase your best specimens</li>
+          </ul>
+        </div>
+        
+        <div class="feature-block">
+          <h3>🧬 Advanced Breeding</h3>
+          <ul>
+            <li><strong>Schema-Driven Rules</strong> - JSON-defined compatibility</li>
+            <li><strong>Environmental Requirements</strong> - Biome, temperature, time</li>
+            <li><strong>Genetic Traits</strong> - Offspring inherit parent characteristics</li>
+            <li><strong>Breeding Chambers</strong> - Specialized blocks for reproduction</li>
+            <li><strong>Cross-Species Hybrids</strong> - Discover rare combinations</li>
+          </ul>
+        </div>
+        
+        <div class="feature-block">
+          <h3>🎯 Progression System</h3>
+          <ul>
+            <li><strong>Advancements</strong> - Full achievement tree</li>
+            <li><strong>Research Tiers</strong> - Unlock advanced mechanics</li>
+            <li><strong>Collection Goals</strong> - Complete species sets</li>
+            <li><strong>Milestones</strong> - Track overall progress</li>
+            <li><strong>Leaderboards</strong> - Compare with other collectors</li>
+          </ul>
+        </div>
+        
+        <div class="feature-block">
+          <h3>⚙️ Technical Excellence</h3>
+          <ul>
+            <li><strong>Modular Architecture</strong> - 11 distinct code layers</li>
+            <li><strong>JSON Schemas</strong> - Validate all configuration</li>
+            <li><strong>API Integration</strong> - Support for other mods</li>
+            <li><strong>Performance Optimized</strong> - Efficient entity handling</li>
+            <li><strong>Extensible Design</strong> - Easy to add new species</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture Section -->
+  <section class="section" id="architecture">
+    <div class="section-content">
+      <h2>🏗️ Mod Architecture</h2>
+      <p class="section-intro">
+        Entomology follows a clean, modular design pattern with clear separation of concerns. 
+        This architecture ensures maintainability, testability, and easy extension.
+      </p>
+      
+      <div class="architecture-visual">
+        <pre class="code-tree">
+<span class="tree-root">📦 Entomology Mod</span>
+<span class="tree-branch">├── 🎯 Core</span> <span class="tree-desc">Main mod class, registration, initialization</span>
+<span class="tree-branch">├── 🦗 Entities</span> <span class="tree-desc">8 custom insect entities with AI & rendering</span>
+<span class="tree-branch">├── 🎨 Client</span> <span class="tree-desc">Renderers, HUD overlays, particle effects</span>
+<span class="tree-branch">├── 🛠️ Items</span> <span class="tree-desc">Bug nets (5 tiers), specimen jars, field guide</span>
+<span class="tree-branch">├── 🧱 Blocks</span> <span class="tree-desc">Research station, display cases, breeding chambers</span>
+<span class="tree-branch">├── ⚡ Mechanics</span> <span class="tree-desc">Breeding system, environment detection, rarity</span>
+<span class="tree-branch">├── ⚙️ Config</span> <span class="tree-desc">Simple config + JSON schema validation</span>
+<span class="tree-branch">├── 📊 Data</span> <span class="tree-desc">JSON definitions, loot tables, recipes</span>
+<span class="tree-branch">├── 🔌 API</span> <span class="tree-desc">Public interfaces for mod integration</span>
+<span class="tree-branch">├── 📋 Schemas</span> <span class="tree-desc">JSON Schema validators for all data</span>
+<span class="tree-branch">└── 🧪 Tests</span> <span class="tree-desc">Unit tests, integration tests, tooling</span>
+        </pre>
+      </div>
+      
+      <div class="architecture-cards">
+        <div class="arch-card">
+          <h4>🔄 Data-Driven Design</h4>
+          <p>
+            All insects, breeding rules, and mechanics are defined in JSON files 
+            validated against comprehensive schemas. Modpacks can easily customize 
+            behavior without touching code.
+          </p>
+        </div>
+        
+        <div class="arch-card">
+          <h4>🧩 Modular Components</h4>
+          <p>
+            Each system (capture, research, breeding) operates independently 
+            with well-defined interfaces. Add or modify features without 
+            impacting other systems.
+          </p>
+        </div>
+        
+        <div class="arch-card">
+          <h4>🔌 Extensible API</h4>
+          <p>
+            Public API allows other mods to register custom insects, add research 
+            data, or integrate with the collection system. Full documentation included.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Installation Section -->
+  <section class="section section-alt" id="installation">
+    <div class="section-content">
+      <h2>📥 Installation Guide</h2>
+      
+      <div class="install-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Install Fabric</h3>
+            <p>Download and install Fabric Loader for Minecraft 1.21.x</p>
+            <a href="https://fabricmc.net/use/" target="_blank" class="step-link">
+              Get Fabric Loader →
+            </a>
+          </div>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Install Fabric API</h3>
+            <p>Required dependency - download from CurseForge or Modrinth</p>
+            <a href="https://modrinth.com/mod/fabric-api" target="_blank" class="step-link">
+              Get Fabric API →
+            </a>
+          </div>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Add Entomology Mod</h3>
+            <p>Place the downloaded .jar file in your <code>.minecraft/mods/</code> folder</p>
+          </div>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Launch & Enjoy</h3>
+            <p>Start Minecraft with the Fabric profile and begin your research!</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="dev-section">
+        <h3>🛠️ Development Setup</h3>
+        <div class="code-blocks">
+          <div class="code-block-wrapper">
+            <div class="code-label">Clone Repository</div>
+            <pre class="code-block"><code>git clone https://github.com/Mosberg/entomology.git
+cd entomology</code></pre>
+          </div>
+          
+          <div class="code-block-wrapper">
+            <div class="code-label">Build Project</div>
+            <pre class="code-block"><code>./gradlew build</code></pre>
+          </div>
+          
+          <div class="code-block-wrapper">
+            <div class="code-label">Run Development Client</div>
+            <pre class="code-block"><code>./gradlew runClient</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Section -->
+  <section class="section section-accent" id="download">
+    <div class="section-content download-hero">
+      <h2>🎁 Ready to Start Your Research?</h2>
+      <p class="download-description">
+        Download the latest version of Entomology and begin your journey as a Minecraft naturalist.
+      </p>
+      
+      <div class="download-actions">
+        <a href="https://github.com/Mosberg/entomology/releases/latest" 
+           target="_blank" 
+           rel="noopener"
+           class="btn primary large"
+           id="downloadBtn">
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 12L3 7h3V1h4v6h3L8 12z"/>
+            <path d="M1 13h14v2H1z"/>
+          </svg>
+          Download Latest Release
+        </a>
+        
+        <a href="https://github.com/Mosberg/entomology" 
+           target="_blank" 
+           rel="noopener"
+           class="btn ghost large">
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          View on GitHub
+        </a>
+      </div>
+      
+      <p class="download-note" id="downloadNote">
+        Version 1.0.0 • Minecraft 1.21.x • Requires Fabric API
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer class="footer">
-    <p>&copy; <span id="currentYear">2025</span> Mosberg.</p>
-    <div id="visitCounter"></div>
+    <div class="footer-content">
+      <p>
+        &copy; <span id="currentYear">2025</span> Mosberg • 
+        <a href="https://github.com/Mosberg" target="_blank" rel="noopener">GitHub</a> • 
+        <a href="https://github.com/Mosberg/entomology/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a> • 
+        <a href="https://mosberg.github.io/">← Back to Portfolio</a>
+      </p>
+      <div id="visitCounter" class="visit-counter"></div>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Scripts -->
   <script src="https://mosberg.github.io/js/core/theme.js"></script>
-<script src="https://mosberg.github.io/js/core/visit-counter.js"></script>
-<script src="https://mosberg.github.io/js/core/dynamic-year.js"></script>
+  <script src="https://mosberg.github.io/js/core/visit-counter.js"></script>
+  <script src="https://mosberg.github.io/js/core/dynamic-year.js"></script>
+  <script src="js/entomology.js"></script>
 </body>
-
 </html>
