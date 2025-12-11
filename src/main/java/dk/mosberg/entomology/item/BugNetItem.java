@@ -1,133 +1,154 @@
 package dk.mosberg.entomology.item;
 
-import dk.mosberg.entomology.EntomologyMod;
-import dk.mosberg.entomology.data.DataDrivenRegistry;
-import dk.mosberg.entomology.data.ItemDefinition;
-import dk.mosberg.entomology.data.SpecimenDefinition;
+import dk.mosberg.entomology.data.BugNetDefinition;
+import dk.mosberg.entomology.data.BugNetReloader;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.sound.SoundCategory;
+import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-/**
- * Bug net for capturing insects defined in JSON.
- * Charges like a bow - hold right-click to charge, release to capture nearby
- * entity.
- */
 public class BugNetItem extends Item {
-  public BugNetItem(Settings settings) {
+  private final String netId;
+
+  public BugNetItem(Settings settings, String netId) {
     super(settings);
-  }
-
-  private String getNetIdFromStack(ItemStack stack) {
-    // Determine which bug net tier this is based on max damage
-    int maxDamage = stack.getMaxDamage();
-    if (maxDamage == 128) {
-      return "basic_bug_net";
-    }
-    if (maxDamage == 256) {
-      return "iron_bug_net";
-    }
-    if (maxDamage == 192) {
-      return "golden_bug_net";
-    }
-    if (maxDamage == 512) {
-      return "diamond_bug_net";
-    }
-    if (maxDamage == 1024) {
-      return "netherite_bug_net";
-    }
-    return "basic_bug_net"; // fallback
+    this.netId = netId;
   }
 
   @Override
-  public int getMaxUseTime(ItemStack stack, LivingEntity user) {
-    return 72000; // Same as bow
-  }
-
-  @Override
-  public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-    // Called when charge completes (fully charged)
-    if (!(user instanceof PlayerEntity player)) {
-      return stack;
+  public ActionResult useOnEntity(ItemStack stack, PlayerEntity user,
+      LivingEntity entity, Hand hand) {
+    if (user.getEntityWorld().isClient()) {
+      return ActionResult.SUCCESS;
     }
 
-    if (!world.isClient()) {
-      performCapture(stack, world, player);
-    }
-
-    return stack;
-  }
-
-  @Override
-  public ActionResult use(World world, PlayerEntity user, Hand hand) {
-    user.setCurrentHand(hand);
-    return ActionResult.CONSUME;
-  }
-
-  private void performCapture(ItemStack stack, World world, PlayerEntity player) {
-    // Get the bug net definition for this specific net tier
-    String netId = getNetIdFromStack(stack);
-    ItemDefinition def = DataDrivenRegistry.getItem(netId);
+    BugNetDefinition def = BugNetReloader.get(netId);
     if (def == null) {
-      EntomologyMod.LOGGER.warn("Bug net definition missing for: " + netId);
-      return;
+      user.sendMessage(Text.literal("§cBug net definition not found: " + netId), true);
+      return ActionResult.FAIL;
     }
 
-    // Find nearest capturable entity in range (3 blocks)
-    double range = 3.0;
-    Box box = player.getBoundingBox().expand(range);
-    List<LivingEntity> entities = world.getEntitiesByClass(LivingEntity.class, box, entity -> {
-      if (entity == player) {
-        return false;
+    // Check special abilities for multi-capture
+    if (def.getSpecialAbilities().isMultiCapture()) {
+      return attemptMultiCapture(stack, user, entity, hand, def);
+    } else {
+      return attemptSingleCapture(stack, user, entity, hand, def);
+    }
+  }
+
+  private ActionResult attemptSingleCapture(ItemStack stack, PlayerEntity user,
+      LivingEntity entity, Hand hand,
+      BugNetDefinition def) {
+    Identifier entityId = Registries.ENTITY_TYPE.getId(entity.getType());
+
+    // Check if boss and not allowed
+    if (entity instanceof net.minecraft.entity.boss.WitherEntity
+        || entity instanceof net.minecraft.entity.boss.dragon.EnderDragonEntity) {
+      if (!def.getSpecialAbilities().canCaptureBoss()) {
+        user.sendMessage(Text.literal("This net cannot capture boss entities!").formatted(Formatting.RED), true);
+        return ActionResult.FAIL;
+      }
+    }
+
+    if (!def.canCapture(entityId)) {
+      user.sendMessage(Text.literal("This net cannot capture " + entityId).formatted(Formatting.YELLOW), true);
+      return ActionResult.PASS;
+    }
+
+    double distance = user.getBlockPos().toCenterPos().distanceTo(entity.getBlockPos().toCenterPos());
+    double effectiveRange = def.getRange() + def.getSpecialAbilities().getCaptureRadius();
+
+    if (distance > effectiveRange) {
+      user.sendMessage(Text.literal(String.format("Too far! (Max range: %.1f blocks)", effectiveRange))
+          .formatted(Formatting.YELLOW), true);
+      return ActionResult.PASS;
+    }
+
+    float catchChance = calculateCatchChance(user, entity, def);
+
+    if (user.getRandom().nextFloat() < catchChance) {
+      captureEntity(entity, user, stack, hand, def);
+      user.sendMessage(Text.literal("Captured " + entityId + "!").formatted(Formatting.GREEN), true);
+      return ActionResult.SUCCESS;
+    } else {
+      user.sendMessage(Text.literal(String.format("Capture failed! (%.0f%% chance)", catchChance * 100))
+          .formatted(Formatting.RED), true);
+      stack.damage(def.getDurabilityPerCapture(), user, hand);
+      return ActionResult.FAIL;
+    }
+  }
+
+  private ActionResult attemptMultiCapture(ItemStack stack, PlayerEntity user,
+      LivingEntity targetEntity, Hand hand,
+      BugNetDefinition def) {
+    World world = user.getEntityWorld();
+    double radius = def.getRange() + def.getSpecialAbilities().getCaptureRadius();
+    Box box = Box.of(user.getBlockPos().toCenterPos(), radius * 2, radius * 2, radius * 2);
+
+    List<LivingEntity> nearbyEntities = world.getEntitiesByClass(
+        LivingEntity.class, box,
+        e -> e != user && def.canCapture(Registries.ENTITY_TYPE.getId(e.getType())));
+
+    int maxCaptures = def.getSpecialAbilities().getMaxCaptures();
+    int captured = 0;
+
+    for (LivingEntity entity : nearbyEntities) {
+      if (captured >= maxCaptures) {
+        break;
       }
 
-      @SuppressWarnings("deprecation")
-      boolean match = def.captureTargets().stream()
-          .anyMatch(id -> id.equals(entity.getType().getRegistryEntry().registryKey().getValue()));
-      return match;
-    });
-
-    if (entities.isEmpty()) {
-      player.sendMessage(Text.translatable("item.entomology.bug_net.no_target"), true);
-      return;
+      float catchChance = calculateCatchChance(user, entity, def);
+      if (user.getRandom().nextFloat() < catchChance) {
+        captureEntity(entity, user, stack, hand, def);
+        captured++;
+      }
     }
 
-    // Capture the nearest entity
-    LivingEntity target = entities.get(0);
-    SpecimenDefinition specimen = DataDrivenRegistry.getSpecimenByEntityType(target.getType());
-    if (specimen == null) {
-      player.sendMessage(Text.translatable("item.entomology.bug_net.no_specimen"), true);
-      return;
+    if (captured > 0) {
+      user.sendMessage(Text.literal(String.format("Captured %d entities!", captured))
+          .formatted(Formatting.GREEN), true);
+      return ActionResult.SUCCESS;
+    } else {
+      user.sendMessage(Text.literal("No entities captured!").formatted(Formatting.RED), true);
+      stack.damage(def.getDurabilityPerCapture(), user, hand);
+      return ActionResult.FAIL;
+    }
+  }
+
+  private float calculateCatchChance(PlayerEntity user, LivingEntity entity, BugNetDefinition def) {
+    float catchChance = def.getCatchRate();
+
+    // Speed penalty/bonus
+    double entitySpeed = entity.getVelocity().length();
+    if (entitySpeed > 0.1) {
+      catchChance *= def.getSpeedBonus();
     }
 
-    // Create specimen jar with captured insect
-    ItemStack jarStack = new ItemStack(EntomologyMod.specimenJarItem);
-    SpecimenJarItem.setSpecimenId(jarStack, specimen.id());
+    // Rarity modifier (example - read from entity NBT in real implementation)
+    String rarity = "common"; // TODO: Get from entity data
+    catchChance *= def.getRarityBonus(rarity);
 
-    // Play capture sound and remove entity
-    world.playSound(null, player.getBlockPos(), SoundEvents.ENTITY_ITEM_PICKUP,
-        SoundCategory.PLAYERS, 0.7f, 1.2f);
-    target.discard();
+    // Health modifier - lower health = easier capture
+    float healthPercent = entity.getHealth() / entity.getMaxHealth();
+    catchChance *= (1.0f + (1.0f - healthPercent) * 0.3f); // Up to 30% bonus at low health
 
-    // Give jar to player
-    if (!player.getInventory().insertStack(jarStack)) {
-      player.dropItem(jarStack, false);
-    }
+    return Math.max(0.0f, Math.min(1.0f, catchChance));
+  }
 
-    // Damage the net
-    stack.damage(1, player, player.getActiveHand());
-
-    player.sendMessage(Text.translatable("item.entomology.bug_net.captured",
-        Text.translatable(specimen.displayNameKey())), true);
+  private void captureEntity(LivingEntity entity, PlayerEntity user, ItemStack stack, Hand hand, BugNetDefinition def) {
+    // TODO: Create captured insect item with entity data
+    entity.remove(Entity.RemovalReason.DISCARDED);
+    stack.damage(def.getDurabilityPerCapture(), user, hand);
   }
 }

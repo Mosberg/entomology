@@ -10,6 +10,7 @@ import dk.mosberg.entomology.item.FieldGuideItem;
 import dk.mosberg.entomology.item.SpecimenJarItem;
 import dk.mosberg.entomology.block.ResearchStationBlock;
 import dk.mosberg.entomology.block.SpecimenJarBlock;
+import dk.mosberg.entomology.data.BugNetReloader;
 import dk.mosberg.entomology.data.DataDrivenRegistry;
 import dk.mosberg.entomology.entity.BeetleEntity;
 import dk.mosberg.entomology.entity.ButterflyEntity;
@@ -19,6 +20,7 @@ import dk.mosberg.entomology.entity.FireflyEntity;
 import dk.mosberg.entomology.entity.FlyEntity;
 import dk.mosberg.entomology.entity.MonarchButterflyEntity;
 import dk.mosberg.entomology.entity.MosquitoEntity;
+import dk.mosberg.entomology.registry.ModItems;
 import dk.mosberg.entomology.registry.ModRegistry;
 import dk.mosberg.entomology.screen.ResearchStationScreenHandler;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -30,6 +32,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.entity.BlockEntityType;
@@ -139,7 +142,12 @@ public class EntomologyMod implements ModInitializer {
     ModRegistry.initialize(); // Register mechanics, components, validators
     DataDrivenRegistry.bootstrap(); // Register data reloaders
 
+    // Register data reloader using new Fabric API v1
+    ResourceLoader.get(ResourceType.SERVER_DATA)
+        .registerReloader(Identifier.of(MODID, "bug_nets"), new BugNetReloader());
+
     // Register content
+    ModItems.register();
     registerContent();
     registerEntities();
 
@@ -180,22 +188,12 @@ public class EntomologyMod implements ModInitializer {
   }
 
   private void registerContent() {
-    // Register all bug net tiers (removed basic bug_net, kept others)
-    basicBugNet = registerItem("basic_bug_net",
-        new BugNetItem(new Item.Settings().maxDamage(64)
-            .registryKey(RegistryKey.of(RegistryKeys.ITEM, id("basic_bug_net")))));
-    ironBugNet = registerItem("iron_bug_net",
-        new BugNetItem(new Item.Settings().maxDamage(256)
-            .registryKey(RegistryKey.of(RegistryKeys.ITEM, id("iron_bug_net")))));
-    goldenBugNet = registerItem("golden_bug_net",
-        new BugNetItem(new Item.Settings().maxDamage(192)
-            .registryKey(RegistryKey.of(RegistryKeys.ITEM, id("golden_bug_net")))));
-    diamondBugNet = registerItem("diamond_bug_net",
-        new BugNetItem(new Item.Settings().maxDamage(512)
-            .registryKey(RegistryKey.of(RegistryKeys.ITEM, id("diamond_bug_net")))));
-    netheriteBugNet = registerItem("netherite_bug_net",
-        new BugNetItem(new Item.Settings().maxDamage(1024)
-            .registryKey(RegistryKey.of(RegistryKeys.ITEM, id("netherite_bug_net")))));
+    // Register bug nets using data-driven definitions from JSON
+    basicBugNet = registerBugNet("basic_bug_net");
+    ironBugNet = registerBugNet("iron_bug_net");
+    goldenBugNet = registerBugNet("golden_bug_net");
+    diamondBugNet = registerBugNet("diamond_bug_net");
+    netheriteBugNet = registerBugNet("netherite_bug_net");
 
     fieldGuide = registerItem("field_guide",
         new FieldGuideItem(new Item.Settings().maxCount(1)
@@ -317,6 +315,7 @@ public class EntomologyMod implements ModInitializer {
     resourceHelper.registerReloadListener(new DataDrivenRegistry.SpecimenReloader());
     resourceHelper.registerReloadListener(new DataDrivenRegistry.DefinitionReloader());
     resourceHelper.registerReloadListener(new DataDrivenRegistry.MechanicsReloader());
+    // BugNetReloader is registered earlier using ResourceLoader.get() at line 146
   }
 
   public static Identifier id(String path) {
@@ -346,6 +345,50 @@ public class EntomologyMod implements ModInitializer {
         .build();
 
     Registry.register(Registries.ITEM_GROUP, ENTOMOLOGY_GROUP, entomologyItemGroup);
+  }
+
+  /**
+   * Registers a bug net using data-driven definitions from JSON.
+   * Falls back to default values if definition is not found.
+   */
+  private static Item registerBugNet(String netId) {
+    dk.mosberg.entomology.data.BugNetDefinition def = BugNetReloader.get(netId);
+
+    Item.Settings settings = new Item.Settings()
+        .registryKey(RegistryKey.of(RegistryKeys.ITEM, id(netId)));
+
+    // Apply durability from definition, or use defaults
+    if (def != null) {
+      settings.maxDamage(def.getDurability());
+
+      // Apply fireproof flag for netherite
+      if (def.isFireproof()) {
+        settings.fireproof();
+      }
+
+      LOGGER.info("Registered bug net {} with durability {} from JSON",
+          netId, def.getDurability());
+    } else {
+      // Fallback defaults if JSON not loaded yet (shouldn't happen in normal flow)
+      int defaultDurability = switch (netId) {
+        case "basic_bug_net" -> 128;
+        case "iron_bug_net" -> 256;
+        case "golden_bug_net" -> 64;
+        case "diamond_bug_net" -> 512;
+        case "netherite_bug_net" -> 768;
+        default -> 64;
+      };
+      settings.maxDamage(defaultDurability);
+
+      if (netId.equals("netherite_bug_net")) {
+        settings.fireproof();
+      }
+
+      LOGGER.warn("Bug net {} registered with fallback durability {} (JSON not loaded)",
+          netId, defaultDurability);
+    }
+
+    return registerItem(netId, new BugNetItem(settings, netId));
   }
 
   private static Item registerItem(String name, Item item) {

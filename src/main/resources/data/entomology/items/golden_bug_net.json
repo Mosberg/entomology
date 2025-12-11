@@ -1,5 +1,6 @@
 {
   "id": "golden_bug_net",
+  "tier": "golden",
   "type": "tool",
   "capture_targets": [
     "minecraft:bee",
@@ -7,7 +8,6 @@
     "minecraft:spider",
     "minecraft:cave_spider",
     "minecraft:endermite",
-    "minecraft:phantom",
     "entomology:butterfly",
     "entomology:firefly",
     "entomology:beetle",
@@ -17,8 +17,26 @@
     "entomology:cicada",
     "entomology:monarch_butterfly"
   ],
-  "durability": 96,
+  "durability": 64,
   "max_stack_size": 1,
-  "capture_chance": 0.85,
-  "durability_per_capture": 1
+  "durability_per_capture": 1,
+  "catchRate": 0.85,
+  "range": 3.5,
+  "speedBonus": 1.5,
+  "rarityBonus": {
+    "common": 0.9,
+    "uncommon": 0.75,
+    "rare": 0.55,
+    "legendary": 0.3
+  },
+  "fireproof": false,
+  "enchantable": true,
+  "enchantability": 22,
+  "repairIngredient": "minecraft:gold_ingot",
+  "special_abilities": {
+    "auto_capture": false,
+    "capture_radius": 1.0,
+    "multi_capture": false,
+    "capture_boss": false
+  }
 }

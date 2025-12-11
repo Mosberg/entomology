@@ -1,5 +1,6 @@
 {
   "id": "diamond_bug_net",
+  "tier": "diamond",
   "type": "tool",
   "capture_targets": [
     "minecraft:bee",
@@ -17,8 +18,27 @@
     "entomology:cicada",
     "entomology:monarch_butterfly"
   ],
-  "durability": 256,
+  "durability": 512,
   "max_stack_size": 1,
-  "capture_chance": 0.9,
-  "durability_per_capture": 1
+  "durability_per_capture": 1,
+  "catchRate": 0.9,
+  "range": 5.0,
+  "speedBonus": 1.2,
+  "rarityBonus": {
+    "common": 0.95,
+    "uncommon": 0.8,
+    "rare": 0.6,
+    "legendary": 0.35
+  },
+  "fireproof": false,
+  "enchantable": true,
+  "enchantability": 10,
+  "repairIngredient": "minecraft:diamond",
+  "special_abilities": {
+    "auto_capture": false,
+    "capture_radius": 1.5,
+    "multi_capture": true,
+    "max_captures": 2,
+    "capture_boss": false
+  }
 }

@@ -1,13 +1,12 @@
 {
   "id": "iron_bug_net",
+  "tier": "iron",
   "type": "tool",
   "capture_targets": [
     "minecraft:bee",
     "minecraft:silverfish",
     "minecraft:spider",
     "minecraft:cave_spider",
-    "minecraft:endermite",
-    "minecraft:phantom",
     "entomology:butterfly",
     "entomology:firefly",
     "entomology:beetle",
@@ -17,8 +16,26 @@
     "entomology:cicada",
     "entomology:monarch_butterfly"
   ],
-  "durability": 128,
+  "durability": 256,
   "max_stack_size": 1,
-  "capture_chance": 0.7,
-  "durability_per_capture": 1
+  "durability_per_capture": 1,
+  "catchRate": 0.75,
+  "range": 4.0,
+  "speedBonus": 1.0,
+  "rarityBonus": {
+    "common": 0.85,
+    "uncommon": 0.65,
+    "rare": 0.4,
+    "legendary": 0.15
+  },
+  "fireproof": false,
+  "enchantable": true,
+  "enchantability": 14,
+  "repairIngredient": "minecraft:iron_ingot",
+  "special_abilities": {
+    "auto_capture": false,
+    "capture_radius": 0.5,
+    "multi_capture": false,
+    "capture_boss": false
+  }
 }

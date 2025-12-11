@@ -1,5 +1,6 @@
 {
   "id": "netherite_bug_net",
+  "tier": "netherite",
   "type": "tool",
   "capture_targets": [
     "minecraft:bee",
@@ -17,9 +18,27 @@
     "entomology:cicada",
     "entomology:monarch_butterfly"
   ],
-  "durability": 384,
+  "durability": 768,
   "max_stack_size": 1,
-  "capture_chance": 1.0,
   "durability_per_capture": 1,
-  "fireproof": true
+  "catchRate": 0.95,
+  "range": 6.0,
+  "speedBonus": 1.3,
+  "rarityBonus": {
+    "common": 0.98,
+    "uncommon": 0.9,
+    "rare": 0.75,
+    "legendary": 0.5
+  },
+  "fireproof": true,
+  "enchantable": true,
+  "enchantability": 15,
+  "repairIngredient": "minecraft:netherite_ingot",
+  "special_abilities": {
+    "auto_capture": false,
+    "capture_radius": 2.0,
+    "multi_capture": true,
+    "max_captures": 3,
+    "capture_boss": true
+  }
 }

@@ -1,24 +1,35 @@
 {
   "id": "basic_bug_net",
+  "tier": "basic",
   "type": "tool",
   "capture_targets": [
     "minecraft:bee",
     "minecraft:silverfish",
-    "minecraft:spider",
-    "minecraft:cave_spider",
-    "minecraft:endermite",
-    "minecraft:phantom",
     "entomology:butterfly",
     "entomology:firefly",
-    "entomology:beetle",
     "entomology:fly",
-    "entomology:mosquito",
-    "entomology:damselfly",
-    "entomology:cicada",
     "entomology:monarch_butterfly"
   ],
   "durability": 128,
   "max_stack_size": 1,
-  "capture_chance": 0.6,
-  "durability_per_capture": 1
+  "durability_per_capture": 1,
+  "catchRate": 0.6,
+  "range": 3.0,
+  "speedBonus": 0.8,
+  "rarityBonus": {
+    "common": 0.75,
+    "uncommon": 0.5,
+    "rare": 0.25,
+    "legendary": 0.1
+  },
+  "fireproof": false,
+  "enchantable": true,
+  "enchantability": 5,
+  "repairIngredient": "minecraft:string",
+  "special_abilities": {
+    "auto_capture": false,
+    "capture_radius": 0.0,
+    "multi_capture": false,
+    "capture_boss": false
+  }
 }
