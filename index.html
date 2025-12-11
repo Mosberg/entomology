@@ -11,6 +11,8 @@
   <meta name="author" content="Mosberg">
   <title>Entomology – Advanced Insect Collection Mod</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://mosberg.github.io/css/core.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -26,6 +28,21 @@
       <p class="meta">
         Version 1.0.0 • Fabric Loader 0.18.1 • Fabric API 0.138.3+1.21.10
       </p>
+    </div>
+    <!-- Theme Selector -->
+    <div class="controls">
+      <label for="themeSelect" class="sr-only">Choose theme</label>
+      <select id="themeSelect" aria-label="Select website color theme">
+        <option value="auto">Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="retro">Retro</option>
+        <option value="cosmic">Cosmic</option>
+        <option value="sunset">Sunset</option>
+        <option value="earth">Earth</option>
+        <option value="ocean">Ocean</option>
+        <option value="solarized">Solarized</option>
+      </select>
     </div>
   </header>
 
@@ -189,10 +206,14 @@ Entomology Mod
   </main>
 
   <footer class="footer">
-    <p>Entomology &copy; Mosberg • Fabric mod for Minecraft 1.21.10.</p>
+    <p>&copy; <span id="currentYear">2025</span> Mosberg.</p>
+    <div id="visitCounter"></div>
   </footer>
 
   <script src="script.js"></script>
+  <script src="https://mosberg.github.io/js/core/theme.js"></script>
+<script src="https://mosberg.github.io/js/core/visit-counter.js"></script>
+<script src="https://mosberg.github.io/js/core/dynamic-year.js"></script>
 </body>
 
 </html>
